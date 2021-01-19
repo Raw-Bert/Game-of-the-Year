@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 277401527}
   - component: {fileID: 277401528}
   m_Layer: 0
-  m_Name: TestSprite
+  m_Name: Test Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

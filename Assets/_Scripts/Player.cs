@@ -22,12 +22,10 @@ public class Player : MonoBehaviour
         Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "Hurtful")
         {
-            Debug.Log("printoooo");
             this.TakeDamage(20);
         }
         else if (col.gameObject.tag == "Enemy")
         {
-            Debug.Log("printoooo");
             this.TakeDamage(10);
         }
     }
@@ -37,6 +35,17 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        if(currentHealth <= 0)
+        {
+            PlayerDeath();
+        }
+    }
+
+    void PlayerDeath()
+    {
+        //Play player death animation here
+        Destroy(this.gameObject);
     }
 
 }
