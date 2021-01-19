@@ -25,6 +25,11 @@ public class Player : MonoBehaviour
             Debug.Log("printoooo");
             this.TakeDamage(20);
         }
+        else if (col.gameObject.tag == "Enemy")
+        {
+            Debug.Log("printoooo");
+            this.TakeDamage(10);
+        }
     }
 
     void TakeDamage(int damage)
