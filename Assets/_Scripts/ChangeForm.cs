@@ -13,7 +13,16 @@ public class ChangeForm : MonoBehaviour
     public Color flashColor = Color.white;
     public Color shadowFlashColor = Color.black;
 
+    public GameObject normalTileMap;
+    public GameObject shadowTileMap;
+
+    void Start()
+    {
+        shadowTileMap.SetActive(false);
+        normalTileMap.SetActive(true);
+    }
     // Update is called once per frame
+    //If designated key pressed, switch form, switch dimension, and make the screen flash
     void Update()
     {
         if (Input.GetKeyDown(shadowModeKey))
@@ -22,13 +31,22 @@ public class ChangeForm : MonoBehaviour
             {
                 //screen flash black
                 flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
-                //Change sprite to shadow player
+
+                //Change form from normal to shadow
+                shadowTileMap.SetActive(true);
+                normalTileMap.SetActive(false);
+
                 shadowForm = true;
             }
             else if(shadowForm == true)
             {
+                //Screen flash white
                 flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
-                //Change sprite to normal player
+
+                //Change form from shadow to normal
+                shadowTileMap.SetActive(false);
+                normalTileMap.SetActive(true);
+                
                 shadowForm = false;
             }
         }

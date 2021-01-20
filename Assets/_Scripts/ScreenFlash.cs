@@ -13,7 +13,9 @@ public class ScreenFlash : MonoBehaviour
     {
         image = GetComponent<Image>();
     }
- 
+    
+    //Accessed from the editor or called from other scripts
+    //Starts the screen flash IEnumerator and if one is actively running stops it before starting a new one
     public void StartScreenFlash(float seconds, float maxAlpha, Color newColor)
     {
         image.color = newColor;
@@ -27,8 +29,10 @@ public class ScreenFlash : MonoBehaviour
         currentFlashCo = StartCoroutine(Flash(seconds, maxAlpha));
     }
 
+    //Screen flash magic happens here
     IEnumerator Flash(float seconds, float maxAlpha)
     {
+        //duration is divided in half. Alpha is Lerped between 0 and the maxAlpha over the halved duration witrh the given colour
         float flashInDuraction = seconds / 2;
         for (float i = 0; i <= flashInDuraction; i += Time.deltaTime)
         {
@@ -38,6 +42,7 @@ public class ScreenFlash : MonoBehaviour
             yield return null;
         }
 
+        //Same thing as above but fades out, so starts at the max alpha and Lerps towards 0 over the halved duration witrh the given colour
         float flashOutDuration = seconds / 2;
         for (float i = 0; i <= flashOutDuration; i += Time.deltaTime)
         {
