@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Hurtful
   - Enemy
+  - Player Bullet
   layers:
   - Default
   - TransparentFX
