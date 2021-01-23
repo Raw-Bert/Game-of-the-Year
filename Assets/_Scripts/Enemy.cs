@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "PlayerBullet")
+        if(col.gameObject.tag == "Player Bullet")
         {
             TakeDamage(25);
         }
