@@ -6,11 +6,14 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 50;
     public int currentHealth;
+    GameObject manager;
+    
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentHealth = maxHealth;
+        manager = GameObject.Find("LevelController");
     }
 
     void Update(){
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
         if(col.gameObject.tag == "Player Bullet")
         {
             TakeDamage(25);
+
             Destroy(col.gameObject);
         }
     }
@@ -34,6 +38,7 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         if(currentHealth <= 0)
         {
+            manager.GetComponent<GameScore>().countScore(10);
             Die();
         }
     }
