@@ -467,7 +467,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1950565272}
   basicBullet: {fileID: 7835946755970645943, guid: 079b53eb40ee4194891bcad6578e7b7a, type: 3}
-  bulletForce: 15
+  manager: {fileID: 1179261777}
+  bulletSpeed: 100
 --- !u!1 &374109737
 GameObject:
   m_ObjectHideFlags: 0

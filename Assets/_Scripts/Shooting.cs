@@ -8,7 +8,11 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject basicBullet;
 
-    public float bulletForce;
+    public GameObject manager;
+
+    Vector2 mousePos;
+
+    public float bulletSpeed = 20f;
     // Update is called once per frame
     void Update()
     {
@@ -20,7 +24,12 @@ public class Shooting : MonoBehaviour
  
     void Shoot()
     {
+        
         GameObject bullet = Instantiate(basicBullet, firePoint.position, firePoint.rotation);
+
+        //bullet.transform.Translate(mousePos * bulletSpeed * Time.deltaTime);
+
+        //Debug.Log("POS: " + mousePos);
         //Rigidbody2D rb = basicBullet.GetComponent<Rigidbody2D>();
         //rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
         //replace with transforms

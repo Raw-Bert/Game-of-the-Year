@@ -23,12 +23,11 @@ public class CameraOffset : MonoBehaviour
         }
     }
 
-    Vector2 CaptureMousePos()
+    public Vector2 CaptureMousePos()
     {
         Vector2 pos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
         pos *= 2;
         pos -= Vector2.one;
-        Debug.Log("POS: " + pos);
 
         return pos;
     }

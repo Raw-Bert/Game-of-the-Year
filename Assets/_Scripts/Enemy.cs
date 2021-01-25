@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
         if(col.gameObject.tag == "Player Bullet")
         {
             TakeDamage(25);
+            Destroy(col.gameObject);
         }
     }
 
