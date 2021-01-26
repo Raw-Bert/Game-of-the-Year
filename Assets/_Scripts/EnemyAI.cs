@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     public EnemyType movementType;
-    public float speed = 2, chargeTimmer = 0, cooldownTimmer = 0;
+    public float speed = 2, chargeTimer = 0, cooldownTimer = 0;
     bool hasCharged = false;
     bool isCollidingWithPlayer = false;
 
@@ -57,12 +57,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (hasCharged)
         {
-            cooldownTimmer += Time.deltaTime;
-            if (cooldownTimmer >= 5)
+            cooldownTimer += Time.deltaTime;
+            if (cooldownTimer >= 5)
             {
                 hasCharged = false;
-                cooldownTimmer = 0;
-                chargeTimmer = 0;
+                cooldownTimer = 0;
+                chargeTimer = 0;
                 chargeLoc = player;
             }
         }
@@ -72,9 +72,9 @@ public class EnemyAI : MonoBehaviour
             if (!isCollidingWithPlayer)
                 transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * speed;
 
-            if (chargeTimmer >= 2)
+            if (chargeTimer >= 2)
                 hasCharged = true;
-            chargeTimmer += Time.deltaTime;
+            chargeTimer += Time.deltaTime;
         }
     }
     void SlowMove() {}
