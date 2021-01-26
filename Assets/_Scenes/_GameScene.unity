@@ -988,6 +988,10 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   camera: {fileID: 519420031}
   factor: 0.5
+  cameraDistance: 3.5
+  max: 0.9
+  target: {x: 0, y: 0, z: 0}
+  refVel: {x: 1, y: 1, z: 1}
 --- !u!1 &1268191761
 GameObject:
   m_ObjectHideFlags: 0
