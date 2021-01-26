@@ -18,6 +18,17 @@ public class EnemyAI : MonoBehaviour
     bool hasCharged = false;
     bool isCollidingWithPlayer = false;
 
+    public float stopDis;
+    public float backDis;
+    public float timeBtwAttack;
+    float timeBtwAttackUpdate;
+    public GameObject projectile;
+
+    private void Start()
+    {
+        timeBtwAttackUpdate = timeBtwAttack;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -30,10 +41,10 @@ public class EnemyAI : MonoBehaviour
                 ChargeMove(playerPos);
                 break;
             case EnemyType.Slowmoving:
-                SlowMove();
+                SlowMove(playerPos);
                 break;
             case EnemyType.Ranged:
-                RangedMove();
+                RangedMove(playerPos);
                 break;
         }
     }
@@ -53,7 +64,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     Vector3 chargeLoc;
-    void ChargeMove(Vector3 player)
+    void ChargeMove(Vector3 playerPos)
     {
         if (hasCharged)
         {
@@ -63,7 +74,7 @@ public class EnemyAI : MonoBehaviour
                 hasCharged = false;
                 cooldownTimer = 0;
                 chargeTimer = 0;
-                chargeLoc = player;
+                chargeLoc = playerPos;
             }
         }
 
@@ -77,7 +88,39 @@ public class EnemyAI : MonoBehaviour
             chargeTimer += Time.deltaTime;
         }
     }
-    void SlowMove() {}
-    void RangedMove() {}
+
+    void SlowMove(Vector3 playerPos)
+    {
+        transform.position += (playerPos - transform.position).normalized * Time.deltaTime * speed / 4;
+
+    }
+
+    void RangedMove(Vector3 player)
+    {
+        // Movement
+        if (Vector2.Distance(transform.position, player) > stopDis)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player, speed * Time.deltaTime);
+        }
+        else if (Vector2.Distance(transform.position, player) < stopDis && Vector2.Distance(transform.position, player) > backDis)
+        {
+            transform.position = this.transform.position;
+        }
+        else if (Vector2.Distance(transform.position, player) < backDis)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player, -speed * Time.deltaTime);
+        }
+
+        // Attack
+        if (timeBtwAttackUpdate <= 0)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            timeBtwAttackUpdate = timeBtwAttack;
+        }
+        else
+        {
+            timeBtwAttackUpdate -= Time.deltaTime;
+        }
+    }
 
 }
