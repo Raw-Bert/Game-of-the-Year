@@ -17,6 +17,17 @@ public class EnemyAI : MonoBehaviour
     public float speed = 2, chargeTimmer = 0, cooldownTimmer = 0;
     bool hasCharged = false;
     bool isCollidingWithPlayer = false;
+    
+    public float stopDis;
+    public float backDis;
+    public float timeBtwAttack;
+    float timeBtwAttackUpdate;
+    public GameObject projectile;
+
+    private void Start()
+    {
+        timeBtwAttackUpdate = timeBtwAttack;
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,7 +44,7 @@ public class EnemyAI : MonoBehaviour
                 SlowMove();
                 break;
             case EnemyType.Ranged:
-                RangedMove();
+                RangedMove(playerPos);
                 break;
         }
     }
@@ -77,7 +88,34 @@ public class EnemyAI : MonoBehaviour
             chargeTimmer += Time.deltaTime;
         }
     }
+
     void SlowMove() {}
-    void RangedMove() {}
+
+    void RangedMove(Vector3 player) {
+        // Movement
+        if(Vector2.Distance(transform.position, player) > stopDis)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player, speed * Time.deltaTime);
+        }
+        else if (Vector2.Distance(transform.position, player) < stopDis && Vector2.Distance(transform.position, player) > backDis)
+        {
+            transform.position = this.transform.position;
+        }
+        else if(Vector2.Distance(transform.position, player) < backDis)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player, -speed * Time.deltaTime);
+        }
+
+        // Attack
+        if(timeBtwAttackUpdate <= 0)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            timeBtwAttackUpdate = timeBtwAttack;
+        }
+        else
+        {
+            timeBtwAttackUpdate -= Time.deltaTime;
+        }
+    }
 
 }
