@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
 
+    public GameObject manager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,7 +48,9 @@ public class Player : MonoBehaviour
     void PlayerDeath()
     {
         //Play player death animation here
+        manager.GetComponent<GameOver>().End(2f);
         Destroy(this.gameObject);
+        
     }
 
 }
