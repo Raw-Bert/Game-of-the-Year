@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
         manager = GameObject.Find("LevelController");
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        manager.GetComponent<SpawnEnemies>().numberOfEnemies += 1;
     }
 
     //void Update(){
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
     {
         //Play Enemy death animation here
         manager.GetComponent<GameScore>().countScore(10);
+        manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
         Destroy(this.gameObject);
     } 
 }
