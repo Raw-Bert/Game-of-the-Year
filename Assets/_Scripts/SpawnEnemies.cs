@@ -17,11 +17,6 @@ public class SpawnEnemies : MonoBehaviour
 
     public GameObject player;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -35,12 +30,16 @@ public class SpawnEnemies : MonoBehaviour
         }
     }
 
+    // Spawns enemy and gives it an attack type.
     void SpawnEnemy()
     {
         Vector2 spawnPos = SpawnPoint();
         GameObject newEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+        newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
+         
     }
 
+    //Creates a spawn point away from player for the enemy
     Vector2 SpawnPoint()
     {
         int spawnPointX = Random.Range(-15, 15);
