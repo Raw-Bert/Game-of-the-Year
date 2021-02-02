@@ -16,6 +16,8 @@ public class ChangeForm : MonoBehaviour
     public GameObject normalTileMap;
     public GameObject shadowTileMap;
 
+    public Texture2D shadowCursor;
+
     void Start()
     {
         shadowTileMap.SetActive(false);
@@ -37,6 +39,9 @@ public class ChangeForm : MonoBehaviour
                 normalTileMap.SetActive(false);
 
                 shadowForm = true;
+
+                // cursor change
+                Cursor.SetCursor(shadowCursor, Vector2.zero, CursorMode.Auto);
             }
             else if(shadowForm == true)
             {
@@ -48,6 +53,9 @@ public class ChangeForm : MonoBehaviour
                 normalTileMap.SetActive(true);
                 
                 shadowForm = false;
+
+                // cursor change
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
             }
         }
                 
