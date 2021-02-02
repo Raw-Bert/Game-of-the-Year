@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
 
     public GameObject manager;
 
+    public int hurtfulDamage = 20;
+    public int enemyDamage = 10;
+    public int enemyProjectileDamage = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +30,15 @@ public class Player : MonoBehaviour
         Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "Hurtful")
         {
-            this.TakeDamage(20);
+            this.TakeDamage(hurtfulDamage);
         }
         else if (col.gameObject.tag == "Enemy")
         {
-            this.TakeDamage(10);
+            this.TakeDamage(enemyDamage);
+        }
+        else if (col.gameObject.tag == "EnemyProjectile")
+        {
+            this.TakeDamage(enemyProjectileDamage);
         }
     }
 
