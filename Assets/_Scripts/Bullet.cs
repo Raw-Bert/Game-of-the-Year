@@ -34,4 +34,22 @@ public class Bullet : MonoBehaviour
             this.transform.position += new Vector3(shootDir.x * speed * Time.deltaTime, shootDir.y * speed * Time.deltaTime, this.transform.position.z);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        Debug.Log("Col");
+        if(col.gameObject.tag == "Tile")
+        {
+           Debug.Log("Tile Collision");
+            Destroy(this.gameObject);
+        }
+    }
+    //void OnCollisionEnter(Collider other){
+    //    {
+    //        if(other.tag == "Tile")
+    //        {
+    //            Debug.Log("Tile Trigger");
+    //            Destroy(this.gameObject);
+    //        }
+   //     }
+   // }
 }

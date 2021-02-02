@@ -1528,7 +1528,7 @@ GameObject:
   - component: {fileID: 1268191763}
   m_Layer: 0
   m_Name: Ground Feature Tilemap Normal Mode
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2138,7 +2138,7 @@ GameObject:
   - component: {fileID: 1670892747}
   m_Layer: 0
   m_Name: Ground Feature Tilemap Shadow Mode
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
