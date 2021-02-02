@@ -43,7 +43,7 @@ public class CameraOffset : MonoBehaviour
         {
             pos = pos.normalized;
         }
-        Debug.Log("POS: " + pos);
+        //Debug.Log("POS: " + pos);
 
         return pos;
     }

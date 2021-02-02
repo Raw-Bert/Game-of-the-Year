@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -24,9 +25,26 @@ public class EnemyAI : MonoBehaviour
     float timeBtwAttackUpdate;
     public GameObject projectile;
 
+    NavMeshAgent agent;
+    bool isAgentEnable = true;
+
     private void Start()
     {
         timeBtwAttackUpdate = timeBtwAttack;
+
+        // nav mesh reset for 2D
+        if (GameObject.Find("NavMesh") != null)
+        {
+            agent = GetComponent<NavMeshAgent>();
+            agent.updateRotation = false;
+            agent.updateUpAxis = false;
+        }
+        else
+        {
+            isAgentEnable = false;
+            Debug.Log("Nave Mesh is not exist!");
+        }
+
     }
 
     // Update is called once per frame
@@ -91,24 +109,44 @@ public class EnemyAI : MonoBehaviour
 
     void SlowMove(Vector3 playerPos)
     {
-        transform.position += (playerPos - transform.position).normalized * Time.deltaTime * speed / 4;
-
+        if (isAgentEnable)
+        {
+            agent.SetDestination(playerPos);
+        }
+        else
+        {
+            transform.position += (playerPos - transform.position).normalized * Time.deltaTime * speed / 4;
+        }
     }
 
-    void RangedMove(Vector3 player)
+    void RangedMove(Vector3 playerPos)
     {
         // Movement
-        if (Vector2.Distance(transform.position, player) > stopDis)
+        if (Vector2.Distance(transform.position, playerPos) > stopDis)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player, speed * Time.deltaTime);
+            if (isAgentEnable)
+            {
+                agent.SetDestination(playerPos);
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
+            }
         }
-        else if (Vector2.Distance(transform.position, player) < stopDis && Vector2.Distance(transform.position, player) > backDis)
+        else if (Vector2.Distance(transform.position, playerPos) < stopDis && Vector2.Distance(transform.position, playerPos) > backDis)
         {
             transform.position = this.transform.position;
         }
-        else if (Vector2.Distance(transform.position, player) < backDis)
+        else if (Vector2.Distance(transform.position, playerPos) < backDis)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player, -speed * Time.deltaTime);
+            if (isAgentEnable)
+            {
+                agent.SetDestination(-playerPos);
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerPos, -speed * Time.deltaTime);
+            }
         }
 
         // Attack

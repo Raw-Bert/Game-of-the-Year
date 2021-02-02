@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6486187154662754277}
   - component: {fileID: 3938087748152103689}
   - component: {fileID: 5883859740905726732}
+  - component: {fileID: 2419407261929838792}
   m_Layer: 0
   m_Name: Enemy Projectile
-  m_TagString: Untagged
+  m_TagString: EnemyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,4 +113,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2517fb5f164fa41439ebfd46da77df4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
+--- !u!58 &2419407261929838792
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636470433957654561}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.1
