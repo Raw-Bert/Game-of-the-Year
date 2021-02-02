@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Bullet : MonoBehaviour
 {
@@ -30,26 +31,19 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
         else
-        {
+        {            
             this.transform.position += new Vector3(shootDir.x * speed * Time.deltaTime, shootDir.y * speed * Time.deltaTime, this.transform.position.z);
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col) {
+    void OnCollisionEnter2D(Collision2D col) 
+    {
         Debug.Log("Col");
         if(col.gameObject.tag == "Tile")
         {
-           Debug.Log("Tile Collision");
+            Debug.Log("Tile Collision");
             Destroy(this.gameObject);
         }
     }
-    //void OnCollisionEnter(Collider other){
-    //    {
-    //        if(other.tag == "Tile")
-    //        {
-    //            Debug.Log("Tile Trigger");
-    //            Destroy(this.gameObject);
-    //        }
-   //     }
-   // }
+
 }
