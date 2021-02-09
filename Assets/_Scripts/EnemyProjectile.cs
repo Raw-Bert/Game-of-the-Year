@@ -10,27 +10,34 @@ public class EnemyProjectile : MonoBehaviour
     Transform player;
     Vector2 target;
 
+    public float lifeTime = 4f;
+    float timer;
+
     void Start()
     {
         player = GameObject.FindGameObjectsWithTag("Player")[0].transform;
-        target = new Vector2(player.position.x, player.position.y);
+        Vector3 playerDir = player.position - this.transform.position;
+        target = new Vector2(playerDir.x, playerDir.y);
+        target.Normalize();
     }
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-        // destroy when arrive the target position
-        if(transform.position.x == target.x && transform.position.y == target.y)
+        timer += Time.deltaTime;
+        if (timer > lifeTime)
         {
             Destroy(gameObject);
         }
+        else
+        {
+            this.transform.position += new Vector3(target.x * speed * Time.deltaTime, target.y * speed * Time.deltaTime, 0);
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        // destroy when hit player
-        if (collision.CompareTag("Player"))
+        print("collision????" + collision.gameObject.tag);
+        if (collision.gameObject.tag == "Tile" || collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);
         }

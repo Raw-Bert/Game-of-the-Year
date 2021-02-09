@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
         timeBtwAttackUpdate = timeBtwAttack;
 
         // nav mesh reset for 2D
-        if (GameObject.Find("NavMesh") != null)
+        if (GameObject.FindGameObjectWithTag("NavMesh") != null)
         {
             agent = GetComponent<NavMeshAgent>();
             agent.updateRotation = false;

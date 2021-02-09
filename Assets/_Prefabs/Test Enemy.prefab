@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7635303804270510611}
   - component: {fileID: 7635303804270510606}
   - component: {fileID: 7635303804270510607}
-  - component: {fileID: 571070970765897424}
+  - component: {fileID: -7675350324853050437}
   m_Layer: 0
   m_Name: Test Enemy
   m_TagString: Enemy
@@ -223,7 +223,7 @@ MonoBehaviour:
   backDis: 4
   timeBtwAttack: 2
   projectile: {fileID: 4636470433957654561, guid: ac0b6f70150108d46be3775b388a1ec9, type: 3}
---- !u!195 &571070970765897424
+--- !u!195 &-7675350324853050437
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
