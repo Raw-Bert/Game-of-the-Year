@@ -59,7 +59,8 @@ public class Player : MonoBehaviour
     {
         //Play player death animation here
         manager.GetComponent<GameOver>().End(2f);
-        Destroy(this.gameObject);
+        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         
     }
 

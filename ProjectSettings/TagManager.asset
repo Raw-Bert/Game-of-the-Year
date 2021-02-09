@@ -9,6 +9,7 @@ TagManager:
   - Player Bullet
   - Tile
   - EnemyProjectile
+  - NavMesh
   layers:
   - Default
   - TransparentFX
