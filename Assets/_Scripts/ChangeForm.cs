@@ -16,6 +16,9 @@ public class ChangeForm : MonoBehaviour
     public GameObject normalTileMap;
     public GameObject shadowTileMap;
 
+    public GameObject normalGround;
+    public GameObject shadowGround;
+
     public GameObject normalNavMesh;
     public GameObject shadowNavMesh;
 
@@ -30,6 +33,8 @@ public class ChangeForm : MonoBehaviour
         normalTileMap.SetActive(true);
         shadowNavMesh.SetActive(false);
         normalNavMesh.SetActive(true);
+        shadowGround.SetActive(false);
+        normalGround.SetActive(true);
     }
     // Update is called once per frame
     //If designated key pressed, switch form, switch dimension, and make the screen flash
@@ -47,6 +52,8 @@ public class ChangeForm : MonoBehaviour
                 normalTileMap.SetActive(false);
                 shadowNavMesh.SetActive(true);
                 normalNavMesh.SetActive(false);
+                shadowGround.SetActive(true);
+                normalGround.SetActive(false);
 
                 shadowForm = true;
 
@@ -63,6 +70,8 @@ public class ChangeForm : MonoBehaviour
                 normalTileMap.SetActive(true);
                 shadowNavMesh.SetActive(false);
                 normalNavMesh.SetActive(true);
+                shadowGround.SetActive(false);
+                normalGround.SetActive(true);
 
                 shadowForm = false;
 
