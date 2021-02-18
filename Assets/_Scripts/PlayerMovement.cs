@@ -16,6 +16,13 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     Vector2 mousePosition;
 
+    Animator playerAnimator;
+
+    private void Start()
+    {
+        playerAnimator = this.GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +32,15 @@ public class PlayerMovement : MonoBehaviour
         mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
         rbWeapon.position = this.transform.position;
+
+        if(movement.x !=0 || movement.y != 0)
+        {
+            playerAnimator.SetBool("isRun", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isRun", false);
+        }
     }
 
     void FixedUpdate()
