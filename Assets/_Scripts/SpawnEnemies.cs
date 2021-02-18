@@ -17,6 +17,8 @@ public class SpawnEnemies : MonoBehaviour
 
     public GameObject player;
 
+    public List<GameObject> spawnPoints = new List<GameObject>();
+
 
     // Update is called once per frame
     void Update()
@@ -42,9 +44,11 @@ public class SpawnEnemies : MonoBehaviour
     //Creates a spawn point away from player for the enemy
     Vector2 SpawnPoint()
     {
-        int spawnPointX = Random.Range(-15, 15);
-        int spawnPointY = Random.Range(-15, 15);
-        Vector2 spawnPos = new Vector2(spawnPointX,spawnPointY);
+        int randomIndex = Random.Range(0, spawnPoints.Count);
+        Vector2 spawnPos = spawnPoints[randomIndex].transform.position;
+        //int spawnPointX = Random.Range(-15, 15);
+        //int spawnPointY = Random.Range(-15, 15);
+        //Vector2 spawnPos = new Vector2(spawnPointX,spawnPointY);
         Vector2 playerPos = new Vector2(player.transform.position.x,player.transform.position.y);
         if ((spawnPos.x - playerPos.x) < spawnDistFromPlayer && (spawnPos.y - playerPos.y) < spawnDistFromPlayer)
         {
