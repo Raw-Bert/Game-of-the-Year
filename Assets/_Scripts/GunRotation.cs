@@ -34,9 +34,11 @@ public class GunRotation : MonoBehaviour
         if(mousePosition.x < 0.0f)
         {
             gunRenderer.flipY = true;
+            player.GetComponent<SpriteRenderer>().flipX = true;
         }
         else if(mousePosition.x >= 0.0f){
             gunRenderer.flipY = false;
+            player.GetComponent<SpriteRenderer>().flipX = false;
         }
         
         //Put gun in layer behind the player depending on mouse position in relation to player
