@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     public int enemyDamage = 10;
     public int enemyProjectileDamage = 5;
 
+    public float flashTime;
+    public float flashMaxAlpha;
+    public Color flashColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,8 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        this.GetComponent<HealthbarFlash>().StartHealthFlash(flashTime, flashMaxAlpha, flashColor);
     
         
         if(currentHealth <= 0)

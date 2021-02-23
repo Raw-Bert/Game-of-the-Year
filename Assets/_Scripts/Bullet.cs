@@ -17,8 +17,12 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         //manager = GameObject.Find("LevelController");
+        var mousePos = Input.mousePosition;
+        mousePos.x -= Screen.width/2;
+        mousePos.y -= Screen.height/2;
         mainCamera = GameObject.FindWithTag("MainCamera");
-        shootDir = mainCamera.GetComponent<CameraOffset>().CaptureMousePos();
+        shootDir = mousePos;
+        //shootDir = mainCamera.GetComponent<CameraOffset>().CaptureMousePos();
         shootDir.Normalize();
     }
 

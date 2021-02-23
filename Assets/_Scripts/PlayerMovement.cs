@@ -41,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("isRun", false);
         }
+        //Debug.Log(mousePosition.x + " " + mousePosition.y);
     }
 
     void FixedUpdate()
