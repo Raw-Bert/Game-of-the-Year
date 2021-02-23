@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         //If player collides with game objects of various tags, player takes X damage
-        Debug.Log("OnCollisionEnter2D");
+        //Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "Hurtful")
         {
             this.TakeDamage(hurtfulDamage);

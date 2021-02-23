@@ -15,8 +15,8 @@ public class EnemyAI : MonoBehaviour
     }
 
     public EnemyType movementType;
-    public float speed = 2, chargeTimer = 0, cooldownTimer = 0;
-    bool hasCharged = false;
+    public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5;
+    bool hasCharged = true;
     bool isCollidingWithPlayer = false;
 
     public float stopDis;
@@ -50,6 +50,19 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //if (!agent.isOnNavMesh)
+        //{
+        //    isAgentEnable = false;
+        //    this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        //}
+        //else
+        //{
+        //    this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        //    isAgentEnable = true;
+        //    print(isAgentEnable);
+        //}
+
         Vector3 playerPos = Vector3.zero;
         if (Transform.FindObjectOfType<PlayerMovement>())
             playerPos = Transform.FindObjectOfType<PlayerMovement>().gameObject.transform.position;
@@ -71,13 +84,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = true;
-        print("hit player");
+        //print("hit player");
     }
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = false;
-        print("exit player");
+        //print("exit player");
 
     }
 
@@ -87,22 +100,30 @@ public class EnemyAI : MonoBehaviour
         if (hasCharged)
         {
             cooldownTimer += Time.deltaTime;
-            if (cooldownTimer >= 5)
+            if (cooldownTimer >= 5 && (Vector3.Distance(transform.position, playerPos) < chargeDistance))
             {
-                hasCharged = false;
-                cooldownTimer = 0;
-                chargeTimer = 0;
-                chargeLoc = playerPos;
+                Vector2 direct = new Vector2(playerPos.x, playerPos.y) - new Vector2(transform.position.x, transform.position.y);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direct.normalized);
+                
+                if (hit.collider != null)
+                {
+                    if (hit.collider.gameObject.tag == "Player")
+                    {
+                        hasCharged = false;
+                        cooldownTimer = 0;
+                        chargeTimer = 0;
+                        chargeLoc = playerPos;
+                    }
+                }
             }
         }
 
         if (!hasCharged)
         {
-            if (!isCollidingWithPlayer)
-                transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * speed;
-
-            if (chargeTimer >= 2)
+            if (chargeTimer >= 2 || isCollidingWithPlayer)
                 hasCharged = true;
+            else
+                transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * speed;
             chargeTimer += Time.deltaTime;
         }
     }
