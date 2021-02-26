@@ -17,11 +17,27 @@ public class Player : MonoBehaviour
     public int enemyDamage = 10;
     public int enemyProjectileDamage = 5;
 
+    public float flashTime;
+    public float flashMaxAlpha;
+    public Color flashColor;
+
+    bool invincible = false;
+    float timer;
+    float invincibilityTime = 0.5f;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+    }
+
+    void Update(){
+        timer += Time.deltaTime;
+        if (timer < invincibilityTime)
+        {
+            invincible = true;
+        }
+        else invincible = false;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -30,15 +46,24 @@ public class Player : MonoBehaviour
         Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "Hurtful")
         {
-            this.TakeDamage(hurtfulDamage);
+            if (invincible == false){
+                 this.TakeDamage(hurtfulDamage);
+                 
+            }
         }
         else if (col.gameObject.tag == "Enemy")
         {
-            this.TakeDamage(enemyDamage);
+             if (invincible == false){
+                this.TakeDamage(enemyDamage);
+                //timer = 0;
+             }
         }
         else if (col.gameObject.tag == "EnemyProjectile")
         {
-            this.TakeDamage(enemyProjectileDamage);
+             if (invincible == false){
+                this.TakeDamage(enemyProjectileDamage);
+                //timer = 0;
+             }
         }
     }
 
@@ -47,6 +72,9 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+
+        this.GetComponent<HealthbarFlash>().StartHealthFlash(flashTime, flashMaxAlpha, flashColor);
+        timer = 0;
     
         
         if(currentHealth <= 0)

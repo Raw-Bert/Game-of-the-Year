@@ -41,11 +41,13 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("isRun", false);
         }
+        //Debug.Log(mousePosition.x + " " + mousePosition.y);
     }
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        //tempMove = (rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
 
         Vector2 lookDir = mousePosition - rb.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
