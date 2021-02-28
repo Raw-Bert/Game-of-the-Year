@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 0}
+  collideEffect: {fileID: 7017830336995032454, guid: 0187c922c1ad3384f838688a7d1fad8a, type: 3}
   lifeTime: 4
   speed: 10
 --- !u!95 &-2909297245692297322

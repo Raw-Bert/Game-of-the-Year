@@ -31,19 +31,17 @@ public class Enemy : MonoBehaviour
        //}
     //}
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Player Bullet")
-        {
-            this.gameObject.GetComponent<Flash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
+    // void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if(col.gameObject.tag == "Player Bullet")
+    //     {
+    //         TakeDamage(15);
 
-            TakeDamage(15);
+    //         Destroy(col.gameObject);
+    //     }
+    // }
 
-            Destroy(col.gameObject);
-        }
-    }
-
-    void TakeDamage(int damage)
+     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);

@@ -25934,7 +25934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f96ac6da6b93784db1c5b6cec054806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 1
+  spawnTime: 0.5
   enemy: {fileID: 7635303804270510610, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
   maxEnemies: 30
   numberOfEnemies: 0
@@ -48082,7 +48082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1950565271}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.157, y: 0.003, z: 0}
+  m_LocalPosition: {x: 1.163, y: -0.001, z: 0}
   m_LocalScale: {x: 1.0416666, y: 1.0416667, z: 1}
   m_Children:
   - {fileID: 1739658892}
