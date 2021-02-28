@@ -44,17 +44,17 @@ public class SpawnEnemies : MonoBehaviour
             {
                 GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
                 newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
-                Debug.Log("spawn: " + spawnPoint.name);
+                //Debug.Log("spawn: " + spawnPoint.name);
                 break;
             }
             else
             {
                 breakLoop--;
-                Debug.Log("Not spawning...: " + spawnPoint.name);
+                //Debug.Log("Not spawning...: " + spawnPoint.name);
             }
             
         }  
-         Debug.Log("Did not spawn... ");
+         //Debug.Log("Did not spawn... ");
     }
 
     //Gets a spawn point from the list

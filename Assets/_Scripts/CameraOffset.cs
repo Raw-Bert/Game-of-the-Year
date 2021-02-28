@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraOffset : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CameraOffset : MonoBehaviour
    // public float factor = 3f;
     public float cameraDistance = 3.5f;
     public float max = 0.9f;
+    public GameObject gun;
+    public Vector3 recoilModifier = new Vector3 (.1f,.1f,.0f);
     float smoothTime = 0.2f, zStart;
 
     Vector3 mousePos, target, refVel;
@@ -78,28 +81,32 @@ public class CameraOffset : MonoBehaviour
 
     IEnumerator GunRecoil(float seconds)
     {
-        float backDuration = seconds / 2;
-        for (float i = 0; i <= backDuration; i += Time.deltaTime)
-        {
-            Vector2 tempPos = mousePos;
-            Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
+      
+        
+        gameObject.transform.DOShakePosition(seconds,(player.GetComponent<PlayerMovement>().weaponDir.normalized) * recoilModifier,2,10,false,false);
+        // Debug.Log(gunForward);
+        // float backDuration = seconds / 2;
+        // for (float i = 0; i <= backDuration; i += Time.deltaTime)
+        // {
+        //     Vector2 tempPos = mousePos;
+        //     Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
            
-            tempNewPos = Vector3.Lerp(mousePos, targetDir, i / backDuration);
-            target += new Vector3(tempNewPos.x, tempNewPos.y,0);
+        //     tempNewPos = Vector3.Lerp(mousePos, targetDir, i / backDuration);
+        //     target += new Vector3(tempNewPos.x, tempNewPos.y,0);
+
+        //     yield return null;
+        // }
+
+        // float forwardDuration = seconds / 2;
+        // for (float i = 0; i <= backDuration; i += Time.deltaTime)
+        // {
+        //     Vector2 tempPos = mousePos;
+        //     Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
+           
+        //     tempNewPos = Vector3.Lerp(targetDir, mousePos, i / backDuration);
+        //     target += new Vector3(tempNewPos.x, tempNewPos.y,0);
 
             yield return null;
-        }
-
-        float forwardDuration = seconds / 2;
-        for (float i = 0; i <= backDuration; i += Time.deltaTime)
-        {
-            Vector2 tempPos = mousePos;
-            Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
-           
-            tempNewPos = Vector3.Lerp(targetDir, mousePos, i / backDuration);
-            target += new Vector3(tempNewPos.x, tempNewPos.y,0);
-
-            yield return null;
-        }
+        // }
     }
 }
