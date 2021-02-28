@@ -42,10 +42,10 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) 
     {
-        Debug.Log("Col");
+        //Debug.Log("Col");
         if(col.gameObject.tag == "Tile")
         {
-            Debug.Log("Tile Collision");
+            //Debug.Log("Tile Collision");
             Destroy(this.gameObject);
         }
     }

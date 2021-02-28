@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 7635303804270510606}
   - component: {fileID: 7635303804270510607}
   - component: {fileID: -7675350324853050437}
+  - component: {fileID: 8228150531163527034}
   m_Layer: 0
   m_Name: Test Enemy
   m_TagString: Enemy
@@ -203,6 +204,9 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 0
   healthBar: {fileID: 7635303804876598550}
+  flashTime: 0.1
+  flashMaxAlpha: 0.5
+  flashColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &7635303804270510607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,9 +220,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementType: 1
-  speed: 6
-  chargeTimer: 1
-  cooldownTimer: 0
+  speed: 10
+  chargeTimer: 0
+  cooldownTimer: 5
+  chargeDistance: 5
   stopDis: 3
   backDis: 4
   timeBtwAttack: 2
@@ -245,6 +250,18 @@ NavMeshAgent:
   m_BaseOffset: 0.08
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8228150531163527034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635303804270510610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab3475996add6d94d8010b880eeb9eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7635303804669154208
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.2}
+  m_AnchoredPosition: {x: 116.466, y: -15.592001}
   m_SizeDelta: {x: 14.5347595, y: 3.4864388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7635303804868632557

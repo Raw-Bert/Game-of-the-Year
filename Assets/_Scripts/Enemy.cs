@@ -9,7 +9,11 @@ public class Enemy : MonoBehaviour
     GameObject manager;
 
     public HealthBar healthBar;
-    
+
+    public float flashTime;
+    public float flashMaxAlpha;
+    public Color flashColor = Color.red;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -31,6 +35,8 @@ public class Enemy : MonoBehaviour
     {
         if(col.gameObject.tag == "Player Bullet")
         {
+            this.gameObject.GetComponent<Flash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
+
             TakeDamage(15);
 
             Destroy(col.gameObject);
