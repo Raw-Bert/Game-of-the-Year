@@ -27,17 +27,17 @@ public class Enemy : MonoBehaviour
        //}
     //}
 
-    void OnCollisionEnter2D(Collision2D col)
-    {
-        if(col.gameObject.tag == "Player Bullet")
-        {
-            TakeDamage(15);
+    // void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if(col.gameObject.tag == "Player Bullet")
+    //     {
+    //         TakeDamage(15);
 
-            Destroy(col.gameObject);
-        }
-    }
+    //         Destroy(col.gameObject);
+    //     }
+    // }
 
-    void TakeDamage(int damage)
+     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);

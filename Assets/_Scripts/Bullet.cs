@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     GameObject manager;
     Vector2 shootDir;
     public GameObject mainCamera;
+    public GameObject collideEffect;
     public float lifeTime = 4f;
     float timer;
 
@@ -43,10 +44,17 @@ public class Bullet : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col) 
     {
         Debug.Log("Col");
-        if(col.gameObject.tag == "Tile")
+        if(col.gameObject.tag == "Tile" || col.gameObject.tag == "Enemy")
         {
-            Debug.Log("Tile Collision");
+            if (col.gameObject.tag == "Enemy")
+            {
+                col.gameObject.GetComponent<Enemy>().TakeDamage(15);
+            }
+            //Debug.Log("Tile Collision");
+            Instantiate(collideEffect, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
+
+           
         }
     }
 
