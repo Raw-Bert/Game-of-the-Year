@@ -20,6 +20,9 @@ public class CameraOffset : MonoBehaviour
 
     Vector3 mousePos, target, refVel;
 
+    Coroutine currentRecoil;
+    Vector2 tempNewPos;
+
     void Start()
     {
         target = player.position;
@@ -59,7 +62,44 @@ public class CameraOffset : MonoBehaviour
     void UpdateCameraPos()
     {
         Vector3 tempPos;
-        tempPos = Vector3.SmoothDamp(transform.position, target, ref refVel, smoothTime);
+        tempPos = Vector3.SmoothDamp(new Vector3(transform.position.x + tempNewPos.x, transform.position.y + tempNewPos.y, this.transform.position.z),
+         target, ref refVel, smoothTime);
         transform.position = tempPos;
+    }
+
+    public void StartGunRecoil(float seconds)
+    {
+        if (currentRecoil != null)
+        {
+            StopCoroutine(currentRecoil);
+        }
+        currentRecoil = StartCoroutine(GunRecoil(seconds));
+    }
+
+    IEnumerator GunRecoil(float seconds)
+    {
+        float backDuration = seconds / 2;
+        for (float i = 0; i <= backDuration; i += Time.deltaTime)
+        {
+            Vector2 tempPos = mousePos;
+            Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
+           
+            tempNewPos = Vector3.Lerp(mousePos, targetDir, i / backDuration);
+            target += new Vector3(tempNewPos.x, tempNewPos.y,0);
+
+            yield return null;
+        }
+
+        float forwardDuration = seconds / 2;
+        for (float i = 0; i <= backDuration; i += Time.deltaTime)
+        {
+            Vector2 tempPos = mousePos;
+            Vector2 targetDir = new Vector2(player.transform.position.x, player.transform.position.y);
+           
+            tempNewPos = Vector3.Lerp(targetDir, mousePos, i / backDuration);
+            target += new Vector3(tempNewPos.x, tempNewPos.y,0);
+
+            yield return null;
+        }
     }
 }
