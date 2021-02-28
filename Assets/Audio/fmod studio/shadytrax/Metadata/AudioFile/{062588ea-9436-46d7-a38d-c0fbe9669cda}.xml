@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{062588ea-9436-46d7-a38d-c0fbe9669cda}">
+		<property name="assetPath">
+			<value>Shade Shifter (Dark).mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>14.132244897959184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{38838bb1-aef9-41b9-b967-d3602f008489}</destination>
+		</relationship>
+	</object>
+</objects>

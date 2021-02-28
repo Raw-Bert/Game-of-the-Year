@@ -5,7 +5,7 @@ using UnityEngine;
 public class ChangeForm : MonoBehaviour
 {
     public GameObject flashImage;
-    public bool shadowForm = false;
+    public bool shadowForm { get; private set; } = false;
     public KeyCode shadowModeKey;
 
     public float flashTime;
