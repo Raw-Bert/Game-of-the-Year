@@ -27,8 +27,8 @@ public class GunRotation : MonoBehaviour
         
         mousePosition = CaptureMousePos();
         this.transform.position = player.transform.position + weaponOffset + (new Vector3(factor.x * mousePosition.x, factor.y * mousePosition.y, 0.0f));
-        Debug.Log(mousePosition);
-        Debug.Log(new Vector3(factor.x * mousePosition.x, factor.y * mousePosition.y, 0.0f));
+        //Debug.Log(mousePosition);
+        //Debug.Log(new Vector3(factor.x * mousePosition.x, factor.y * mousePosition.y, 0.0f));
 
         //Flip sprite if mouse past certain axis in relation to the player.
         if(mousePosition.x < 0.0f)
