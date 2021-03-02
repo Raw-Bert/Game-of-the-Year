@@ -42,7 +42,6 @@ public class EnemyAI : MonoBehaviour
         else
         {
             isAgentEnable = false;
-            Debug.Log("Nave Mesh is not exist!");
         }
 
     }
@@ -71,14 +70,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = true;
-        print("hit player");
     }
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = false;
-        print("exit player");
-
+  
     }
 
     Vector3 chargeLoc;

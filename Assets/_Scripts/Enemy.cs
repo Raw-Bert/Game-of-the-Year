@@ -6,10 +6,32 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 50;
     public int currentHealth;
+    public bool onCam { get; set; } = false;
     GameObject manager;
+    public GameObject player { get; set; }
 
     public HealthBar healthBar;
-    
+    void OnDestroy()
+    {
+        if(!player)return;
+        if (onCam)
+            switch (gameObject.GetComponent<EnemyAI>().movementType)
+            {
+                case EnemyAI.EnemyType.Ranged:
+                    --player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
+                    break;
+
+                case EnemyAI.EnemyType.Charge:
+                    --player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
+                    break;
+            }
+
+        var amountEnemy = player.GetComponent<AudioSwapper>().amountOfEnemyType;
+        for (int a = 0; a < amountEnemy.Count; ++a)
+            if (amountEnemy[a] < 0)
+                amountEnemy[a] = 0;
+
+    }
 
     // Start is called before the first frame update
     void Awake()
@@ -21,15 +43,15 @@ public class Enemy : MonoBehaviour
     }
 
     //void Update(){
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    TakeDamage(20);
-       //}
+    //if (Input.GetKeyDown(KeyCode.Space))
+    //{
+    //    TakeDamage(20);
+    //}
     //}
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Player Bullet")
+        if (col.gameObject.tag == "Player Bullet")
         {
             TakeDamage(15);
 
@@ -41,9 +63,9 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            
+
             Die();
         }
     }
@@ -54,5 +76,5 @@ public class Enemy : MonoBehaviour
         manager.GetComponent<GameScore>().countScore(10);
         manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
         Destroy(this.gameObject);
-    } 
+    }
 }

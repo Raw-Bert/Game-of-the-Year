@@ -36,7 +36,6 @@ public class EnemyProjectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("collision????" + collision.gameObject.tag);
         if (collision.gameObject.tag == "Tile" || collision.gameObject.tag == "Player")
         {
             Destroy(gameObject);

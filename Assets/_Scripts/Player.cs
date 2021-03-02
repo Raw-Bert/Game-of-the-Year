@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         //If player collides with game objects of various tags, player takes X damage
-        Debug.Log("OnCollisionEnter2D");
         if (col.gameObject.tag == "Hurtful")
         {
             this.TakeDamage(hurtfulDamage);
@@ -60,8 +59,7 @@ public class Player : MonoBehaviour
         //Play player death animation here
         manager.GetComponent<GameOver>().End(2f);
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);        
     }
 
 }
