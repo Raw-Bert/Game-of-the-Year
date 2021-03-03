@@ -19,12 +19,12 @@ public class EnemyInView : MonoBehaviour
                 switch (enemy.GetComponent<EnemyAI>().movementType)
                 {
                     case EnemyAI.EnemyType.Ranged:
-                      //  ++player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
+                        ++player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
                         print("Enemy On Screen P1: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[0]);
                         break;
 
                     case EnemyAI.EnemyType.Charge:
-                     //   ++player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
+                        ++player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
                         print("Enemy On Screen P2: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[1]);
                         break;
                 }

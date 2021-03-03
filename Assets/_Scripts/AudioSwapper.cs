@@ -37,7 +37,7 @@ public class AudioSwapper : MonoBehaviour
         busDark[1].setVolume(0);
         busBright[1].setVolume(0);
         busDark[2].setVolume(0);
-        busBright[2].setVolume(.5f);
+        busBright[2].setVolume(0.5f);
 
         for (int a = 0; a < 3; ++a)
         {
@@ -74,7 +74,8 @@ public class AudioSwapper : MonoBehaviour
                     switchBright[a] = false;
                 }
 
-                fadeIn(busDark[a], fadeInit[a], fadeTime, startVol[a * 2], 0.5f * (0.1f * a + (a > 0 ? 1 : 0)));
+                fadeIn(busDark[a], fadeInit[a], fadeTime, startVol[a * 2],
+                    0.5f * (0.1f * amountOfEnemyType[a] + (amountOfEnemyType[a] > 0 ? 1 : 0)));
                 fadeOut(busBright[a], fadeInit[a], startVol[a * 2 + 1], fadeTime);
             }
 
@@ -83,11 +84,17 @@ public class AudioSwapper : MonoBehaviour
             {
                 fadeInit[lastIndex] = DateTime.Now;
 
+                float tmp;
+                busDark[lastIndex - 1].getVolume(out tmp);
+                startVol[lastIndex * 2 - 1] = tmp;
+                busBright[lastIndex].getVolume(out tmp);
+                startVol[lastIndex * 2] = tmp;
+
                 switchDark[lastIndex] = true;
                 switchBright[lastIndex] = false;
             }
 
-            fadeIn(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f * (0.1f * lastIndex + (lastIndex > 0 ? 1 : 0)));
+            fadeIn(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
             fadeOut(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
         }
         else
@@ -109,34 +116,39 @@ public class AudioSwapper : MonoBehaviour
                     switchDark[a] = false;
                 }
 
-                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2], 0.5f * (0.1f * a + (a > 0 ? 1 : 0)));
+                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2],
+                    0.5f * (0.1f * amountOfEnemyType[a] + (amountOfEnemyType[a] > 0 ? 1 : 0)));
                 fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2 + 1]);
-
             }
 
             int lastIndex = switchBright.Count - 1;
             if (!switchBright[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
+
+                float tmp;
+                busBright[lastIndex - 1].getVolume(out tmp);
+                startVol[lastIndex * 2 - 1] = tmp;
+                busDark[lastIndex].getVolume(out tmp);
+                startVol[lastIndex * 2] = tmp;
+
                 switchBright[lastIndex] = true;
                 switchDark[lastIndex] = false;
             }
 
-            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f * (0.1f * lastIndex + (lastIndex > 0 ? 1 : 0)));
+            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
             fadeOut(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
         }
     }
 
     void fadeIn(EventInstance e, DateTime startTime, float duration, float startVol, float vol)
     {
-
         e.setVolume(Mathf.Lerp(startVol, Mathf.Clamp(vol, 0, .8f),
             Mathf.Clamp((float)DateTime.Now.Subtract(startTime).TotalSeconds / duration, 0, 1)));
     }
 
     void fadeOut(EventInstance e, DateTime startTime, float duration, float startVol)
     {
-
         e.setVolume(Mathf.Lerp(startVol, 0,
             Mathf.Clamp((float)DateTime.Now.Subtract(startTime).TotalSeconds / duration, 0, 1)));
     }
