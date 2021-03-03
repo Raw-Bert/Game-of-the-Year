@@ -8,7 +8,7 @@ public class MainMenuButtons : MonoBehaviour
     public string game;
     public void PlayButton()
     {
-        SceneManager.LoadScene(game);
+        SceneManager.LoadScene(game, LoadSceneMode.Single);
     }
 
     public void SettingsButton()
