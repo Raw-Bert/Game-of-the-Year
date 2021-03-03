@@ -44,7 +44,29 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 12832
+  Length: 12800
+--- !u!114 &-7409842138435310656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/Syncro Bright
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/Syncro Bright
+  guid: 3e03d589e97c164892b197dc7adba54f
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-6387377814300549461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +128,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/DO NOT USE.bank
   Name: DO NOT USE
   StudioPath: bank:/DO NOT USE
-  lastModified: 637502937011863227
+  lastModified: 637503078961657330
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -125,7 +147,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637502937012205640
+  lastModified: 637503078961926603
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -144,7 +166,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/BG Music.bank
   Name: BG Music
   StudioPath: bank:/BG Music
-  lastModified: 637502937010617967
+  lastModified: 637503078960880984
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -163,12 +185,34 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637502937012601216
+  lastModified: 637503078962006398
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1346
   Exists: 1
+--- !u!114 &-629841693514128886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/BGM/Syncro Dark
+  m_EditorClassIdentifier: 
+  Path: event:/BGM/Syncro Dark
+  guid: 6ffd12d372adfd4fadbad3d422acf887
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +245,7 @@ MonoBehaviour:
   - {fileID: -3862080079897475651}
   StringsBanks:
   - {fileID: -1294895500114869895}
-  stringsBankWriteTime: 637502937012601216
+  stringsBankWriteTime: 637503078962006398
   cacheVersion: 6
 --- !u!114 &136516472068837784
 MonoBehaviour:
@@ -271,7 +315,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 12832
+  Length: 12800
 --- !u!114 &5962070094557511339
 MonoBehaviour:
   m_ObjectHideFlags: 0
