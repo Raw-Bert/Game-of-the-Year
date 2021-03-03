@@ -20,6 +20,11 @@ public class SpawnEnemies : MonoBehaviour
 
     public List<GameObject> spawnPoints = new List<GameObject>();
 
+    bool spawning = false;
+
+    public GameObject wall;
+    public float triggerPos = 13.5f;
+
 
     // Update is called once per frame
     void Update()
@@ -28,8 +33,21 @@ public class SpawnEnemies : MonoBehaviour
         if ((timer >= spawnTime) && (numberOfEnemies < maxEnemies))
         {
             timer = 0;
-            SpawnEnemy();
+            if(spawning == true) 
+            {
+                SpawnEnemy();
+            }
+            
         }
+        if(!spawning)
+        {
+            if (player.transform.position.x > triggerPos)
+            {
+                wall.SetActive(true);
+                spawning = true;
+            }
+        }
+        
     }
 
     // Spawns enemy and gives it an attack type if chosen spawn point not near player
