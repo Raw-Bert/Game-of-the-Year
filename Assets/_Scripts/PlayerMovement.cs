@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject weapon;
     public Rigidbody2D rbWeapon;
     
+    public Vector2 weaponDir;
+
     Vector2 movement;
     Vector2 mousePosition;
 
@@ -48,8 +50,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //tempMove = (rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
-
         Vector2 lookDir = mousePosition - rb.position;
+        weaponDir = lookDir;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         rbWeapon.rotation = angle;
     }

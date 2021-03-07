@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SpawnEnemies : MonoBehaviour
 {
     float timer;
@@ -19,6 +20,11 @@ public class SpawnEnemies : MonoBehaviour
 
     public List<GameObject> spawnPoints = new List<GameObject>();
 
+    bool spawning = false;
+
+    public GameObject wall;
+    public float triggerPos = 13.5f;
+
 
     // Update is called once per frame
     void Update()
@@ -26,34 +32,54 @@ public class SpawnEnemies : MonoBehaviour
         timer += Time.deltaTime;
         if ((timer >= spawnTime) && (numberOfEnemies < maxEnemies))
         {
-            SpawnEnemy();
             timer = 0;
-            //GameObject newEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
+            if(spawning == true) 
+            {
+                SpawnEnemy();
+            }
+            
         }
+        if(!spawning)
+        {
+            if (player.transform.position.x > triggerPos)
+            {
+                wall.SetActive(true);
+                spawning = true;
+            }
+        }
+        
     }
 
-    // Spawns enemy and gives it an attack type.
+    // Spawns enemy and gives it an attack type if chosen spawn point not near player
     void SpawnEnemy()
     {
-        Vector2 spawnPos = SpawnPoint();
-        GameObject newEnemy = Instantiate(enemy, spawnPos, Quaternion.identity);
-        newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
-         
+        int breakLoop = 4;
+        Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
+        while(breakLoop > 0)
+        {
+            GameObject spawnPoint = SpawnPoint();
+            if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > spawnDistFromPlayer && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > spawnDistFromPlayer)
+            {
+                GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
+                newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
+                //Debug.Log("spawn: " + spawnPoint.name);
+                break;
+            }
+            else
+            {
+                breakLoop--;
+                //Debug.Log("Not spawning...: " + spawnPoint.name);
+            }
+            
+        }  
+         //Debug.Log("Did not spawn... ");
     }
 
-    //Creates a spawn point away from player for the enemy
-    Vector2 SpawnPoint()
+    //Gets a spawn point from the list
+    GameObject SpawnPoint()
     {
-        int randomIndex = Random.Range(0, spawnPoints.Count);
-        Vector2 spawnPos = spawnPoints[randomIndex].transform.position;
-        //int spawnPointX = Random.Range(-15, 15);
-        //int spawnPointY = Random.Range(-15, 15);
-        //Vector2 spawnPos = new Vector2(spawnPointX,spawnPointY);
-        Vector2 playerPos = new Vector2(player.transform.position.x,player.transform.position.y);
-        if ((spawnPos.x - playerPos.x) < spawnDistFromPlayer && (spawnPos.y - playerPos.y) < spawnDistFromPlayer)
-        {
-            return SpawnPoint();
-        }
-        else return spawnPos;
+            GameObject spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            return spawnPoint;
     }
+
 }
