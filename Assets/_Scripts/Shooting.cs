@@ -9,8 +9,12 @@ public class Shooting : MonoBehaviour
     public GameObject basicBullet;
     public GameObject muzzleFlash;
     private Animator animator;
+    
+    public GameObject gun;
+    private Animator gunAnimator;
 
     public GameObject manager;
+    public Camera camera;
 
     Vector2 mousePos;
 
@@ -21,6 +25,7 @@ public class Shooting : MonoBehaviour
     {
         //muzzleFlash = GameObject.Find("muzzleFlash");
         animator = muzzleFlash.GetComponent<Animator>();
+        gunAnimator = gun.GetComponent<Animator>();
 
     }
     void Update()
@@ -40,8 +45,11 @@ public class Shooting : MonoBehaviour
     {
         
         GameObject bullet = Instantiate(basicBullet, firePoint.position, firePoint.rotation);
+        gunAnimator.SetTrigger("Shoot");
         muzzleFlash.SetActive(true);
         animator.SetBool("hasShot",true);
+
+        camera.GetComponent<CameraOffset>().StartGunRecoil(0.1f);
         
         //bullet.transform.Translate(mousePos * bulletSpeed * Time.deltaTime);
 
