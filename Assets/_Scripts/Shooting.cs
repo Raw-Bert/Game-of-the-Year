@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviour
     private Animator gunAnimator;
 
     public GameObject manager;
-    public Camera cam;
+   // public Camera cam;
 
     Vector2 mousePos;
 
@@ -49,7 +49,7 @@ public class Shooting : MonoBehaviour
         muzzleFlash.SetActive(true);
         animator.SetBool("hasShot",true);
 
-        camera.GetComponent<CameraOffset>().StartGunRecoil(0.1f);
+        Camera.main.GetComponent<CameraOffset>().StartGunRecoil(0.1f);
         
         //bullet.transform.Translate(mousePos * bulletSpeed * Time.deltaTime);
 

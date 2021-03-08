@@ -43,7 +43,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col) 
     {
-        Debug.Log("Col");
         if(col.gameObject.tag == "Tile" || col.gameObject.tag == "Enemy")
         {
             if (col.gameObject.tag == "Enemy")

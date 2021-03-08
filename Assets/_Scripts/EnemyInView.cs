@@ -16,19 +16,7 @@ public class EnemyInView : MonoBehaviour
                 if (enemy.tag.ToLower().Contains("bullet"))return;
 
                 enemy.GetComponent<Enemy>().onCam = true;
-                switch (enemy.GetComponent<EnemyAI>().movementType)
-                {
-                    case EnemyAI.EnemyType.Ranged:
-                        ++player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
-                        print("Enemy On Screen P1: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[0]);
-                        break;
-
-                    case EnemyAI.EnemyType.Charge:
-                        ++player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
-                        print("Enemy On Screen P2: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[1]);
-                        break;
-                }
-
+                increaseAmoutOfEnemyType(enemy);
             }
     }
 
@@ -43,23 +31,49 @@ public class EnemyInView : MonoBehaviour
                 if (enemy.tag.ToLower().Contains("bullet"))return;
 
                 enemy.GetComponent<Enemy>().onCam = false;
-                switch (enemy.GetComponent<EnemyAI>().movementType)
-                {
-                    case EnemyAI.EnemyType.Ranged:
-                        --player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
-                        print("Enemy Off Screen P1: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[0]);
-                        break;
-
-                    case EnemyAI.EnemyType.Charge:
-                        --player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
-                        print("Enemy Off Screen P2: " + player.GetComponent<AudioSwapper>().amountOfEnemyType[2]);
-                        break;
-                }
-
-                var amountEnemy = player.GetComponent<AudioSwapper>().amountOfEnemyType;
-                for (int a = 0; a < amountEnemy.Count; ++a)
-                    if (amountEnemy[a] < 0)
-                        amountEnemy[a] = 0;
+                decreaseAmountOfEnemyType(enemy);
             }
+    }
+
+    public void increaseAmoutOfEnemyType(GameObject enemy)
+    {
+      //  Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+
+        switch (enemy.GetComponent<EnemyAI>().movementType)
+        {
+            case EnemyAI.EnemyType.Slowmoving:
+            case EnemyAI.EnemyType.Ranged:
+                ++player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
+                print("Enemy type 1:" + player.GetComponent<AudioSwapper>().amountOfEnemyType[0]);
+                break;
+
+            case EnemyAI.EnemyType.Charge:
+                ++player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
+                print("Enemy type 2:" + player.GetComponent<AudioSwapper>().amountOfEnemyType[1]);
+                break;
+        }
+    }
+    public void decreaseAmountOfEnemyType(GameObject enemy)
+    {
+     //   Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), enemy.GetComponent<Collider2D>(), true);
+
+        switch (enemy.GetComponent<EnemyAI>().movementType)
+        {
+            case EnemyAI.EnemyType.Slowmoving:
+            case EnemyAI.EnemyType.Ranged:
+                --player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
+                print("Enemy type 1:" + player.GetComponent<AudioSwapper>().amountOfEnemyType[0]);
+                break;
+
+            case EnemyAI.EnemyType.Charge:
+                --player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
+                print("Enemy type 2:" + player.GetComponent<AudioSwapper>().amountOfEnemyType[1]);
+                break;
+        }
+
+        var amountEnemy = player.GetComponent<AudioSwapper>().amountOfEnemyType;
+        for (int a = 0; a < amountEnemy.Count; ++a)
+            if (amountEnemy[a] < 0)
+                amountEnemy[a] = 0;
     }
 }

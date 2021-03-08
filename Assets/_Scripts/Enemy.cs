@@ -18,22 +18,7 @@ public class Enemy : MonoBehaviour
     void OnDestroy()
     {
         if (!player)return;
-        if (onCam)
-            switch (gameObject.GetComponent<EnemyAI>().movementType)
-            {
-                case EnemyAI.EnemyType.Ranged:
-                    --player.GetComponent<AudioSwapper>().amountOfEnemyType[0];
-                    break;
-
-                case EnemyAI.EnemyType.Charge:
-                    --player.GetComponent<AudioSwapper>().amountOfEnemyType[1];
-                    break;
-            }
-
-        var amountEnemy = player.GetComponent<AudioSwapper>().amountOfEnemyType;
-        for (int a = 0; a < amountEnemy.Count; ++a)
-            if (amountEnemy[a] < 0)
-                amountEnemy[a] = 0;
+        Camera.main.GetComponent<EnemyInView>().decreaseAmountOfEnemyType(this.gameObject);
 
     }
 
