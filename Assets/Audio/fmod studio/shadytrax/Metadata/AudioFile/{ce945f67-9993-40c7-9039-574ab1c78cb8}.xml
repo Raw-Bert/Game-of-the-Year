@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{ce945f67-9993-40c7-9039-574ab1c78cb8}">
+		<property name="assetPath">
+			<value>Base Dark Side.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>12.8321875</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{38838bb1-aef9-41b9-b967-d3602f008489}</destination>
+		</relationship>
+	</object>
+</objects>

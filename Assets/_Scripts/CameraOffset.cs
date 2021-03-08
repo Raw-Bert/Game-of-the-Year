@@ -12,7 +12,7 @@ public class CameraOffset : MonoBehaviour
     public Transform player;
     
 
-    public Camera camera;
+    public Camera cam;
 
    // public float factor = 3f;
     public float cameraDistance = 3.5f;

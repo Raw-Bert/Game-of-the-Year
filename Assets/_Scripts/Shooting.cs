@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviour
     private Animator gunAnimator;
 
     public GameObject manager;
-    public Camera camera;
+    public Camera cam;
 
     Vector2 mousePos;
 
