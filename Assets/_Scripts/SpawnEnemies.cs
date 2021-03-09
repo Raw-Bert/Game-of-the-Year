@@ -9,7 +9,7 @@ public class SpawnEnemies : MonoBehaviour
     public float spawnTime;
 
     Vector2 spawnPos;
-    public GameObject enemy;
+    public List<GameObject> enemies;
 
     public int maxEnemies = 20;
     public int numberOfEnemies;
@@ -60,8 +60,8 @@ public class SpawnEnemies : MonoBehaviour
             GameObject spawnPoint = SpawnPoint();
             if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > spawnDistFromPlayer && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > spawnDistFromPlayer)
             {
-                GameObject newEnemy = Instantiate(enemy, spawnPoint.transform.position, Quaternion.identity);
-                newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
+                GameObject newEnemy = Instantiate(enemies[Random.Range(0, 3)], spawnPoint.transform.position, Quaternion.identity);
+                //newEnemy.GetComponent<EnemyAI>().movementType = (EnemyAI.EnemyType)Random.Range(1,4);
                 //Debug.Log("spawn: " + spawnPoint.name);
                 break;
             }

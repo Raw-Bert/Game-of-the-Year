@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
 
      public void TakeDamage(int damage)
     {
+        this.gameObject.GetComponent<Flash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         if(currentHealth <= 0)

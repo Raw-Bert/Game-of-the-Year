@@ -29806,7 +29806,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnTime: 0.5
-  enemy: {fileID: 7635303804270510610, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+  enemies:
+  - {fileID: 4363422824140175350, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
+  - {fileID: 3213082644646293026, guid: ee4b9d5c97f605e448bac73896e48a4a, type: 3}
+  - {fileID: 1337814409777588968, guid: d0b6b161a93294f4c9f50db166c46539, type: 3}
   maxEnemies: 30
   numberOfEnemies: 0
   spawnDistFromPlayer: 3
@@ -31247,6 +31250,10 @@ PrefabInstance:
       propertyPath: movementType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7635303804270510608, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ffe2f0c9d6d6476409486062a3828a1b, type: 3}
     - target: {fileID: 7635303804270510609, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
       propertyPath: m_RootOrder
       value: 1
