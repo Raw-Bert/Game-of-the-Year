@@ -10,6 +10,7 @@ TagManager:
   - Tile
   - EnemyProjectile
   - NavMesh
+  - spawnPoint
   layers:
   - Default
   - TransparentFX

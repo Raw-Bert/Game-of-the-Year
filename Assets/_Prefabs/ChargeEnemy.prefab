@@ -213,7 +213,8 @@ MonoBehaviour:
   speed: 10
   chargeTimer: 0
   cooldownTimer: 5
-  chargeDistance: 5
+  chargeDistance: 4
+  detectDistance: 7
   stopDis: 3
   backDis: 4
   timeBtwAttack: 2
@@ -228,7 +229,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 2.5
+  m_Speed: 0.8
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

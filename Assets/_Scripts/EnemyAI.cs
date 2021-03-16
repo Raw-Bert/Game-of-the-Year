@@ -15,9 +15,12 @@ public class EnemyAI : MonoBehaviour
     }
 
     public EnemyType movementType;
-    public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5;
+    public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5, detectDistance = 8;
     bool hasCharged = true;
     bool isCollidingWithPlayer = false;
+    List<Vector3> patrollingPoints;
+    Vector3 patrollingPoint;
+    bool patrolPointSet = false;
 
     public float stopDis;
     public float backDis;
@@ -45,6 +48,13 @@ public class EnemyAI : MonoBehaviour
             Debug.Log("Nave Mesh is not exist!");
         }
 
+        // assign patrolling points
+        patrollingPoints = new List<Vector3>();
+        GameObject[] pp = GameObject.FindGameObjectsWithTag("spawnPoint");
+        for(int i = 0; i < pp.Length; i++)
+        {
+            patrollingPoints.Add(pp[i].transform.position);
+        }
     }
 
     // Update is called once per frame
@@ -102,9 +112,13 @@ public class EnemyAI : MonoBehaviour
             cooldownTimer += Time.deltaTime;
             if (cooldownTimer >= 5 && (Vector3.Distance(transform.position, playerPos) < chargeDistance))
             {
+                patrolPointSet = false;
+                agent.isStopped = true;
+                agent.ResetPath();
+
                 Vector2 direct = new Vector2(playerPos.x, playerPos.y) - new Vector2(transform.position.x, transform.position.y);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direct.normalized);
-                
+
                 if (hit.collider != null)
                 {
                     if (hit.collider.gameObject.tag == "Player")
@@ -115,6 +129,31 @@ public class EnemyAI : MonoBehaviour
                         chargeLoc = playerPos;
                     }
                 }
+            }
+            else if (Vector3.Distance(transform.position, playerPos) > detectDistance)
+            {
+                if (!patrolPointSet)
+                {
+                    int random = Random.Range(0, patrollingPoints.Count);
+                    patrollingPoint = patrollingPoints[random];
+                    patrolPointSet = true;
+                    agent.isStopped = false;
+                }
+                else
+                {
+                    agent.SetDestination(patrollingPoint);
+                }
+
+                Vector3 distance = this.transform.position - patrollingPoint;
+
+                if (distance.magnitude < 1f)
+                    patrolPointSet = false;
+            }
+            else
+            {
+                patrolPointSet = false;
+                agent.isStopped = true;
+                agent.ResetPath();
             }
         }
 
