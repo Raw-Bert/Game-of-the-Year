@@ -31,8 +31,12 @@ public class EnemyAI : MonoBehaviour
     NavMeshAgent agent;
     bool isAgentEnable = true;
 
+    Animator enemyAnimator;
+
     private void Start()
     {
+        enemyAnimator = this.GetComponent<Animator>();
+
         timeBtwAttackUpdate = timeBtwAttack;
 
         // nav mesh reset for 2D
@@ -112,6 +116,10 @@ public class EnemyAI : MonoBehaviour
             cooldownTimer += Time.deltaTime;
             if (cooldownTimer >= 5 && (Vector3.Distance(transform.position, playerPos) < chargeDistance))
             {
+                enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.SetBool("isJump", true);
+                enemyAnimator.SetBool("isAngry", false);
+
                 patrolPointSet = false;
                 agent.isStopped = true;
                 agent.ResetPath();
@@ -132,6 +140,10 @@ public class EnemyAI : MonoBehaviour
             }
             else if (Vector3.Distance(transform.position, playerPos) > detectDistance)
             {
+                enemyAnimator.SetBool("isMoving", true);
+                enemyAnimator.SetBool("isJump", false);
+                enemyAnimator.SetBool("isAngry", false);
+
                 if (!patrolPointSet)
                 {
                     int random = Random.Range(0, patrollingPoints.Count);
@@ -154,11 +166,18 @@ public class EnemyAI : MonoBehaviour
                 patrolPointSet = false;
                 agent.isStopped = true;
                 agent.ResetPath();
+                enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.SetBool("isJump", false);
+                enemyAnimator.SetBool("isAngry", true);
             }
         }
 
         if (!hasCharged)
         {
+            enemyAnimator.SetBool("isMoving", false);
+            enemyAnimator.SetBool("isJump", false);
+            enemyAnimator.SetBool("isAngry", true);
+
             if (chargeTimer >= 2 || isCollidingWithPlayer)
                 hasCharged = true;
             else

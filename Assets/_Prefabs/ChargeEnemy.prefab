@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4363422824140175339}
   - component: {fileID: 4611787311078377055}
   - component: {fileID: 2831553585337000606}
+  - component: {fileID: -1623137249844359805}
   m_Layer: 0
   m_Name: ChargeEnemy
   m_TagString: Enemy
@@ -152,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 453a782cd77030d44882051a6b7ea0cc, type: 3}
+  m_Sprite: {fileID: -1065546083322022379, guid: 517eeab6b710b5a4191c8e994970b8f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -176,8 +177,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0041356105, y: -0.012398952}
-  m_Size: {x: 0.74173087, y: 0.5061646}
+  m_Offset: {x: -0.0062139537, y: -0.16405065}
+  m_Size: {x: 0.7708288, y: 0.5103242}
   m_Direction: 1
 --- !u!114 &4363422824140175338
 MonoBehaviour:
@@ -253,6 +254,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3475996add6d94d8010b880eeb9eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &-1623137249844359805
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363422824140175350}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e01ae73555c5ff44baaad50588dfba9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4363422824538383940
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +384,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.35}
+  m_AnchoredPosition: {x: 0, y: 0.178}
   m_SizeDelta: {x: 14.5347595, y: 3.4864388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4363422825276336649
