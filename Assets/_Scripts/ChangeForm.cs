@@ -25,6 +25,10 @@ public class ChangeForm : MonoBehaviour
     public Texture2D normalCursor;
     public Texture2D shadowCursor;
 
+    public GameObject normalEmblem;
+    public GameObject shiftEmblem; 
+
+
     void Start()
     {
         Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
@@ -35,6 +39,7 @@ public class ChangeForm : MonoBehaviour
         normalNavMesh.SetActive(true);
         shadowGround.SetActive(false);
         normalGround.SetActive(true);
+        normalEmblem.SetActive(true); 
     }
     // Update is called once per frame
     //If designated key pressed, switch form, switch dimension, and make the screen flash
@@ -59,6 +64,13 @@ public class ChangeForm : MonoBehaviour
 
                 // cursor change
                 Cursor.SetCursor(shadowCursor, new Vector2(shadowCursor.width/2, shadowCursor.height/2), CursorMode.Auto);
+
+                //change emblem
+                normalEmblem.SetActive(false);
+                shiftEmblem.SetActive(true); 
+
+
+
             }
             else if(shadowForm == true)
             {
@@ -77,6 +89,10 @@ public class ChangeForm : MonoBehaviour
 
                 // cursor change
                 Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
+
+                //change emblem
+                normalEmblem.SetActive(true);
+                shiftEmblem.SetActive(false);
             }
         }
                 
