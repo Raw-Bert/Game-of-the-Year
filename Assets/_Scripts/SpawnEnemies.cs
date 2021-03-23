@@ -24,7 +24,10 @@ public class SpawnEnemies : MonoBehaviour
 
     public GameObject wall;
     public float triggerPos = 13.5f;
+    public GameObject target;
 
+    bool wallAnimation = false;
+    private Vector3 velocity = Vector3.zero;
 
     // Update is called once per frame
     void Update()
@@ -43,10 +46,22 @@ public class SpawnEnemies : MonoBehaviour
         {
             if (player.transform.position.x > triggerPos)
             {
-                wall.SetActive(true);
+                //wall.transform.position = Vector2.Lerp(wall.transform.position, target.transform.position, 0.25f);
+                //wall.SetActive(true);
                 spawning = true;
             }
         }
+        if(spawning && wall.transform.position != target.transform.position)
+        {
+            //wall.transform.position = Vector2.Lerp(wall.transform.position, target.transform.position, Time.deltaTime);
+            wall.transform.position = Vector3.SmoothDamp(wall.transform.position, target.transform.position, ref velocity, 0.1f);
+        }
+        if(wallAnimation == false && wall.transform.position != target.transform.position)
+        {
+            //Play animation
+            wallAnimation = true;
+        }
+        
         
     }
 
