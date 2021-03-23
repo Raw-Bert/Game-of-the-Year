@@ -38,58 +38,13 @@ MonoBehaviour:
   guid: bb501646732dfb4390cd765ba4d62b5d
   Banks:
   - {fileID: -4077825409949921268}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
---- !u!114 &-7409842138435310656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Syncro Bright
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Syncro Bright
-  guid: 3e03d589e97c164892b197dc7adba54f
-  Banks: []
   IsStream: 0
   Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
---- !u!114 &-6387377814300549461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Dark Side 2
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Dark Side 2
-  guid: 33a79fe78b07c84e9947a3ab0c2cad35
-  Banks:
-  - {fileID: -1417439179264225021}
-  IsStream: 1
-  Is3D: 0
   IsOneShot: 0
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 12800
+  Length: 12850
 --- !u!114 &-5978658703085941256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +83,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/DO NOT USE.bank
   Name: DO NOT USE
   StudioPath: bank:/DO NOT USE
-  lastModified: 637508060694488499
+  lastModified: 637503392267755419
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -147,7 +102,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637508056793988361
+  lastModified: 637501127751181967
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -166,7 +121,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/BG Music.bank
   Name: BG Music
   StudioPath: bank:/BG Music
-  lastModified: 637508060695152576
+  lastModified: 637503392267765396
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -185,34 +140,12 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637508060694034539
+  lastModified: 637503392267765396
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1346
+    Value: 1106
   Exists: 1
---- !u!114 &-629841693514128886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Syncro Dark
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Syncro Dark
-  guid: 6ffd12d372adfd4fadbad3d422acf887
-  Banks: []
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,18 +167,12 @@ MonoBehaviour:
   - {fileID: -7617461654095599954}
   - {fileID: -5978658703085941256}
   - {fileID: 136516472068837784}
-  - {fileID: 8879241983939915690}
-  - {fileID: 4266475183323064511}
-  - {fileID: -6387377814300549461}
-  - {fileID: 9063694210470103330}
-  - {fileID: 5962070094557511339}
-  - {fileID: 803584821276000888}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3862080079897475651}
   StringsBanks:
   - {fileID: -1294895500114869895}
-  stringsBankWriteTime: 637508060694034539
+  stringsBankWriteTime: 637503392267765396
   cacheVersion: 6
 --- !u!114 &136516472068837784
 MonoBehaviour:
@@ -270,75 +197,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 12800
---- !u!114 &803584821276000888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Dark Side 1
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Dark Side 1
-  guid: de3f92b9b90d50438bc951252d65cdb3
-  Banks:
-  - {fileID: -1417439179264225021}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
---- !u!114 &4266475183323064511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Dark Side 3
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Dark Side 3
-  guid: 0ef6ca12aa4b4c4d8ae33faa1d4acff3
-  Banks:
-  - {fileID: -1417439179264225021}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
---- !u!114 &5962070094557511339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Bright Side 1
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Bright Side 1
-  guid: bc3d13c87d66fe41b6b4f8bae82ad7cf
-  Banks:
-  - {fileID: -1417439179264225021}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
 --- !u!114 &6739886490604674953
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,52 +212,6 @@ MonoBehaviour:
   Path: event:/Dark Side
   guid: 4d1d55ddb9189c4f907a3a297db29796
   Banks: []
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
---- !u!114 &8879241983939915690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Bright Side 3
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Bright Side 3
-  guid: 02ec9a121db7ea43843648996fa5c0e2
-  Banks:
-  - {fileID: -1417439179264225021}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 12800
---- !u!114 &9063694210470103330
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/BGM/Bright Side 2
-  m_EditorClassIdentifier: 
-  Path: event:/BGM/Bright Side 2
-  guid: 4607401c91c5924595652522383edfe9
-  Banks:
-  - {fileID: -1417439179264225021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
