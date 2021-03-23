@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7635303804148877560}
   - component: {fileID: 7635303804148877558}
   - component: {fileID: 7635303804148877561}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 8228150531163527034}
   - component: {fileID: 8117997997203561688}
   - component: {fileID: 6280475365611418170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Test Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7635303804669154207}
   - component: {fileID: 7635303804669154206}
   - component: {fileID: 7635303804669154209}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 7635303804868632557}
   - component: {fileID: 7635303804868632556}
   - component: {fileID: 7635303804868632559}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Enemy Health UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ GameObject:
   - component: {fileID: 7635303804876598553}
   - component: {fileID: 7635303804876598551}
   - component: {fileID: 7635303804876598550}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
