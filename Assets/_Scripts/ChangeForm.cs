@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ChangeForm : MonoBehaviour
 {
@@ -26,7 +27,9 @@ public class ChangeForm : MonoBehaviour
     public Texture2D shadowCursor;
 
     public GameObject normalEmblem;
-    public GameObject shiftEmblem; 
+    public GameObject shiftEmblem;
+
+    public UnityEvent buttonClick;
 
 
     void Start()
@@ -96,6 +99,57 @@ public class ChangeForm : MonoBehaviour
             }
         }
                 
+    }
+
+    public void MobileButton()
+    {
+        if (shadowForm == false)
+        {
+            //screen flash black
+            flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
+
+            //Change form from normal to shadow
+            shadowTileMap.SetActive(true);
+            normalTileMap.SetActive(false);
+            shadowNavMesh.SetActive(true);
+            normalNavMesh.SetActive(false);
+            shadowGround.SetActive(true);
+            normalGround.SetActive(false);
+
+            shadowForm = true;
+
+            // cursor change
+            Cursor.SetCursor(shadowCursor, new Vector2(shadowCursor.width / 2, shadowCursor.height / 2), CursorMode.Auto);
+
+            //change emblem
+            normalEmblem.SetActive(false);
+            shiftEmblem.SetActive(true);
+
+
+
+        }
+        else if (shadowForm == true)
+        {
+            //Screen flash white
+            flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
+
+            //Change form from shadow to normal
+            shadowTileMap.SetActive(false);
+            normalTileMap.SetActive(true);
+            shadowNavMesh.SetActive(false);
+            normalNavMesh.SetActive(true);
+            shadowGround.SetActive(false);
+            normalGround.SetActive(true);
+
+            shadowForm = false;
+
+            // cursor change
+            Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
+
+            //change emblem
+            normalEmblem.SetActive(true);
+            shiftEmblem.SetActive(false);
+        }
     }
 }
 

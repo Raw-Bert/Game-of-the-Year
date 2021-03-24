@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
 
     Animator playerAnimator;
 
+    public Joystick joystick;
+
     private void Start()
     {
         playerAnimator = this.GetComponent<Animator>();
@@ -28,8 +30,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        //movement.x = Input.GetAxisRaw("Horizontal");
+        //movement.y = Input.GetAxisRaw("Vertical");
+
+        movement.x = joystick.Horizontal;
+        movement.y = joystick.Vertical;
+
 
         mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
 
