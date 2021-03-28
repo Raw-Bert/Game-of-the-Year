@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
     float timer;
 
     public float speed = 5.0f;
+    public int damageAmount = 20;
     // Start is called before the first frame update
 
     void Awake()
@@ -47,7 +48,7 @@ public class Bullet : MonoBehaviour
         {
             if (col.gameObject.tag == "Enemy")
             {
-                col.gameObject.GetComponent<Enemy>().TakeDamage(15);
+                col.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
             }
             //Debug.Log("Tile Collision");
             Instantiate(collideEffect, this.transform.position, this.transform.rotation);
