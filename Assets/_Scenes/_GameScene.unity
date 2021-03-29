@@ -581,6 +581,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9a6fc2704bb387f49af26efb6b2c520f, type: 3}
   - {fileID: 21300000, guid: c83aa3bdd8330fc4f9e5ab469a3ca2b2, type: 3}
   - {fileID: 21300000, guid: 8c1755176049dd44baa4923861e89bdc, type: 3}
+  weaponUI: {fileID: 427317812}
 --- !u!95 &277401530
 Animator:
   serializedVersion: 3
@@ -23672,8 +23673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 242.97, y: 110.100006}
-  m_SizeDelta: {x: 44.258835, y: 44.258835}
+  m_AnchoredPosition: {x: 259.57, y: 114.56}
+  m_SizeDelta: {x: 58.71251, y: 100.04863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427317812
 MonoBehaviour:
@@ -23695,7 +23696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d1480e1c2fe727e45b46a75946c16bdb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a6fc2704bb387f49af26efb6b2c520f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24977,9 +24978,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 310.67, y: 110.100006}
+  m_AnchoredPosition: {x: 335.57, y: 114.56}
   m_SizeDelta: {x: 91.13757, y: 91.13757}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.4999997, y: 0.5}
 --- !u!114 &789249687
 MonoBehaviour:
   m_ObjectHideFlags: 0
