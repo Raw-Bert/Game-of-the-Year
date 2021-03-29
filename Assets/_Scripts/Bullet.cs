@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     Vector2 shootDir;
     public GameObject mainCamera;
     public GameObject collideEffect;
-    public float lifeTime = 4f;
+    public float lifeTime = 5f;
     float timer;
 
     public float speed = 5.0f;
@@ -23,7 +23,8 @@ public class Bullet : MonoBehaviour
         mousePos.x -= Screen.width/2;
         mousePos.y -= Screen.height/2;
         mainCamera = GameObject.FindWithTag("MainCamera");
-        shootDir = mousePos;
+        //shootDir = mousePos;
+        shootDir = this.transform.right;
         //shootDir = mainCamera.GetComponent<CameraOffset>().CaptureMousePos();
         shootDir.Normalize();
     }

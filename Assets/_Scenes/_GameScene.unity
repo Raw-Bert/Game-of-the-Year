@@ -573,12 +573,14 @@ MonoBehaviour:
   manager: {fileID: 1179261777}
   machineGunTime: 0.1
   plasmaRifleTime: 0.4
+  shotGunTime: 1.2
   equippedGun: 0
   bulletSpeed: 100
   spriteR: {fileID: 1677591473}
   sprites:
   - {fileID: 21300000, guid: 9a6fc2704bb387f49af26efb6b2c520f, type: 3}
   - {fileID: 21300000, guid: c83aa3bdd8330fc4f9e5ab469a3ca2b2, type: 3}
+  - {fileID: 21300000, guid: 8c1755176049dd44baa4923861e89bdc, type: 3}
 --- !u!95 &277401530
 Animator:
   serializedVersion: 3
