@@ -9,10 +9,11 @@ public class Bullet : MonoBehaviour
     Vector2 shootDir;
     public GameObject mainCamera;
     public GameObject collideEffect;
-    public float lifeTime = 4f;
+    public float lifeTime = 5f;
     float timer;
 
     public float speed = 5.0f;
+    public int damageAmount = 20;
     // Start is called before the first frame update
 
     void Awake()
@@ -22,7 +23,8 @@ public class Bullet : MonoBehaviour
         mousePos.x -= Screen.width/2;
         mousePos.y -= Screen.height/2;
         mainCamera = GameObject.FindWithTag("MainCamera");
-        shootDir = mousePos;
+        //shootDir = mousePos;
+        shootDir = this.transform.right;
         //shootDir = mainCamera.GetComponent<CameraOffset>().CaptureMousePos();
         shootDir.Normalize();
     }
@@ -47,7 +49,7 @@ public class Bullet : MonoBehaviour
         {
             if (col.gameObject.tag == "Enemy")
             {
-                col.gameObject.GetComponent<Enemy>().TakeDamage(15);
+                col.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
             }
             //Debug.Log("Tile Collision");
             Instantiate(collideEffect, this.transform.position, this.transform.rotation);

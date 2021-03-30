@@ -25,6 +25,7 @@ public class HealthbarFlash : MonoBehaviour
         {
             StopCoroutine(currentFlashCo);
         }
+        Debug.Log("FLASH!");
         currentFlashCo = StartCoroutine(Flash(seconds, maxAlpha));
     }
 
