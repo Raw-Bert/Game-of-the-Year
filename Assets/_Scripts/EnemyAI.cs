@@ -33,6 +33,12 @@ public class EnemyAI : MonoBehaviour
 
     Animator enemyAnimator;
 
+    public GameObject rangeEnemyArm;
+    public GameObject firePoint;
+    public GameObject armLeftPos;
+    public GameObject armRightPos;
+    
+
     private void Start()
     {
         enemyAnimator = this.GetComponent<Animator>();
@@ -197,11 +203,19 @@ public class EnemyAI : MonoBehaviour
 
     void RangedMove(Vector3 playerPos)
     {
+        // Arm Movement
+        Vector3 dir = playerPos - rangeEnemyArm.transform.position;
+        float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(ang + 90, Vector3.forward);
+        rangeEnemyArm.transform.rotation = Quaternion.Slerp(rangeEnemyArm.transform.rotation, q, Time.deltaTime * 10);
+
         // Movement
         if (Vector2.Distance(transform.position, playerPos) > stopDis)
         {
+            enemyAnimator.enabled = true;
             if (isAgentEnable)
             {
+                agent.isStopped = false;
                 agent.SetDestination(playerPos);
             }
             else
@@ -209,31 +223,55 @@ public class EnemyAI : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
             }
         }
-        else if (Vector2.Distance(transform.position, playerPos) < stopDis && Vector2.Distance(transform.position, playerPos) > backDis)
-        {
-            transform.position = this.transform.position;
-        }
         else if (Vector2.Distance(transform.position, playerPos) < backDis)
         {
+            enemyAnimator.enabled = true;
             if (isAgentEnable)
             {
-                agent.SetDestination(-playerPos);
+                agent.isStopped = false;
+                agent.SetDestination(this.transform.position - (playerPos - this.transform.position));
             }
             else
             {
                 transform.position = Vector2.MoveTowards(transform.position, playerPos, -speed * Time.deltaTime);
             }
         }
+        else if (Vector2.Distance(transform.position, playerPos) <= stopDis && Vector2.Distance(transform.position, playerPos) >= backDis)
+        {
+            enemyAnimator.enabled = false;
+            //transform.position = this.transform.position;
+            if (isAgentEnable)
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+            }
+            else
+            {
+                transform.position = this.transform.position;
+            }
+        }
 
         // Attack
         if (timeBtwAttackUpdate <= 0)
         {
-            Instantiate(projectile, transform.position, Quaternion.identity);
+            Instantiate(projectile, firePoint.transform.position, Quaternion.identity);
             timeBtwAttackUpdate = timeBtwAttack;
         }
         else
         {
             timeBtwAttackUpdate -= Time.deltaTime;
+        }
+
+        // Sprite direction and arm position
+        if(dir.x < 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+            rangeEnemyArm.transform.position = armRightPos.transform.position;
+        }
+        else if(dir.x >= 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+            rangeEnemyArm.transform.position = armLeftPos.transform.position;
         }
     }
 
