@@ -60,7 +60,7 @@ public class Shooting : MonoBehaviour
             case Guns.plasmaRifle:
                 if(Input.GetButtonDown("Fire1") && timeSinceLastShot > plasmaRifleTime)
                 {
-                    Shoot(1.5f, 0.12f, 1, 5.0f);
+                    Shoot(1.5f, 0.1f, 1, 5.0f);
                 }
                 if(Input.GetKeyDown(KeyCode.E))
                 {
@@ -78,7 +78,7 @@ public class Shooting : MonoBehaviour
             case Guns.remorse:
                 if(Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
                 {
-                    Shoot(0.9f, 0.8f, 1, 3.0f);
+                    Shoot(0.9f, 0.08f, 1, 3.0f);
                     Debug.Log("Remorsful Shot");
                 }
                 if(Input.GetKeyDown(KeyCode.E))
@@ -97,7 +97,7 @@ public class Shooting : MonoBehaviour
             case Guns.ravager:
                 if(Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
                 {
-                    Shoot(2.6f, 2.0f, 5, 0.5f);
+                    Shoot(2.6f, 0.2f, 5, 0.5f);
                     Debug.Log("Ravaging Shot");
                 }
                 if(Input.GetKeyDown(KeyCode.E))
@@ -130,7 +130,7 @@ public class Shooting : MonoBehaviour
         }
     }
  
-    void Shoot(float bulletScale, float cameraRecoil, int bulletNumber, float lifeTime)
+    void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
     {
         GameObject bullet = Instantiate(basicBullet, firePoint.position, firePoint.rotation);
         bullet.transform.localScale = new Vector3(bulletScale, bulletScale, 0.0f);
@@ -160,7 +160,7 @@ public class Shooting : MonoBehaviour
         muzzleFlash.SetActive(true);
         animator.SetBool("hasShot",true);
 
-        Camera.main.GetComponent<CameraOffset>().StartGunRecoil(cameraRecoil);
+        Camera.main.GetComponent<CameraOffset>().StartGunRecoil(0.05f,recoilModifier);
 
         timeSinceLastShot = 0.0f;
     }
