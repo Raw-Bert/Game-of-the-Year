@@ -70,20 +70,20 @@ public class CameraOffset : MonoBehaviour
         transform.position = tempPos;
     }
 
-    public void StartGunRecoil(float seconds)
+    public void StartGunRecoil(float seconds, float recoilAmount)
     {
         if (currentRecoil != null)
         {
             StopCoroutine(currentRecoil);
         }
-        currentRecoil = StartCoroutine(GunRecoil(seconds));
+        currentRecoil = StartCoroutine(GunRecoil(seconds, recoilAmount));
     }
 
-    IEnumerator GunRecoil(float seconds)
+    IEnumerator GunRecoil(float seconds, float recoilAmount)
     {
       
         
-        gameObject.transform.DOShakePosition(seconds,(player.GetComponent<PlayerMovement>().weaponDir.normalized) * recoilModifier,2,10,false,false);
+        gameObject.transform.DOShakePosition(seconds,(player.GetComponent<PlayerMovement>().weaponDir.normalized) * (new Vector3(recoilAmount, recoilAmount, 0)) ,2,10,false,false);
         // Debug.Log(gunForward);
         // float backDuration = seconds / 2;
         // for (float i = 0; i <= backDuration; i += Time.deltaTime)
