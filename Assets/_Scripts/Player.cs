@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+//using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -26,11 +28,14 @@ public class Player : MonoBehaviour
     float invincibilityTime = 0.5f;
 
     public int healingAmount = 25;
+    public TextMeshProUGUI healthText;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        healthText.text = maxHealth + "/" + maxHealth;
     }
 
     void Update(){
@@ -40,6 +45,9 @@ public class Player : MonoBehaviour
             invincible = true;
         }
         else invincible = false;
+
+        healthText.text = currentHealth + "/" + maxHealth;
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
