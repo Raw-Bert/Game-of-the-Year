@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     bool invincible = false;
     float timer;
     float invincibilityTime = 0.5f;
+
+    public int healingAmount = 25;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,11 @@ public class Player : MonoBehaviour
                     this.TakeDamage(enemyProjectileDamage);
                 }
             }
+            if(other.gameObject.tag == "HealthPickup")
+            {
+                this.Healing(healingAmount);
+                Destroy(other.gameObject);
+            }
         }
     
 
@@ -94,6 +101,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Healing(int healAmount)
+    {
+        if(currentHealth <= maxHealth - healAmount)
+        {
+            currentHealth += healAmount;
+            healthBar.SetHealth(currentHealth);
+        }
+        else if(currentHealth > maxHealth - healAmount)
+        {
+            currentHealth = maxHealth;
+            healthBar.SetHealth(currentHealth);
+        }
+        
+    }
+
     void PlayerDeath()
     {
         //Play player death animation here
@@ -101,5 +123,7 @@ public class Player : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);        
     }
+
+
 
 }
