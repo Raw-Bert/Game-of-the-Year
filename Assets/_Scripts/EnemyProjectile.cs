@@ -18,7 +18,14 @@ public class EnemyProjectile : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0].transform;
         Vector3 playerDir = player.position - this.transform.position;
         target = new Vector2(playerDir.x, playerDir.y);
+
         target.Normalize();
+
+
+        float rot_z = Mathf.Atan2(playerDir.y, playerDir.x) * Mathf.Rad2Deg;
+
+        //Quaternion.LookRotation(new Vector3(0,0, target.x));
+        this.transform.rotation = Quaternion.Euler(0f, 0f, rot_z);
     }
 
     void Update()
@@ -34,11 +41,23 @@ public class EnemyProjectile : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Tile" || collision.gameObject.tag == "Player")
+   //private void OnCollisionEnter2D(Collision2D collision)
+
+   //{
+
+   //    if (collision.gameObject.tag == "Tile" || collision.gameObject.tag == "Player")
+   //    {
+   //        Destroy(gameObject);
+   //    }
+   //}
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         {
-            Destroy(gameObject);
+            if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Player")
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
+
 }

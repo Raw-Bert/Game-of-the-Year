@@ -66,6 +66,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "EnemyProjectile")
+            {
+                if (invincible == false)
+                {
+                    this.TakeDamage(enemyProjectileDamage);
+                }
+            }
+        }
+    
+
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
