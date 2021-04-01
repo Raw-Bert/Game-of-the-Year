@@ -201,6 +201,8 @@ MonoBehaviour:
   flashTime: 0.1
   flashMaxAlpha: 0.5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  probabilityOfHPDrop: 6
+  HPDrop: {fileID: 4363422824140175350, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
 --- !u!114 &1337814409777588981
 MonoBehaviour:
   m_ObjectHideFlags: 0

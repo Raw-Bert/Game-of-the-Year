@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+//using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -24,11 +26,16 @@ public class Player : MonoBehaviour
     bool invincible = false;
     float timer;
     float invincibilityTime = 0.5f;
+
+    public int healingAmount = 25;
+    public TextMeshProUGUI healthText;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
+        healthText.text = maxHealth + "/" + maxHealth;
     }
 
     void Update(){
@@ -38,6 +45,9 @@ public class Player : MonoBehaviour
             invincible = true;
         }
         else invincible = false;
+
+        healthText.text = currentHealth + "/" + maxHealth;
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -66,6 +76,23 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "EnemyProjectile")
+            {
+                if (invincible == false)
+                {
+                    this.TakeDamage(enemyProjectileDamage);
+                }
+            }
+            if(other.gameObject.tag == "HealthPickup")
+            {
+                this.Healing(healingAmount);
+                Destroy(other.gameObject);
+            }
+        }
+    
+
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -82,6 +109,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Healing(int healAmount)
+    {
+        if(currentHealth <= maxHealth - healAmount)
+        {
+            currentHealth += healAmount;
+            healthBar.SetHealth(currentHealth);
+        }
+        else if(currentHealth > maxHealth - healAmount)
+        {
+            currentHealth = maxHealth;
+            healthBar.SetHealth(currentHealth);
+        }
+        
+    }
+
     void PlayerDeath()
     {
         //Play player death animation here
@@ -89,5 +131,7 @@ public class Player : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);        
     }
+
+
 
 }

@@ -11,6 +11,7 @@ TagManager:
   - EnemyProjectile
   - NavMesh
   - spawnPoint
+  - HealthPickup
   layers:
   - Default
   - TransparentFX
