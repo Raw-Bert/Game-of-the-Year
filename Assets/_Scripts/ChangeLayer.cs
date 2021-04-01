@@ -10,9 +10,9 @@ public class ChangeLayer : MonoBehaviour
     {
         if (player.transform.position.y > this.transform.position.y)
         {
-            this.GetComponent<Renderer>().sortingOrder = player.GetComponent<Renderer>().sortingOrder + 1;
+            this.GetComponent<Renderer>().sortingOrder = player.GetComponent<Renderer>().sortingOrder + 2;
         }
         else
-            this.GetComponent<Renderer>().sortingOrder = player.GetComponent<Renderer>().sortingOrder - 1;
+            this.GetComponent<Renderer>().sortingOrder = player.GetComponent<Renderer>().sortingOrder - 2;
     }
 }
