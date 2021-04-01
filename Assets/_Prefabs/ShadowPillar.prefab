@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1602924072467934734}
   - component: {fileID: 1602924072467934737}
   - component: {fileID: 1602924072467934736}
+  - component: {fileID: -1260378986591150410}
   m_Layer: 0
   m_Name: ShadowPillar
   m_TagString: Untagged
@@ -109,3 +110,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6067748, y: 0.33551168}
   m_EdgeRadius: 0
+--- !u!114 &-1260378986591150410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602924072467934739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56aeb00a45c177c4eb808551c493b06e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
