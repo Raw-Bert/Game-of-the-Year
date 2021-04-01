@@ -585,7 +585,7 @@ MonoBehaviour:
   flashTime: 0.16
   flashMaxAlpha: 0.55
   flashColor: {r: 1, g: 1, b: 1, a: 0}
-  healingAmount: 25
+  healingAmount: 15
   healthText: {fileID: 780144297}
 --- !u!114 &277401529
 MonoBehaviour:

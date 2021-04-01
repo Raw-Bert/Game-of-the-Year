@@ -58,7 +58,7 @@ public class Shooting : MonoBehaviour
         {
             //Semi-Auto plasma rifle. Default gun. Good all around weapon. Medium bullet size. Medium fire rate
             case Guns.plasmaRifle:
-                if(Input.GetButtonDown("Fire1") && timeSinceLastShot > plasmaRifleTime)
+                if(Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
                 {
                     Shoot(1.5f, 0.1f, 1, 5.0f);
                 }

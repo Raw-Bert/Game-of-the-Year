@@ -198,6 +198,8 @@ MonoBehaviour:
   flashTime: 0.1
   flashMaxAlpha: 0.5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  probabilityOfHPDrop: 6
+  HPDrop: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
 --- !u!114 &4363422824140175339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,33 +551,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 4363422825283115251}
-  gradient:
-    serializedVersion: 2
-    key0: {r: 1, g: 0.0141509175, b: 0.0141509175, a: 1}
-    key1: {r: 0.9811321, g: 0, b: 0.03802699, a: 1}
-    key2: {r: 1, g: 0.573152, b: 0.23113209, a: 0}
-    key3: {r: 0.9716981, g: 0.8731366, b: 0.1512549, a: 0}
-    key4: {r: 0.047423627, g: 1, b: 0.023584902, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 9252
-    ctime2: 25636
-    ctime3: 39707
-    ctime4: 65535
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 65535
-    atime2: 0
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_NumColorKeys: 5
-    m_NumAlphaKeys: 2
   fill: {fileID: 4363422824538383941}

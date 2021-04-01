@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
     public float flashMaxAlpha;
     public Color flashColor = Color.red;
 
+    public int probabilityOfHPDrop = 6; //4%
+    public GameObject HPDrop;
+
     void OnDestroy()
     {
         if (!player)return;
@@ -63,8 +66,23 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         //Play Enemy death animation here
+        if(HealthDropChance(probabilityOfHPDrop))
+        {
+            Instantiate(HPDrop, this.transform.position, Quaternion.identity);
+        }
         manager.GetComponent<GameScore>().countScore(10);
         manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
         Destroy(this.gameObject);
+    }
+
+    bool HealthDropChance(int probability)
+    {
+        int randomChance = Random.Range(0, 100);
+
+        if (randomChance < probability)
+        {
+            return true;
+        }
+        return false;
     }
 }
