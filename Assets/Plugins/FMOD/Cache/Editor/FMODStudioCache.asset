@@ -106,7 +106,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/DO NOT USE.bank
   Name: DO NOT USE
   StudioPath: bank:/DO NOT USE
-  lastModified: 637520967666907351
+  lastModified: 637528340087068763
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -125,7 +125,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637501127751181967
+  lastModified: 637503924410906094
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -144,7 +144,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/BG Music.bank
   Name: BG Music
   StudioPath: bank:/BG Music
-  lastModified: 637520967666917336
+  lastModified: 637528340087118769
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -163,7 +163,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637520967666827565
+  lastModified: 637528340086683695
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -201,7 +201,7 @@ MonoBehaviour:
   - {fileID: -3862080079897475651}
   StringsBanks:
   - {fileID: -1294895500114869895}
-  stringsBankWriteTime: 637520967666827565
+  stringsBankWriteTime: 637528340086683695
   cacheVersion: 6
 --- !u!114 &8985325253610115
 MonoBehaviour:
