@@ -29,6 +29,15 @@ public class Player : MonoBehaviour
 
     public int healingAmount = 25;
     public TextMeshProUGUI healthText;
+
+    //Shadow Bar variables
+    public int shadowBarCurrent = 0;
+    public int maxShadowBar = 100;
+    public HealthBar shadowBar;
+    float shadowTimer = 0;
+    float shadowBarThreshold = 0.2f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +45,15 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
 
         healthText.text = maxHealth + "/" + maxHealth;
+
+        shadowBar.SetMaxHealth(maxShadowBar);
+        shadowBar.SetHealth(0);
     }
 
     void Update(){
         timer += Time.deltaTime;
+        shadowTimer += Time.deltaTime;
+
         if (timer < invincibilityTime)
         {
             invincible = true;
@@ -47,6 +61,28 @@ public class Player : MonoBehaviour
         else invincible = false;
 
         healthText.text = currentHealth + "/" + maxHealth;
+
+        if(shadowBarCurrent == maxShadowBar)
+        {
+            this.GetComponent<ChangeForm>().canSwitch = true;
+        }
+        else
+        {
+            if(shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
+            {
+                shadowBarCurrent += 1;
+                shadowBar.SetHealth(shadowBarCurrent);
+                shadowTimer = 0;
+            }
+        }
+
+        if(shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
+        {
+            shadowBarCurrent -= 3;
+            shadowBar.SetHealth(shadowBarCurrent);
+            shadowTimer = 0;
+            
+        }
 
     }
 

@@ -58,5 +58,13 @@ public class Bullet : MonoBehaviour
            
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Tile")
+        {
+            Instantiate(collideEffect, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
+    }
 
 }

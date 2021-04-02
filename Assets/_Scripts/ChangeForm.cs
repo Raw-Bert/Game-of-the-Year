@@ -28,6 +28,7 @@ public class ChangeForm : MonoBehaviour
     public GameObject normalEmblem;
     public GameObject shiftEmblem; 
 
+    public bool canSwitch = false;
 
     void Start()
     {
@@ -47,7 +48,7 @@ public class ChangeForm : MonoBehaviour
     {
         if (Input.GetKeyDown(shadowModeKey))
         {
-            if (shadowForm == false)
+            if (shadowForm == false && canSwitch == true)
             {
                 //screen flash black
                 flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
@@ -68,6 +69,9 @@ public class ChangeForm : MonoBehaviour
                 //change emblem
                 normalEmblem.SetActive(false);
                 shiftEmblem.SetActive(true); 
+
+                //this.GetComponent<Player>().shadowBarCurrent = 0;
+                canSwitch = false;
 
 
 
@@ -96,6 +100,11 @@ public class ChangeForm : MonoBehaviour
             }
         }
                 
+    }
+
+    void SetShiftBar()
+    {
+
     }
 }
 

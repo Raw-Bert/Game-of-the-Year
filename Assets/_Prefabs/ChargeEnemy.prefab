@@ -216,12 +216,16 @@ MonoBehaviour:
   speed: 10
   chargeTimer: 0
   cooldownTimer: 5
-  chargeDistance: 4
+  chargeDistance: 5
   detectDistance: 7
   stopDis: 3
   backDis: 4
   timeBtwAttack: 2
   projectile: {fileID: 4636470433957654561, guid: ac0b6f70150108d46be3775b388a1ec9, type: 3}
+  rangeEnemyArm: {fileID: 0}
+  firePoint: {fileID: 0}
+  armLeftPos: {fileID: 0}
+  armRightPos: {fileID: 0}
 --- !u!195 &4611787311078377055
 NavMeshAgent:
   m_ObjectHideFlags: 0
