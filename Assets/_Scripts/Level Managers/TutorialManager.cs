@@ -7,7 +7,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject wall;
     public GameObject target;
     public GameObject levelEnd;
-    public GameObject tutorialOverUI;
+    //public GameObject tutorialOverUI;
     public float triggerPos = 13.5f;
     private Vector3 velocity = Vector3.zero;
     bool wallAnimation = false;
