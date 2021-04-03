@@ -13,6 +13,10 @@ public class TutorialManager : MonoBehaviour
     bool wallAnimation = false;
     public GameObject player;
 
+    public float triggerEnemies = 17.5f;
+    public GameObject enemyWall;
+    bool enemiesUnleashed = false;
+
     // Update is called once per frame
     void Update()
     {
@@ -33,6 +37,12 @@ public class TutorialManager : MonoBehaviour
         {
             //Play animation
             wallAnimation = true;
+        }
+
+        if(!enemiesUnleashed && player.transform.position.x > triggerEnemies)
+        {
+            Destroy(enemyWall);
+            enemiesUnleashed = true;
         }
     }
 }
