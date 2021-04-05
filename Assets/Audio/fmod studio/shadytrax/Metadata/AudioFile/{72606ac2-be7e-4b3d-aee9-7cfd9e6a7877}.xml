@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{72606ac2-be7e-4b3d-aee9-7cfd9e6a7877}">
+		<property name="assetPath">
+			<value>Enemy Hit.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.094172335600907</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{38838bb1-aef9-41b9-b967-d3602f008489}</destination>
+		</relationship>
+	</object>
+</objects>

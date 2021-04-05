@@ -62,3 +62,9 @@ crashlytics-build.properties
 *.log
 
 .vscode/
+
+*.orig
+
+Assets/Plugins/FMOD/Cache/
+
+Assets/Audio/fmod studio/shadytrax/.cache/

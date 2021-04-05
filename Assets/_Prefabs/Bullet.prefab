@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd981f589d2bc514b9594bd90980c5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHitSFX: event:/SFX/Enemy Hit
   mainCamera: {fileID: 0}
   collideEffect: {fileID: 7017830336995032454, guid: 0187c922c1ad3384f838688a7d1fad8a, type: 3}
   lifeTime: 4

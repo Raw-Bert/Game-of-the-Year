@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
 
@@ -24,6 +24,6 @@ public class GameOver : MonoBehaviour
 
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
-
+        SceneManager.LoadScene("_GameScene");
     }
 }

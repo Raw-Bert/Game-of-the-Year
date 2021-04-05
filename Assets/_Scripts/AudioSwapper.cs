@@ -16,21 +16,37 @@ public class AudioSwapper : MonoBehaviour
     public float fadeTime = 5;
     public List<int> amountOfEnemyType { get; set; } = new List<int>();
 
+    [EventRef]
+    public List<string> sounds = new List<string>();
+
     List<int> lastAmountOfEnemyType = new List<int>();
     List<float> startVol = new List<float>();
     List<bool> switchDark = new List<bool>(), switchBright = new List<bool>();
     List<DateTime> fadeInit = new List<DateTime>();
 
     List<EventInstance> busBright = new List<EventInstance>(), busDark = new List<EventInstance>();
-
+    private void OnDestroy()
+    {
+        foreach (var a in busBright)
+        {
+            a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            a.release();
+        }
+        foreach (var a in busDark)
+        {
+            a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            a.release();
+        }
+    }
     void Start()
     {
-        busBright.Add(GetComponents<StudioEventEmitter>()[0].EventInstance);
-        busDark.Add(GetComponents<StudioEventEmitter>()[1].EventInstance);
-        busBright.Add(GetComponents<StudioEventEmitter>()[2].EventInstance);
-        busDark.Add(GetComponents<StudioEventEmitter>()[3].EventInstance);
-        busBright.Add(GetComponents<StudioEventEmitter>()[4].EventInstance);
-        busDark.Add(GetComponents<StudioEventEmitter>()[5].EventInstance);
+       
+        busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[0]));
+        busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[1]));
+        busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[2]));
+        busDark.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[3]));
+        busDark.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[4]));
+        busDark.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[5]));
 
         busDark[0].setVolume(0);
         busBright[0].setVolume(0);
@@ -49,6 +65,9 @@ public class AudioSwapper : MonoBehaviour
             lastAmountOfEnemyType.Add(0);
             switchBright.Add(false);
             switchDark.Add(false);
+
+            busBright[a].start();
+            busDark[a].start();
         }
     }
 

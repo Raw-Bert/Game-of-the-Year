@@ -292,6 +292,7 @@ GameObject:
   - component: {fileID: 3213082644646293055}
   - component: {fileID: 5772075908014972811}
   - component: {fileID: 3986080047975332682}
+  - component: {fileID: -4470740154035640845}
   m_Layer: 0
   m_Name: SlowMovingEnemy
   m_TagString: Enemy
@@ -423,6 +424,10 @@ MonoBehaviour:
   backDis: 4
   timeBtwAttack: 2
   projectile: {fileID: 4636470433957654561, guid: ac0b6f70150108d46be3775b388a1ec9, type: 3}
+  rangeEnemyArm: {fileID: 0}
+  firePoint: {fileID: 0}
+  armLeftPos: {fileID: 0}
+  armRightPos: {fileID: 0}
 --- !u!195 &5772075908014972811
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -457,6 +462,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab3475996add6d94d8010b880eeb9eba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &-4470740154035640845
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213082644646293026}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3213082644843422923
 GameObject:
   m_ObjectHideFlags: 0
