@@ -26,7 +26,11 @@ public class ChangeForm : MonoBehaviour
     public Texture2D shadowCursor;
 
     public GameObject normalEmblem;
-    public GameObject shiftEmblem; 
+    public GameObject shiftEmblem;
+
+    public GameObject wallColour;
+    public Color newWall;
+    
 
     public bool canSwitch = false;
 
@@ -73,6 +77,7 @@ public class ChangeForm : MonoBehaviour
                 //this.GetComponent<Player>().shadowBarCurrent = 0;
                 canSwitch = false;
 
+                wallColour.GetComponent<Renderer>().material.SetColor("_Color", newWall);
 
 
             }
@@ -97,6 +102,8 @@ public class ChangeForm : MonoBehaviour
                 //change emblem
                 normalEmblem.SetActive(true);
                 shiftEmblem.SetActive(false);
+
+                wallColour.GetComponent<Renderer>().material.SetColor("_Color", new Color (1,1,1));
             }
         }
                 
