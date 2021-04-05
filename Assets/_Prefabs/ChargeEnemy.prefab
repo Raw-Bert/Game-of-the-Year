@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 4611787311078377055}
   - component: {fileID: 2831553585337000606}
   - component: {fileID: -1623137249844359805}
+  - component: {fileID: 942644988575870691}
   m_Layer: 0
   m_Name: ChargeEnemy
   m_TagString: Enemy
@@ -222,6 +223,10 @@ MonoBehaviour:
   backDis: 4
   timeBtwAttack: 2
   projectile: {fileID: 4636470433957654561, guid: ac0b6f70150108d46be3775b388a1ec9, type: 3}
+  rangeEnemyArm: {fileID: 0}
+  firePoint: {fileID: 0}
+  armLeftPos: {fileID: 0}
+  armRightPos: {fileID: 0}
 --- !u!195 &4611787311078377055
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -275,6 +280,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!50 &942644988575870691
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363422824140175350}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &4363422824538383940
 GameObject:
   m_ObjectHideFlags: 0
