@@ -32,6 +32,9 @@ public class ChangeForm : MonoBehaviour
     public Color newWall;
 
     public bool canSwitch = false;
+    bool canSwitchNormal = false;
+
+    float timer = 0;
 
     void Start()
     {
@@ -49,6 +52,7 @@ public class ChangeForm : MonoBehaviour
     //If designated key pressed, switch form, switch dimension, and make the screen flash
     void Update()
     {
+        timer += Time.deltaTime;
         if (Input.GetKeyDown(shadowModeKey))
         {
             if (canSwitch)
@@ -66,6 +70,7 @@ public class ChangeForm : MonoBehaviour
                     shadowGround.SetActive(true);
                     normalGround.SetActive(false);
 
+                    this.GetComponent<Player>().shadowBarCurrent -=  (int)(this.GetComponent<Player>().maxShadowBar * 0.2f);
                     shadowForm = true;
 
                     // cursor change
@@ -78,44 +83,54 @@ public class ChangeForm : MonoBehaviour
                     //this.GetComponent<Player>().shadowBarCurrent = 0;
 
                     wallColour.GetComponent<Renderer>().material.SetColor("_Color", newWall);
+                    canSwitchNormal = true;
+                    timer = 0.0f;
+                    //canSwitch = false;
                 }
-                else
-                {
-                    //Screen flash white
-                    flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
-
-                    //Change form from shadow to normal
-                    shadowTileMap.SetActive(false);
-                    normalTileMap.SetActive(true);
-                    shadowNavMesh.SetActive(false);
-                    normalNavMesh.SetActive(true);
-                    shadowGround.SetActive(false);
-                    normalGround.SetActive(true);
-
-                    shadowForm = false;
-
-                    // cursor change
-                    Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
-
-                    shadowForm = false;
-
-                    // cursor change
-                    Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
-
-                    //change emblem
-                    normalEmblem.SetActive(true);
-                    shiftEmblem.SetActive(false);
-
-                    wallColour.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 1, 1));
-                }
-                canSwitch = false;
+                
+                //else
+                //{
+                    
+                //canSwitch = false;
+            //}
             }
+            if(shadowForm == true && canSwitchNormal == true && timer > 0.2f)
+            {
+                SwitchToNormal();
+            }
+
+            
 
         }
     }
 
-    void SetShiftBar()
+    public void SwitchToNormal()
     {
+        //Screen flash white
+        flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
 
+        //Change form from shadow to normal
+        shadowTileMap.SetActive(false);
+        normalTileMap.SetActive(true);
+        shadowNavMesh.SetActive(false);
+        normalNavMesh.SetActive(true);
+        shadowGround.SetActive(false);
+        normalGround.SetActive(true);
+
+        //shadowForm = false;
+
+        // cursor change
+        Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
+
+        shadowForm = false;
+
+        // cursor change
+        Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
+
+        //change emblem
+        normalEmblem.SetActive(true);
+        shiftEmblem.SetActive(false);
+
+        wallColour.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 1, 1));
     }
 }

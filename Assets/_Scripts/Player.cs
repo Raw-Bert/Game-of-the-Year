@@ -62,9 +62,13 @@ public class Player : MonoBehaviour
 
         healthText.text = currentHealth + " / " + maxHealth;
 
-        if (shadowBarCurrent == maxShadowBar)
+        if (shadowBarCurrent >= maxShadowBar * 0.4f)
         {
             this.GetComponent<ChangeForm>().canSwitch = true;
+        }
+        else
+        {
+            this.GetComponent<ChangeForm>().canSwitch = false;
         }
 
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
@@ -79,12 +83,20 @@ public class Player : MonoBehaviour
 
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
         {
-            shadowBarCurrent -= 3;
+            Debug.Log("dfdsfsdf");
+            shadowBarCurrent -= 2;
             shadowTimer = 0;
             shadowBarCurrent = Mathf.Max(shadowBarCurrent, 0);
             if (shadowBar)
                 shadowBar.SetHealth(shadowBarCurrent);
 
+            
+
+        }
+
+        if(shadowBarCurrent <= 0)
+        {
+            this.GetComponent<ChangeForm>().SwitchToNormal();
         }
 
     }

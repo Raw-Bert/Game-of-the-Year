@@ -17,6 +17,10 @@ public class TutorialManager : MonoBehaviour
     public GameObject enemyWall;
     bool enemiesUnleashed = false;
 
+    bool isTriggered = false;
+
+
+
     // Update is called once per frame
     void Update()
     {
@@ -45,4 +49,7 @@ public class TutorialManager : MonoBehaviour
             enemiesUnleashed = true;
         }
     }
+    
+    
+
 }

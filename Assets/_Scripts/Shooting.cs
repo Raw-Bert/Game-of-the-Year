@@ -88,12 +88,12 @@ public class Shooting : MonoBehaviour
                     Shoot(0.9f, 0.08f, 1, 3.0f);
                     Debug.Log("Remorsful Shot");
                 }
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.Q))
                 {
                     equippedGun = Guns.plasmaRifle;
                     SwitchGun(0, 20);
                 }
-                if (Input.GetKeyDown(KeyCode.Q))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     equippedGun = Guns.ravager;
                     SwitchGun(2, 30);
