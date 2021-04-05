@@ -217,7 +217,7 @@ MonoBehaviour:
   speed: 10
   chargeTimer: 0
   cooldownTimer: 5
-  chargeDistance: 4
+  chargeDistance: 5
   detectDistance: 7
   stopDis: 3
   backDis: 4

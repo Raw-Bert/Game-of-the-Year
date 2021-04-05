@@ -40,7 +40,9 @@ public class Shooting : MonoBehaviour
 
     public SpriteRenderer spriteR;
     public Sprite[] sprites;
+
     public Image weaponUI;
+    public Sprite[] UIWeapons;
 
     int damage = 20;
 
@@ -171,7 +173,7 @@ public class Shooting : MonoBehaviour
     void SwitchGun(int spriteVersion, int damageAmount)
     {
         spriteR.sprite = sprites[spriteVersion];
-        weaponUI.sprite = sprites[spriteVersion];
+        weaponUI.sprite = UIWeapons[spriteVersion];
 
         damage = damageAmount;
     }

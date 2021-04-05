@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 //using UnityEngine.UI;
 using TMPro;
 
@@ -29,6 +29,14 @@ public class Player : MonoBehaviour
 
     public int healingAmount = 25;
     public TextMeshProUGUI healthText;
+
+    //Shadow Bar variables
+    public int shadowBarCurrent = 0;
+    public int maxShadowBar = 100;
+    public HealthBar shadowBar;
+    float shadowTimer = 0;
+    float shadowBarThreshold = 0.4f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,10 +44,17 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
 
         healthText.text = maxHealth + "/" + maxHealth;
+
+        if (!shadowBar)return;
+        shadowBar.SetMaxHealth(maxShadowBar);
+        shadowBar.SetHealth(0);
     }
 
-    void Update(){
+    void Update()
+    {
         timer += Time.deltaTime;
+        shadowTimer += Time.deltaTime;
+
         if (timer < invincibilityTime)
         {
             invincible = true;
@@ -48,6 +63,30 @@ public class Player : MonoBehaviour
 
         healthText.text = currentHealth + "/" + maxHealth;
 
+        if (shadowBarCurrent == maxShadowBar)
+        {
+            this.GetComponent<ChangeForm>().canSwitch = true;
+        }
+        else
+        {
+            if (shadowBar)
+                if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
+                {
+                    shadowBarCurrent += 1;
+                    shadowBar.SetHealth(shadowBarCurrent);
+                    shadowTimer = 0;
+                }
+        }
+
+        if (shadowBar)
+            if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
+            {
+                shadowBarCurrent -= 3;
+                shadowBar.SetHealth(shadowBarCurrent);
+                shadowTimer = 0;
+
+            }
+
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -55,43 +94,45 @@ public class Player : MonoBehaviour
         //If player collides with game objects of various tags, player takes X damage
         if (col.gameObject.tag == "Hurtful")
         {
-            if (invincible == false){
-                 this.TakeDamage(hurtfulDamage);
-                 
+            if (invincible == false)
+            {
+                this.TakeDamage(hurtfulDamage);
+
             }
         }
         else if (col.gameObject.tag == "Enemy")
         {
-             if (invincible == false){
+            if (invincible == false)
+            {
                 this.TakeDamage(enemyDamage);
                 //timer = 0;
-             }
+            }
         }
         else if (col.gameObject.tag == "EnemyProjectile")
         {
-             if (invincible == false){
+            if (invincible == false)
+            {
                 this.TakeDamage(enemyProjectileDamage);
                 //timer = 0;
-             }
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "EnemyProjectile")
         {
-            if (other.gameObject.tag == "EnemyProjectile")
+            if (invincible == false)
             {
-                if (invincible == false)
-                {
-                    this.TakeDamage(enemyProjectileDamage);
-                }
-            }
-            if(other.gameObject.tag == "HealthPickup")
-            {
-                this.Healing(healingAmount);
-                Destroy(other.gameObject);
+                this.TakeDamage(enemyProjectileDamage);
             }
         }
-    
+        if (other.gameObject.tag == "HealthPickup")
+        {
+            this.Healing(healingAmount);
+            Destroy(other.gameObject);
+        }
+    }
 
     void TakeDamage(int damage)
     {
@@ -101,9 +142,8 @@ public class Player : MonoBehaviour
 
         this.GetComponent<HealthbarFlash>().StartHealthFlash(flashTime, flashMaxAlpha, flashColor);
         timer = 0;
-    
-        
-        if(currentHealth <= 0)
+
+        if (currentHealth <= 0)
         {
             PlayerDeath();
         }
@@ -111,17 +151,17 @@ public class Player : MonoBehaviour
 
     public void Healing(int healAmount)
     {
-        if(currentHealth <= maxHealth - healAmount)
+        if (currentHealth <= maxHealth - healAmount)
         {
             currentHealth += healAmount;
             healthBar.SetHealth(currentHealth);
         }
-        else if(currentHealth > maxHealth - healAmount)
+        else if (currentHealth > maxHealth - healAmount)
         {
             currentHealth = maxHealth;
             healthBar.SetHealth(currentHealth);
         }
-        
+
     }
 
     void PlayerDeath()
@@ -129,9 +169,7 @@ public class Player : MonoBehaviour
         //Play player death animation here
         manager.GetComponent<GameOver>().End(2f);
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);        
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
-
-
 
 }
