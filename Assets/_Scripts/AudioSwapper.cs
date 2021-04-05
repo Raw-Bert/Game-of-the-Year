@@ -40,16 +40,7 @@ public class AudioSwapper : MonoBehaviour
     }
     void Start()
     {
-       // startVol.Clear();
-       // fadeInit.Clear();
-       // amountOfEnemyType.Clear();
-       // lastAmountOfEnemyType.Clear();
-       // switchBright.Clear();
-       // switchDark.Clear();
-//
-       // busBright.Clear();
-       // busDark.Clear();
-
+       
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[0]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[1]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[2]));

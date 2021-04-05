@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     public int shadowBarCurrent = 0;
     public int maxShadowBar = 100;
     public HealthBar shadowBar;
+    float shadowBarThreshold = 0.2f;
     float shadowTimer = 0;
-    float shadowBarThreshold = 0.4f;
 
     // Start is called before the first frame update
     void Start()
@@ -61,31 +61,32 @@ public class Player : MonoBehaviour
         }
         else invincible = false;
 
-        healthText.text = currentHealth + "/" + maxHealth;
+        healthText.text = currentHealth + " / " + maxHealth;
 
         if (shadowBarCurrent == maxShadowBar)
         {
             this.GetComponent<ChangeForm>().canSwitch = true;
         }
-        else
+
+        if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
         {
+            shadowTimer = 0;
+            shadowBarCurrent += 1;
             if (shadowBar)
-                if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
-                {
-                    shadowBarCurrent += 1;
-                    shadowBar.SetHealth(shadowBarCurrent);
-                    shadowTimer = 0;
-                }
+            {
+                shadowBar.SetHealth(shadowBarCurrent);
+            }
         }
 
-        if (shadowBar)
-            if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
+        if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
+        {
+            shadowBarCurrent -= 3;
+            shadowTimer = 0;
+            if (shadowBar)
             {
-                shadowBarCurrent -= 3;
                 shadowBar.SetHealth(shadowBarCurrent);
-                shadowTimer = 0;
-
             }
+        }
 
     }
 

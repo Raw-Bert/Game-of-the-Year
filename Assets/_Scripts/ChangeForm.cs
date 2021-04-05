@@ -26,7 +26,7 @@ public class ChangeForm : MonoBehaviour
     public Texture2D shadowCursor;
 
     public GameObject normalEmblem;
-    public GameObject shiftEmblem; 
+    public GameObject shiftEmblem;
 
     public bool canSwitch = false;
 
@@ -40,7 +40,7 @@ public class ChangeForm : MonoBehaviour
         normalNavMesh.SetActive(true);
         shadowGround.SetActive(false);
         normalGround.SetActive(true);
-        normalEmblem.SetActive(true); 
+        normalEmblem.SetActive(true);
     }
     // Update is called once per frame
     //If designated key pressed, switch form, switch dimension, and make the screen flash
@@ -48,58 +48,59 @@ public class ChangeForm : MonoBehaviour
     {
         if (Input.GetKeyDown(shadowModeKey))
         {
-            if (shadowForm == false && canSwitch == true)
+            if (canSwitch)
             {
-                //screen flash black
-                flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
+                if (!shadowForm)
+                {
+                    //screen flash black
+                    flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
 
-                //Change form from normal to shadow
-                shadowTileMap.SetActive(true);
-                normalTileMap.SetActive(false);
-                shadowNavMesh.SetActive(true);
-                normalNavMesh.SetActive(false);
-                shadowGround.SetActive(true);
-                normalGround.SetActive(false);
+                    //Change form from normal to shadow
+                    shadowTileMap.SetActive(true);
+                    normalTileMap.SetActive(false);
+                    shadowNavMesh.SetActive(true);
+                    normalNavMesh.SetActive(false);
+                    shadowGround.SetActive(true);
+                    normalGround.SetActive(false);
 
-                shadowForm = true;
+                    shadowForm = true;
 
-                // cursor change
-                Cursor.SetCursor(shadowCursor, new Vector2(shadowCursor.width/2, shadowCursor.height/2), CursorMode.Auto);
+                    // cursor change
+                    Cursor.SetCursor(shadowCursor, new Vector2(shadowCursor.width / 2, shadowCursor.height / 2), CursorMode.Auto);
 
-                //change emblem
-                normalEmblem.SetActive(false);
-                shiftEmblem.SetActive(true); 
+                    //change emblem
+                    normalEmblem.SetActive(false);
+                    shiftEmblem.SetActive(true);
 
-                //this.GetComponent<Player>().shadowBarCurrent = 0;
-                canSwitch = false;
+                    //this.GetComponent<Player>().shadowBarCurrent = 0;
+                    canSwitch = false;
 
+                }
+                else
+                {
+                    //Screen flash white
+                    flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
 
+                    //Change form from shadow to normal
+                    shadowTileMap.SetActive(false);
+                    normalTileMap.SetActive(true);
+                    shadowNavMesh.SetActive(false);
+                    normalNavMesh.SetActive(true);
+                    shadowGround.SetActive(false);
+                    normalGround.SetActive(true);
 
-            }
-            else if(shadowForm == true)
-            {
-                //Screen flash white
-                flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
+                    shadowForm = false;
 
-                //Change form from shadow to normal
-                shadowTileMap.SetActive(false);
-                normalTileMap.SetActive(true);
-                shadowNavMesh.SetActive(false);
-                normalNavMesh.SetActive(true);
-                shadowGround.SetActive(false);
-                normalGround.SetActive(true);
+                    // cursor change
+                    Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
 
-                shadowForm = false;
-
-                // cursor change
-                Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
-
-                //change emblem
-                normalEmblem.SetActive(true);
-                shiftEmblem.SetActive(false);
+                    //change emblem
+                    normalEmblem.SetActive(true);
+                    shiftEmblem.SetActive(false);
+                }
             }
         }
-                
+
     }
 
     void SetShiftBar()
@@ -107,4 +108,3 @@ public class ChangeForm : MonoBehaviour
 
     }
 }
-
