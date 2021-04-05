@@ -83,6 +83,8 @@ public class Shooting : MonoBehaviour
             case Guns.remorse:
                 if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
                 {
+                    RuntimeManager.PlayOneShot(fire1SFX);
+
                     Shoot(0.9f, 0.08f, 1, 3.0f);
                     Debug.Log("Remorsful Shot");
                 }
@@ -102,6 +104,8 @@ public class Shooting : MonoBehaviour
             case Guns.ravager:
                 if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
                 {
+                    RuntimeManager.PlayOneShot(fire1SFX);
+
                     Shoot(2.6f, 0.2f, 5, 0.5f);
                     Debug.Log("Ravaging Shot");
                 }
