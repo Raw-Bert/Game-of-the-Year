@@ -11,6 +11,11 @@ public class EndlessLevelManager : MonoBehaviour
 
     public GameObject player;
     private Vector3 velocity = Vector3.zero;
+private void Awake()
+{
+        Time.timeScale = 1;
+    }
+
 
     void Update() {
         if(!this.GetComponent<SpawnEnemies>().spawning)

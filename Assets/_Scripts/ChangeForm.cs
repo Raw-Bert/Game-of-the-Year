@@ -30,7 +30,6 @@ public class ChangeForm : MonoBehaviour
 
     public GameObject wallColour;
     public Color newWall;
-    
 
     public bool canSwitch = false;
 
@@ -77,9 +76,8 @@ public class ChangeForm : MonoBehaviour
                     shiftEmblem.SetActive(true);
 
                     //this.GetComponent<Player>().shadowBarCurrent = 0;
-                    canSwitch = false;
 
-                wallColour.GetComponent<Renderer>().material.SetColor("_Color", newWall);
+                    wallColour.GetComponent<Renderer>().material.SetColor("_Color", newWall);
                 }
                 else
                 {
@@ -99,19 +97,21 @@ public class ChangeForm : MonoBehaviour
                     // cursor change
                     Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
 
-                shadowForm = false;
+                    shadowForm = false;
 
-                // cursor change
-                Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
+                    // cursor change
+                    Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
 
-                //change emblem
-                normalEmblem.SetActive(true);
-                shiftEmblem.SetActive(false);
+                    //change emblem
+                    normalEmblem.SetActive(true);
+                    shiftEmblem.SetActive(false);
 
-                wallColour.GetComponent<Renderer>().material.SetColor("_Color", new Color (1,1,1));
+                    wallColour.GetComponent<Renderer>().material.SetColor("_Color", new Color(1, 1, 1));
+                }
+                canSwitch = false;
             }
-        }
 
+        }
     }
 
     void SetShiftBar()

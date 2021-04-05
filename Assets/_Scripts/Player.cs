@@ -7,7 +7,6 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-
     public int maxHealth = 100;
     public int currentHealth;
 
@@ -72,20 +71,20 @@ public class Player : MonoBehaviour
         {
             shadowTimer = 0;
             shadowBarCurrent += 1;
+            shadowBarCurrent = Mathf.Min(shadowBarCurrent, maxShadowBar);
             if (shadowBar)
-            {
                 shadowBar.SetHealth(shadowBarCurrent);
-            }
+
         }
 
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
         {
             shadowBarCurrent -= 3;
             shadowTimer = 0;
+            shadowBarCurrent = Mathf.Max(shadowBarCurrent, 0);
             if (shadowBar)
-            {
                 shadowBar.SetHealth(shadowBarCurrent);
-            }
+
         }
 
     }

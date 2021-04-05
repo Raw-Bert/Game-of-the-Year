@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     public GameObject levelEndUI;
@@ -13,10 +13,10 @@ public class LevelEnd : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             Time.timeScale = 0.0f;
-            levelEndUI.SetActive(true);
+            SceneManager.LoadScene("_GameScene");
         }
     }
 }
