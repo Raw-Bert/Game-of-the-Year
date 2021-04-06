@@ -690,13 +690,17 @@ MonoBehaviour:
   spriteR: {fileID: 1677591473}
   sprites:
   - {fileID: 21300000, guid: 9a6fc2704bb387f49af26efb6b2c520f, type: 3}
-  - {fileID: 21300000, guid: c83aa3bdd8330fc4f9e5ab469a3ca2b2, type: 3}
-  - {fileID: 21300000, guid: 8c1755176049dd44baa4923861e89bdc, type: 3}
+  - {fileID: 21300000, guid: 32555192e9bdea64697b991a837d8ebe, type: 3}
+  - {fileID: 21300000, guid: bfef676346a217248a6abc3da07dc9e6, type: 3}
+  weaponEmissions:
+  - {fileID: 2800000, guid: 7090b9d3dcb625040a767b973bdd080b, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponUI: {fileID: 427317812}
   UIWeapons:
   - {fileID: 21300000, guid: 93489e0e9d45f3f4da682db72618b51e, type: 3}
-  - {fileID: 21300000, guid: 3f36994f38b427444935f7dea8bea403, type: 3}
-  - {fileID: 21300000, guid: 8c1755176049dd44baa4923861e89bdc, type: 3}
+  - {fileID: 21300000, guid: 9a03ac123e599e044aa7823d2963a522, type: 3}
+  - {fileID: 21300000, guid: f90c65647e5be394f9c7b07cee7a8275, type: 3}
 --- !u!95 &277401530
 Animator:
   serializedVersion: 3
