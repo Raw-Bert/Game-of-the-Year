@@ -65,6 +65,13 @@ public class Bullet : MonoBehaviour
             Instantiate(collideEffect, this.transform.position, this.transform.rotation);
             Destroy(this.gameObject);
         }
+
+        if(col.gameObject.tag == "Box")
+        {
+            col.gameObject.GetComponent<Boxes>().DamageBox(damageAmount);
+            Instantiate(collideEffect, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
