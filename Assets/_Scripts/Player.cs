@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText;
 
     //Shadow Bar variables
-    public int shadowBarCurrent = 0;
+    public float shadowBarCurrent = 0;
     public int maxShadowBar = 100;
     public HealthBar shadowBar;
     float shadowBarThreshold = 0.2f;
@@ -74,21 +74,24 @@ public class Player : MonoBehaviour
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
         {
             shadowTimer = 0;
-            shadowBarCurrent += 1;
+            shadowBarCurrent += 1.5f;
             shadowBarCurrent = Mathf.Min(shadowBarCurrent, maxShadowBar);
             if (shadowBar)
-                shadowBar.SetHealth(shadowBarCurrent);
+                shadowBar.SetHealth((int)shadowBarCurrent);
+            if(shadowBarCurrent > maxShadowBar)
+            {
+                shadowBarCurrent = maxShadowBar;
+            }
 
         }
 
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == true)
         {
-            Debug.Log("dfdsfsdf");
-            shadowBarCurrent -= 2;
+            shadowBarCurrent -= 1;
             shadowTimer = 0;
             shadowBarCurrent = Mathf.Max(shadowBarCurrent, 0);
             if (shadowBar)
-                shadowBar.SetHealth(shadowBarCurrent);
+                shadowBar.SetHealth((int)shadowBarCurrent);
 
             
 
