@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     float shadowBarThreshold = 0.2f;
     float shadowTimer = 0;
 
+    public ParticleSystem shiftBarParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,8 @@ public class Player : MonoBehaviour
         if (!shadowBar)return;
         shadowBar.SetMaxHealth(maxShadowBar);
         shadowBar.SetHealth(0);
+
+        shiftBarParticles.Pause();
     }
 
     void Update()
@@ -65,10 +69,12 @@ public class Player : MonoBehaviour
         if (shadowBarCurrent >= maxShadowBar * 0.4f)
         {
             this.GetComponent<ChangeForm>().canSwitch = true;
+            
         }
         else
         {
             this.GetComponent<ChangeForm>().canSwitch = false;
+            shiftBarParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
 
         if (shadowTimer >= shadowBarThreshold && this.GetComponent<ChangeForm>().shadowForm == false)
@@ -82,6 +88,7 @@ public class Player : MonoBehaviour
             {
                 shadowBarCurrent = maxShadowBar;
             }
+            shiftBarParticles.Play();
 
         }
 
@@ -90,6 +97,7 @@ public class Player : MonoBehaviour
             shadowBarCurrent -= 1;
             shadowTimer = 0;
             shadowBarCurrent = Mathf.Max(shadowBarCurrent, 0);
+            
             if (shadowBar)
                 shadowBar.SetHealth((int)shadowBarCurrent);
 
