@@ -40,7 +40,7 @@ public class TutorialManager : MonoBehaviour
                 
                 tutorialBoxes[i].gameObject.GetComponent<Boxes>().tutorialItemDrop = false;
             }
-            //boxDrop = false;
+            boxDrop = false;
         }
         else
         {
