@@ -13,8 +13,9 @@ public class EndlessLevelManager : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 private void Awake()
 {
-        Time.timeScale = 1;
-    }
+    Time.timeScale = 1;
+    player.GetComponent<Player>().shadowBarCurrent = 50;
+}
 
 
     void Update() {

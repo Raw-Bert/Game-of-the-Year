@@ -13,6 +13,7 @@ public class Shooting : MonoBehaviour
     public GameObject basicBullet;
     public GameObject muzzleFlash;
     public GameObject gun;
+    Renderer gunRender;
 
     [EventRef] public string fire1SFX;
 
@@ -40,7 +41,7 @@ public class Shooting : MonoBehaviour
 
     public SpriteRenderer spriteR;
     public Sprite[] sprites;
-
+    
     public Image weaponUI;
     public Sprite[] UIWeapons;
 
@@ -50,6 +51,7 @@ public class Shooting : MonoBehaviour
     {
         animator = muzzleFlash.GetComponent<Animator>();
         gunAnimator = gun.GetComponent<Animator>();
+        gunRender = gun.GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -177,7 +179,12 @@ public class Shooting : MonoBehaviour
     void SwitchGun(int spriteVersion, int damageAmount)
     {
         spriteR.sprite = sprites[spriteVersion];
+        //gunRender.material.SetTexture("_Emissive", weaponEmissions[spriteVersion]);
+
+        //spriteR.SecondarySpriteTexture = weaponEmissions[spriteVersion];// =  ("_EmissionMap", weaponEmissions[spriteVersion]);
         weaponUI.sprite = UIWeapons[spriteVersion];
+        //spriteR.gameObject.material.SetTexture();
+        //spriteR.SetEmissive(SetEmissive(renderer))
 
         damage = damageAmount;
     }
