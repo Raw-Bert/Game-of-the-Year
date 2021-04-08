@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class LevelEnd : MonoBehaviour
 {
     public GameObject levelEndUI;
+    public string nextScene;
 
     void Awake()
     {
@@ -16,7 +17,7 @@ public class LevelEnd : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Time.timeScale = 0.0f;
-            SceneManager.LoadScene("_GameScene");
+            SceneManager.LoadScene(nextScene);
         }
     }
 }
