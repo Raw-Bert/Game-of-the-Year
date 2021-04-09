@@ -101,11 +101,9 @@ public class Player : MonoBehaviour
             if (shadowBar)
                 shadowBar.SetHealth((int)shadowBarCurrent);
 
-            
-
         }
 
-        if(shadowBarCurrent <= 0)
+        if (shadowBarCurrent <= 0 && this.GetComponent<ChangeForm>().canSwitchNormal)
         {
             this.GetComponent<ChangeForm>().SwitchToNormal();
         }

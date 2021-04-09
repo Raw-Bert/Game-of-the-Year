@@ -46,6 +46,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 12800
+--- !u!114 &-6008538216596977596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Shift
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Shift
+  guid: 3ed59dbd5037364bbdc0f46a9e3f7742
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1185
 --- !u!114 &-5729423377031110802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,7 +107,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637501127751181967
+  lastModified: 637535128405212933
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -165,12 +188,14 @@ MonoBehaviour:
   - {fileID: 7741226966314687232}
   - {fileID: 512131624630317499}
   - {fileID: -786043044220138848}
+  - {fileID: 5853336111823983454}
+  - {fileID: -6008538216596977596}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4998036259008802588}
   StringsBanks:
   - {fileID: 8751671713051383776}
-  stringsBankWriteTime: 637533041652625339
+  stringsBankWriteTime: 637535128405242852
   cacheVersion: 6
 --- !u!114 &512131624630317499
 MonoBehaviour:
@@ -210,7 +235,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/BG Music.bank
   Name: BG Music
   StudioPath: bank:/BG Music
-  lastModified: 637533041652764969
+  lastModified: 637535128404075974
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -252,7 +277,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637533041652625339
+  lastModified: 637535128405741510
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -302,6 +327,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 12800
+--- !u!114 &5853336111823983454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Button Hover
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Button Hover
+  guid: 5fa382d870130d4f99f1e976e468d88b
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 300
 --- !u!114 &5879904492690172502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +411,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/DO NOT USE.bank
   Name: DO NOT USE
   StudioPath: bank:/DO NOT USE
-  lastModified: 637520967666907351
+  lastModified: 637535128405103232
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -405,9 +453,9 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637533041652625339
+  lastModified: 637535128405242852
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1508
+    Value: 1648
   Exists: 1
