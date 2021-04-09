@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
         {
             this.GetComponent<ChangeForm>().SwitchToNormal();
         }
+        
 
     }
 
