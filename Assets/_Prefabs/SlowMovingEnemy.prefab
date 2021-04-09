@@ -139,7 +139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.35}
+  m_AnchoredPosition: {x: 0, y: 0.266}
   m_SizeDelta: {x: 14.5347595, y: 3.4864388}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3213082643919074269
@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 5772075908014972811}
   - component: {fileID: 3986080047975332682}
   - component: {fileID: -4470740154035640845}
+  - component: {fileID: 1489357691191673497}
   m_Layer: 0
   m_Name: SlowMovingEnemy
   m_TagString: Enemy
@@ -355,7 +356,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ffe2f0c9d6d6476409486062a3828a1b, type: 3}
+  m_Sprite: {fileID: -6525861474392436884, guid: 3f8a203095ef52548bc94eba344d26e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -379,8 +380,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.75, y: 0.5}
+  m_Offset: {x: -0.000000018574013, y: -0.15581013}
+  m_Size: {x: 0.7500005, y: 0.57213664}
   m_Direction: 1
 --- !u!114 &3213082644646293054
 MonoBehaviour:
@@ -483,6 +484,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &1489357691191673497
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3213082644646293026}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ca273c8b46613424896cf1b7ef62f638, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3213082644843422923
 GameObject:
   m_ObjectHideFlags: 0

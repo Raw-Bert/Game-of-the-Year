@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
     public int probabilityOfHPDrop = 6; //4%
     public GameObject HPDrop;
 
+    bool isDied = false;
+    public float dieTime = 5f;
+    float waitTime = 0;
+
     void OnDestroy()
     {
         if (!player)return;
@@ -34,7 +38,21 @@ public class Enemy : MonoBehaviour
         manager.GetComponent<SpawnEnemies>().numberOfEnemies += 1;
     }
 
-    //void Update(){
+    void Update(){
+        if (isDied)
+        {
+            if(waitTime > 0)
+            {
+                Color tmp = this.GetComponent<SpriteRenderer>().color;
+                tmp.a = waitTime / dieTime;
+                this.GetComponent<SpriteRenderer>().color = tmp;
+                waitTime -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
     //if (Input.GetKeyDown(KeyCode.Space))
     //{
     //    TakeDamage(20);
@@ -49,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     //         Destroy(col.gameObject);
     //     }
-    // }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -66,13 +84,27 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         //Play Enemy death animation here
-        if(HealthDropChance(probabilityOfHPDrop))
+        this.GetComponent<Animator>().SetBool("isDie", true);
+        if(this.GetComponent<EnemyAI>().movementType == EnemyAI.EnemyType.Ranged)
+        {
+            this.GetComponent<EnemyAI>().rangeEnemyArm.SetActive(false);
+        }
+
+        this.GetComponent<CapsuleCollider2D>().enabled = false;
+        healthBar.gameObject.SetActive(false);
+        this.GetComponent<EnemyAI>().agent.isStopped = true;
+        this.GetComponent<EnemyAI>().agent.ResetPath();
+        this.GetComponent<EnemyAI>().movementType = EnemyAI.EnemyType.Static;
+        waitTime = dieTime;
+
+        if (HealthDropChance(probabilityOfHPDrop))
         {
             Instantiate(HPDrop, this.transform.position, Quaternion.identity);
         }
         manager.GetComponent<GameScore>().countScore(10);
         manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
-        Destroy(this.gameObject);
+        isDied = true;
+        //Destroy(this.gameObject);
     }
 
     bool HealthDropChance(int probability)

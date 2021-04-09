@@ -5458,7 +5458,7 @@ MonoBehaviour:
   shadowPlayer: {fileID: 3177419067510777098, guid: 4a46623bf325e7545a193e15f0941e93, type: 3}
   lightPlayer: {fileID: 3508339662210173181, guid: 43bedacf5e6913546904a2bfc3f59e7c, type: 3}
   shadowPlayerController: {fileID: 9100000, guid: 2c68220cadad6a74e93547c804d99c88, type: 2}
-  lightPlayerController: {fileID: 9100000, guid: 283bc30301d693647947197e1d3fb645, type: 2}
+  lightPlayerController: {fileID: 9100000, guid: 9c49e5493227744408cffc24cd306ca9, type: 2}
 --- !u!114 &277401528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5979,7 +5979,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e32c5eead1b391745803e6e9feb5bd11, type: 2}
+  - {fileID: 2100000, guid: a57d94f0c3c8d424ab4163f877e41a9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31979,7 +31979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -121718,6 +121718,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6280475365611418170, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280475365611418170, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7635303804270510607, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
       propertyPath: movementType
       value: 2
@@ -147293,7 +147301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4363422824140175349, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4363422824140175349, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
       propertyPath: m_LocalPosition.x

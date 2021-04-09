@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     float timeBtwAttackUpdate;
     public GameObject projectile;
 
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     bool isAgentEnable = true;
 
     Animator enemyAnimator;
@@ -40,8 +40,6 @@ public class EnemyAI : MonoBehaviour
 
     //public Animator muzzleAnimator;
     //public GameObject muzzleFlash;
-    
-    
 
     private void Start()
     {
@@ -91,6 +89,9 @@ public class EnemyAI : MonoBehaviour
             playerPos = Transform.FindObjectOfType<PlayerMovement>().gameObject.transform.position;
         switch (movementType)
         {
+            case EnemyType.Static:
+                StaticEnemy();
+                break;
             case EnemyType.Charge:
                 ChargeMove(playerPos);
                 break;
@@ -113,6 +114,11 @@ public class EnemyAI : MonoBehaviour
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = false;
   
+    }
+
+    void StaticEnemy()
+    {
+
     }
 
     Vector3 chargeLoc;
@@ -193,15 +199,62 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    private float slowMoveAttackCount = 0.5f;
     void SlowMove(Vector3 playerPos)
     {
+        slowMoveAttackCount += Time.deltaTime;
+        Vector3 dir = playerPos - this.transform.position;
+
+        //check if agent enable and if it doing attack
         if (isAgentEnable)
         {
-            agent.SetDestination(playerPos);
+            if (slowMoveAttackCount > 0.5f)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(playerPos);
+            }
+            else
+            {
+                agent.isStopped = true;
+                agent.ResetPath();
+            }
         }
         else
         {
             transform.position += (playerPos - transform.position).normalized * Time.deltaTime * speed / 4;
+        }
+
+        //flip sprite based on the moving direction
+        if (dir.x < 0)
+        {
+            this.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            this.GetComponent<SpriteRenderer>().flipX = true;
+        }
+
+        //check if enemy close enough to player to doing attack
+        if (Vector2.Distance(transform.position, playerPos) < 1f)
+        {
+            slowMoveAttackCount = 0;
+            enemyAnimator.SetBool("isAttack", true);
+        }
+        else
+        {
+            enemyAnimator.SetBool("isAttack", false);
+        }
+
+        //check if player reachable or not
+        NavMeshPath path = new NavMeshPath();
+        agent.CalculatePath(playerPos, path);
+        if (path.status == NavMeshPathStatus.PathPartial)
+        {
+            enemyAnimator.SetBool("isMoving", false);
+        }
+        else
+        {
+            enemyAnimator.SetBool("isMoving", true);
         }
     }
 
@@ -279,7 +332,7 @@ public class EnemyAI : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = false;
             rangeEnemyArm.transform.position = armRightPos.transform.position;
         }
-        else if(dir.x >= 0)
+        else
         {
             this.GetComponent<SpriteRenderer>().flipX = true;
             rangeEnemyArm.transform.position = armLeftPos.transform.position;
