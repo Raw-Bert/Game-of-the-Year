@@ -199,7 +199,7 @@ MonoBehaviour:
   flashTime: 0.1
   flashMaxAlpha: 0.5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
-  probabilityOfHPDrop: 6
+  probabilityOfHPDrop: 4
   HPDrop: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
 --- !u!114 &4363422824140175339
 MonoBehaviour:
@@ -227,6 +227,8 @@ MonoBehaviour:
   firePoint: {fileID: 0}
   armLeftPos: {fileID: 0}
   armRightPos: {fileID: 0}
+  muzzleAnimator: {fileID: 0}
+  muzzleFlash: {fileID: 0}
 --- !u!195 &4611787311078377055
 NavMeshAgent:
   m_ObjectHideFlags: 0

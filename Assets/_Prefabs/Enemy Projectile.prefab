@@ -121,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   lifeTime: 20
+  collideEffect: {fileID: 2461819034193721818, guid: 4ae61683833a1ba46871bc4c3179d12d, type: 3}
 --- !u!95 &-2129272948017425613
 Animator:
   serializedVersion: 3
