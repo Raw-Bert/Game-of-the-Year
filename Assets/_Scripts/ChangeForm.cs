@@ -32,7 +32,7 @@ public class ChangeForm : MonoBehaviour
     public Color newWall;
 
     public bool canSwitch = false;
-    bool canSwitchNormal = false;
+    public bool canSwitchNormal { get; private set; } = false;
 
     float timer = 0;
 
@@ -41,6 +41,8 @@ public class ChangeForm : MonoBehaviour
 
     public RuntimeAnimatorController shadowPlayerController;
     public RuntimeAnimatorController lightPlayerController;
+
+    [SerializeField][FMODUnity.EventRef] string shiftSFX;
 
     void Start()
     {
@@ -65,6 +67,8 @@ public class ChangeForm : MonoBehaviour
             {
                 if (!shadowForm)
                 {
+                    FMODUnity.RuntimeManager.PlayOneShot(shiftSFX);
+
                     //Change player oputlook
                     this.GetComponent<SpriteRenderer>().sprite = shadowPlayer;
                     this.GetComponent<Animator>().runtimeAnimatorController = shadowPlayerController;
@@ -80,7 +84,7 @@ public class ChangeForm : MonoBehaviour
                     shadowGround.SetActive(true);
                     normalGround.SetActive(false);
 
-                    this.GetComponent<Player>().shadowBarCurrent -=  (int)(this.GetComponent<Player>().maxShadowBar * 0.2f);
+                    this.GetComponent<Player>().shadowBarCurrent -= (int)(this.GetComponent<Player>().maxShadowBar * 0.2f);
                     shadowForm = true;
 
                     // cursor change
@@ -97,25 +101,20 @@ public class ChangeForm : MonoBehaviour
                     timer = 0.0f;
                     //canSwitch = false;
                 }
-                
-                //else
-                //{
-                    
-                //canSwitch = false;
-            //}
+
             }
-            if(shadowForm == true && canSwitchNormal == true && timer > 0.2f)
+            if (shadowForm == true && canSwitchNormal == true && timer > 0.2f)
             {
                 SwitchToNormal();
             }
-
-            
 
         }
     }
 
     public void SwitchToNormal()
     {
+        FMODUnity.RuntimeManager.PlayOneShot(shiftSFX);
+
         //Change player oputlook
         this.GetComponent<SpriteRenderer>().sprite = lightPlayer;
         this.GetComponent<Animator>().runtimeAnimatorController = lightPlayerController;
@@ -137,6 +136,7 @@ public class ChangeForm : MonoBehaviour
         Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
 
         shadowForm = false;
+        canSwitchNormal = false;
 
         // cursor change
         Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);

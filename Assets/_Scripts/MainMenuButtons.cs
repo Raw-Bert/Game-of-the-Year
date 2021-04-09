@@ -5,10 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public string game;
-    public void PlayButton()
+    public string story;
+    public string endless;
+    public void StoryButton()
     {
-        SceneManager.LoadScene(game, LoadSceneMode.Single);
+        SceneManager.LoadScene(story, LoadSceneMode.Single);
+    }
+ public void EndlessButton()
+    {
+        SceneManager.LoadScene(endless, LoadSceneMode.Single);
     }
 
     public void SettingsButton()
