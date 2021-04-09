@@ -24,12 +24,14 @@ public class Shooting : MonoBehaviour
     public float machineGunTime = 0.1f;
     public float plasmaRifleTime = 0.4f;
     public float shotGunTime = 1.2f;
+    public float sniperTime = 1.2f;
 
     public enum Guns
     {
         plasmaRifle, //Default semi-auto gun
         remorse, //Machine gun named remorse? idk
-        ravager //Shot gun called the ravager
+        ravager, //Shot gun called the ravager
+        deathsWhisper
 
     }
 
@@ -76,8 +78,8 @@ public class Shooting : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
-                    equippedGun = Guns.ravager;
-                    SwitchGun(2, 30);
+                    equippedGun = Guns.deathsWhisper;
+                    SwitchGun(3, 60);
                 }
                 break;
 
@@ -113,13 +115,33 @@ public class Shooting : MonoBehaviour
                 }
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    equippedGun = Guns.plasmaRifle;
-                    SwitchGun(0, 20);
+                    equippedGun = Guns.deathsWhisper;
+                    SwitchGun(3, 60);
                 }
                 if (Input.GetKeyDown(KeyCode.Q))
                 {
                     equippedGun = Guns.remorse;
                     SwitchGun(1, 6);
+                }
+                break;
+
+            case Guns.deathsWhisper:
+                if (Input.GetMouseButton(0) && timeSinceLastShot > sniperTime)
+                {
+                    RuntimeManager.PlayOneShot(fire1SFX);
+
+                    Shoot(2.0f, 0.3f, 1, 8.0f);
+                    Debug.Log("Death Whisper Shot");
+                }
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    equippedGun = Guns.plasmaRifle;
+                    SwitchGun(0, 20);
+                }
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    equippedGun = Guns.ravager;
+                    SwitchGun(2, 30);
                 }
                 break;
 
