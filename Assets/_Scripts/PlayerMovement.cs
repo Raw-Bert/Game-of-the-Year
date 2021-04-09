@@ -38,21 +38,20 @@ public class PlayerMovement : MonoBehaviour
 
         if (movement.x != 0 || movement.y != 0)
         {
-            playerAnimator.SetBool("isRun", true);
+            playerAnimator.SetBool("isMoving", true);
             walkCount -= Time.deltaTime;
         }
         else
         {
-            playerAnimator.SetBool("isRun", false);
+            playerAnimator.SetBool("isMoving", false);
             walkCount = 0;
         }
 
-        if (walkCount <= 0 && playerAnimator.GetBool("isRun"))
+        if (walkCount <= 0 && playerAnimator.GetBool("isMoving"))
         {
             walkCount = .27f;
             FMODUnity.RuntimeManager.PlayOneShot(moveSound);
         }
-
     }
 
     void FixedUpdate()

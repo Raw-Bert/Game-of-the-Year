@@ -5336,7 +5336,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1090020006524598862, guid: 73f786c3f3276b4418eb5ea5408c3a0c, type: 3}
+  m_Sprite: {fileID: 3508339662210173181, guid: 43bedacf5e6913546904a2bfc3f59e7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5455,6 +5455,10 @@ MonoBehaviour:
   wallColour: {fileID: 909846884}
   newWall: {r: 0.5166429, g: 0.56171584, b: 0.8490566, a: 1}
   canSwitch: 0
+  shadowPlayer: {fileID: 3177419067510777098, guid: 4a46623bf325e7545a193e15f0941e93, type: 3}
+  lightPlayer: {fileID: 3508339662210173181, guid: 43bedacf5e6913546904a2bfc3f59e7c, type: 3}
+  shadowPlayerController: {fileID: 9100000, guid: 2c68220cadad6a74e93547c804d99c88, type: 2}
+  lightPlayerController: {fileID: 9100000, guid: 283bc30301d693647947197e1d3fb645, type: 2}
 --- !u!114 &277401528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5526,7 +5530,7 @@ Animator:
   m_GameObject: {fileID: 277401521}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2de8d39ed933adf4eab8c44fee2596a1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9c49e5493227744408cffc24cd306ca9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5975,7 +5979,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50f379368d1e63e4385d0655361aedc1, type: 2}
+  - {fileID: 2100000, guid: e32c5eead1b391745803e6e9feb5bd11, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

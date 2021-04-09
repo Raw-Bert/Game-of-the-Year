@@ -16,10 +16,13 @@ public class GunRotation : MonoBehaviour
     Vector2 mousePosition;
 
     public float max = 0.9f;
-    
+
+    Animator playerAnimator;
+
     void Awake()
     {
         gunRenderer = GetComponent<SpriteRenderer>();
+        playerAnimator = player.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,8 +32,12 @@ public class GunRotation : MonoBehaviour
         mousePosition = CaptureMousePos();
         this.transform.position = player.transform.position + weaponOffset + (new Vector3(factor.x * mousePosition.x, factor.y * mousePosition.y, 0.0f));
 
+        //Set player face direction value
+        playerAnimator.SetFloat("xInput", mousePosition.x);
+        playerAnimator.SetFloat("yInput", mousePosition.y);
+
         //Flip sprite if mouse past certain axis in relation to the player.
-        if(mousePosition.x < 0.0f)
+        if (mousePosition.x < 0.0f)
         {
             gunRenderer.flipY = true;
             player.GetComponent<SpriteRenderer>().flipX = true;
@@ -39,14 +46,18 @@ public class GunRotation : MonoBehaviour
             gunRenderer.flipY = false;
             player.GetComponent<SpriteRenderer>().flipX = false;
         }
-        
+
         //Put gun in layer behind the player depending on mouse position in relation to player
         if (mousePosition.y > 0.0f)
         {
+            playerAnimator.SetFloat("upDown", -1);
             gunRenderer.sortingOrder = 1;
         }
-        else gunRenderer.sortingOrder = 3;
-
+        else 
+        {
+            playerAnimator.SetFloat("upDown", 1);
+            gunRenderer.sortingOrder = 3; 
+        }
     }
 
     public Vector2 CaptureMousePos()

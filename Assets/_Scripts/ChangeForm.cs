@@ -36,6 +36,12 @@ public class ChangeForm : MonoBehaviour
 
     float timer = 0;
 
+    public Sprite shadowPlayer;
+    public Sprite lightPlayer;
+
+    public RuntimeAnimatorController shadowPlayerController;
+    public RuntimeAnimatorController lightPlayerController;
+
     void Start()
     {
         Cursor.SetCursor(normalCursor, new Vector2(normalCursor.width / 2, normalCursor.height / 2), CursorMode.Auto);
@@ -59,6 +65,10 @@ public class ChangeForm : MonoBehaviour
             {
                 if (!shadowForm)
                 {
+                    //Change player oputlook
+                    this.GetComponent<SpriteRenderer>().sprite = shadowPlayer;
+                    this.GetComponent<Animator>().runtimeAnimatorController = shadowPlayerController;
+
                     //screen flash black
                     flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, shadowFlashColor);
 
@@ -106,6 +116,10 @@ public class ChangeForm : MonoBehaviour
 
     public void SwitchToNormal()
     {
+        //Change player oputlook
+        this.GetComponent<SpriteRenderer>().sprite = lightPlayer;
+        this.GetComponent<Animator>().runtimeAnimatorController = lightPlayerController;
+
         //Screen flash white
         flashImage.GetComponent<ScreenFlash>().StartScreenFlash(flashTime, flashMaxAlpha, flashColor);
 
