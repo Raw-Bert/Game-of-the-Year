@@ -15,6 +15,7 @@ TagManager:
   - Box
   - RemorseDrop
   - RavagerDrop
+  - Boss
   layers:
   - Default
   - TransparentFX
