@@ -84,11 +84,12 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         //Play Enemy death animation here
-        this.GetComponent<Animator>().SetBool("isDie", true);
-        if(this.GetComponent<EnemyAI>().movementType == EnemyAI.EnemyType.Ranged)
+        if (this.GetComponent<EnemyAI>().movementType == EnemyAI.EnemyType.Ranged)
         {
+            this.GetComponent<Animator>().enabled = true;
             this.GetComponent<EnemyAI>().rangeEnemyArm.SetActive(false);
         }
+        this.GetComponent<Animator>().SetBool("isDie", true);
 
         this.GetComponent<CapsuleCollider2D>().enabled = false;
         healthBar.gameObject.SetActive(false);

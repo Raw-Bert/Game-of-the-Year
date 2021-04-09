@@ -204,6 +204,7 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 1}
   probabilityOfHPDrop: 8
   HPDrop: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
+  dieTime: 5
 --- !u!114 &1337814409777588981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,10 +223,12 @@ MonoBehaviour:
   cooldownTimer: 5
   chargeDistance: 5
   detectDistance: 8
+  patrollingPoints: []
   stopDis: 4
   backDis: 3
   timeBtwAttack: 2
   projectile: {fileID: 4636470433957654561, guid: ac0b6f70150108d46be3775b388a1ec9, type: 3}
+  agent: {fileID: 0}
   rangeEnemyArm: {fileID: 1413115421346248575}
   firePoint: {fileID: 6435801972867082326}
   armLeftPos: {fileID: 2709235188082224037}
