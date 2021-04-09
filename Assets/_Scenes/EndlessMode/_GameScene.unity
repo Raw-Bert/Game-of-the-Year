@@ -5336,7 +5336,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -1090020006524598862, guid: 73f786c3f3276b4418eb5ea5408c3a0c, type: 3}
+  m_Sprite: {fileID: 3508339662210173181, guid: 43bedacf5e6913546904a2bfc3f59e7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5455,6 +5455,10 @@ MonoBehaviour:
   wallColour: {fileID: 909846884}
   newWall: {r: 0.5166429, g: 0.56171584, b: 0.8490566, a: 1}
   canSwitch: 0
+  shadowPlayer: {fileID: 3177419067510777098, guid: 4a46623bf325e7545a193e15f0941e93, type: 3}
+  lightPlayer: {fileID: 3508339662210173181, guid: 43bedacf5e6913546904a2bfc3f59e7c, type: 3}
+  shadowPlayerController: {fileID: 9100000, guid: 2c68220cadad6a74e93547c804d99c88, type: 2}
+  lightPlayerController: {fileID: 9100000, guid: 9c49e5493227744408cffc24cd306ca9, type: 2}
 --- !u!114 &277401528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5529,7 +5533,7 @@ Animator:
   m_GameObject: {fileID: 277401521}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2de8d39ed933adf4eab8c44fee2596a1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9c49e5493227744408cffc24cd306ca9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5978,7 +5982,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50f379368d1e63e4385d0655361aedc1, type: 2}
+  - {fileID: 2100000, guid: a57d94f0c3c8d424ab4163f877e41a9f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31978,7 +31982,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -121929,6 +121933,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6280475365611418170, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280475365611418170, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 7635303804270510607, guid: d346401013449ef4ea9ab4b22650045f, type: 3}
       propertyPath: movementType
       value: 2
@@ -147579,7 +147591,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4363422824140175349, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4363422824140175349, guid: ccfe1ae5e4b7e9a46a6d34990ccb9311, type: 3}
       propertyPath: m_LocalPosition.x
