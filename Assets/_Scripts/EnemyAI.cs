@@ -18,7 +18,7 @@ public class EnemyAI : MonoBehaviour
     public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5, detectDistance = 8;
     bool hasCharged = true;
     bool isCollidingWithPlayer = false;
-    List<Vector3> patrollingPoints;
+    public List<Vector3> patrollingPoints;
     Vector3 patrollingPoint;
     bool patrolPointSet = false;
 
