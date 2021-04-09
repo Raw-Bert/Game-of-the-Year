@@ -278,7 +278,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3735275683216751086}
   - component: {fileID: 3735275683216751083}
-  - component: {fileID: 3735275683216751081}
   m_Layer: 5
   m_Name: Game Over Menu
   m_TagString: Untagged
@@ -317,18 +316,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3735275683216751087}
   m_CullTransparentMesh: 0
---- !u!114 &3735275683216751081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3735275683216751087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b6e4c1393d2f794798309151999841c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3735275683615099217
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,7 +438,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3735275683216751081}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOverButtons, Assembly-CSharp
         m_MethodName: RestartButton
         m_Mode: 1
@@ -916,7 +903,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3735275683216751081}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GameOverButtons, Assembly-CSharp
         m_MethodName: MenuButton
         m_Mode: 1
