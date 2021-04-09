@@ -17,13 +17,43 @@ public class TutorialManager : MonoBehaviour
     public GameObject enemyWall;
     bool enemiesUnleashed = false;
 
-    bool isTriggered = false;
+    //bool isTriggered = false;
+    public List<GameObject> tutorialBoxes = new List<GameObject>();
+    bool boxDrop = true;
+    int initalBoxCount;
 
 
+    void Awake()
+    {
+        initalBoxCount = tutorialBoxes.Count;
+        Debug.Log(tutorialBoxes.Count);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if(tutorialBoxes.Count < initalBoxCount && boxDrop == true)
+        {
+           
+            for(int i = 0; i < tutorialBoxes.Count; i++)
+            {
+                
+                tutorialBoxes[i].gameObject.GetComponent<Boxes>().tutorialItemDrop = false;
+            }
+            boxDrop = false;
+        }
+        else
+        {
+            for(int i = 0; i < tutorialBoxes.Count; i++)
+            {
+                if(tutorialBoxes[i] == null)
+                {
+                    tutorialBoxes.Remove(tutorialBoxes[i]);
+                }
+            }
+        }
+
+
         if(!this.GetComponent<SpawnEnemies>().spawning)
         {
             if (player.transform.position.x > triggerPos)

@@ -24,6 +24,6 @@ public class GameOver : MonoBehaviour
 
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
-        SceneManager.LoadScene("_GameScene");
+        //SceneManager.LoadScene("_GameScene");
     }
 }

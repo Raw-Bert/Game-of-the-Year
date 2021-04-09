@@ -12,6 +12,9 @@ TagManager:
   - NavMesh
   - spawnPoint
   - HealthPickup
+  - Box
+  - RemorseDrop
+  - RavagerDrop
   layers:
   - Default
   - TransparentFX

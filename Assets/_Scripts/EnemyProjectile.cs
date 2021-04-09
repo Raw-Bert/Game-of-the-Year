@@ -13,6 +13,8 @@ public class EnemyProjectile : MonoBehaviour
     public float lifeTime = 4f;
     float timer;
 
+    public GameObject collideEffect;
+
     void Start()
     {
         player = GameObject.FindGameObjectsWithTag("Player")[0].transform;
@@ -52,12 +54,21 @@ public class EnemyProjectile : MonoBehaviour
    //}
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Player")
         {
-            if (other.gameObject.tag == "Tile" || other.gameObject.tag == "Player")
-            {
+                Instantiate(collideEffect, this.transform.position, this.transform.rotation);
                 Destroy(this.gameObject);
-            }
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Box")
+        {
+            Instantiate(collideEffect, this.transform.position, this.transform.rotation);
+            Destroy(this.gameObject);
+        }
+
     }
 
 }

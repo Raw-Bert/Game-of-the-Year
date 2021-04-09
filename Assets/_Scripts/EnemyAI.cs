@@ -37,6 +37,10 @@ public class EnemyAI : MonoBehaviour
     public GameObject firePoint;
     public GameObject armLeftPos;
     public GameObject armRightPos;
+
+    //public Animator muzzleAnimator;
+    //public GameObject muzzleFlash;
+    
     
 
     private void Start()
@@ -254,6 +258,8 @@ public class EnemyAI : MonoBehaviour
         // Attack
         if (timeBtwAttackUpdate <= 0)
         {
+            //muzzleFlash.SetActive(true);
+            //muzzleAnimator.SetBool("hasShot", true);
             Instantiate(projectile, firePoint.transform.position, Quaternion.identity);
             timeBtwAttackUpdate = timeBtwAttack;
         }
@@ -261,6 +267,11 @@ public class EnemyAI : MonoBehaviour
         {
             timeBtwAttackUpdate -= Time.deltaTime;
         }
+
+        //if (muzzleAnimator.GetBool("hasShot") == false)
+        //{
+            //muzzleFlash.SetActive(false);
+        //}
 
         // Sprite direction and arm position
         if(dir.x < 0)
