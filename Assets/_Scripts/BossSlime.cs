@@ -6,19 +6,21 @@ public class BossSlime : MonoBehaviour
 {
     public GameObject player;
 
-    bool hasCharged = false;
+    [Header("Boss Settings")]
+    //bool hasCharged = false;
     bool spawnSlimes = false;
 
     public HealthBar healthBar;
 
+    [Tooltip("Time it takes to charge up the dashing attack")]
     public float chargeThreshold = 2.0f;
 
     float timeSinceLastMove = 0.0f;
-    public float timeBetweenMoves = 12.0f;
+    public float timeBetweenMoves = 9.0f;
 
 
     float chargeTimer = 0.0f;
-    float spawnTimer = 15.0f;
+    //float spawnTimer = 15.0f;
 
     float dashAttackTime;
 
@@ -35,7 +37,7 @@ public class BossSlime : MonoBehaviour
 
     public List<GameObject> spawnPoints;
     public GameObject slimes;
-    public int numberOfSpawns = 2;
+    public int numberOfSpawns = 3;
 
     public bool aggro = false;
 
@@ -61,7 +63,7 @@ public class BossSlime : MonoBehaviour
         if(health < maxHealth / 2 && enrage == false)
         {
             enrage = true;
-            timeBetweenMoves = 6.0f;
+            timeBetweenMoves = 5.0f;
             numberOfSpawns += 2;
         }
 
@@ -76,8 +78,9 @@ public class BossSlime : MonoBehaviour
 
                     if(timeSinceLastMove >= timeBetweenMoves)
                     {
-                        int selectMove = Random.Range(1,3);
-                        if(selectMove == 1)
+                        int selectMove = Random.Range(1,4);
+                        Debug.Log("SELECTED MOVE: " + selectMove);
+                        if(selectMove == 1 || selectMove == 2)
                         {
                             states = BossStates.chargeUp;
                         }
@@ -121,15 +124,11 @@ public class BossSlime : MonoBehaviour
             case BossStates.spawning:
                 if(spawnSlimes == true)
                 {
-                    for(int i = 0; i < numberOfSpawns; i++)
-                    {
-                        SpawnEnemy();
-                    
-                    }
+                    SpawnEnemy();
                     spawnSlimes = false;
 
                 }
-                //Maybe play an animation in here somewhere
+                //Maybe play an animation in here somewhere, and play a spawning animation for the slimes?
                 
                 
                 timeSinceLastMove = 0;
@@ -142,23 +141,26 @@ public class BossSlime : MonoBehaviour
 
     void SpawnEnemy()
     {
-        int breakLoop = 4;
+        
         Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
-
-        while(breakLoop > 0)
-        {
-            GameObject spawnPoint = SpawnPoint();
-
-            if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > 3 && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > 3)
+        for(int i = 0; i < numberOfSpawns; i++){
+            int breakLoop = 4;
+            while(breakLoop > 0)
             {
-                GameObject newEnemy = Instantiate(slimes, spawnPoint.transform.position, Quaternion.identity);
-                break;
-            }
-            else
-            {
-                breakLoop--;
-            }
-        }  
+                GameObject spawnPoint = SpawnPoint();
+
+                if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > 3 && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > 3)
+                {
+                    GameObject newEnemy = Instantiate(slimes, spawnPoint.transform.position, Quaternion.identity);
+                    Debug.Log("Spawn a slime");
+                    break;
+                }
+                else
+                {
+                    breakLoop--;
+                }
+            }  
+        }
     }
 
     GameObject SpawnPoint()
@@ -170,7 +172,7 @@ public class BossSlime : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("SLIIIIME");
+        //Debug.Log("SLIIIIME");
         if(other.gameObject.tag == "Player")
         {
             isCollidingWithPlayer = true;

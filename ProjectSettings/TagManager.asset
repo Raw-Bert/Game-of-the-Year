@@ -16,6 +16,7 @@ TagManager:
   - RemorseDrop
   - RavagerDrop
   - Boss
+  - WhisperDrop
   layers:
   - Default
   - TransparentFX

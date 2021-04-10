@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class Shooting : MonoBehaviour
 {
 
@@ -24,7 +25,10 @@ public class Shooting : MonoBehaviour
     public float machineGunTime = 0.1f;
     public float plasmaRifleTime = 0.4f;
     public float shotGunTime = 1.2f;
-    public float sniperTime = 1.2f;
+    public float sniperTime = 1.8f;
+
+    bool gunImageShowing = false;
+    float gunImageTimer = 0;
 
     public enum Guns
     {
@@ -49,16 +53,37 @@ public class Shooting : MonoBehaviour
 
     int damage = 20;
 
+    bool remorsePickUp = false;
+    bool p1_smaPickUp = false;
+    bool ravagerPickUp = false;
+    bool deathsWhisperPickUp = false;
+    //bool remorsePickUp = false;
+    GameObject gunDrop;
+
+    public Image pickUpImage;
+
     void Start()
     {
         animator = muzzleFlash.GetComponent<Animator>();
         gunAnimator = gun.GetComponent<Animator>();
         gunRender = gun.GetComponent<Renderer>();
+
+        pickUpImage.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(gunImageShowing == true)
+        {
+            gunImageTimer += Time.deltaTime;
+            if(gunImageTimer >= 3.0f)
+            {
+                gunImageShowing = false;
+                pickUpImage.gameObject.SetActive(false);
+                gunImageTimer = 0;
+            }
+        }
         timeSinceLastShot += Time.deltaTime;
 
         //States for each gun, changes the behaviour of the gun
@@ -71,16 +96,16 @@ public class Shooting : MonoBehaviour
                     RuntimeManager.PlayOneShot(fire1SFX);
                     Shoot(1.5f, 0.1f, 1, 5.0f);
                 }
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    equippedGun = Guns.remorse;
-                    SwitchGun(1, 6);
-                }
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    equippedGun = Guns.deathsWhisper;
-                    SwitchGun(3, 60);
-                }
+                //if (Input.GetKeyDown(KeyCode.E))
+                //{
+                //    equippedGun = Guns.remorse;
+                //    SwitchGun(1, 6);
+                //}
+                //if (Input.GetKeyDown(KeyCode.Q))
+                //{
+                //    equippedGun = Guns.deathsWhisper;
+                //    SwitchGun(3, 60);
+                //}
                 break;
 
                 //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
@@ -90,18 +115,18 @@ public class Shooting : MonoBehaviour
                     RuntimeManager.PlayOneShot(fire1SFX);
 
                     Shoot(0.9f, 0.08f, 1, 3.0f);
-                    Debug.Log("Remorsful Shot");
+                    //Debug.Log("Remorsful Shot");
                 }
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    equippedGun = Guns.plasmaRifle;
-                    SwitchGun(0, 20);
-                }
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    equippedGun = Guns.ravager;
-                    SwitchGun(2, 30);
-                }
+                //if (Input.GetKeyDown(KeyCode.Q))
+                //{
+                //    equippedGun = Guns.plasmaRifle;
+                //    SwitchGun(0, 20);
+                //}
+                //if (Input.GetKeyDown(KeyCode.E))
+                //{
+                //    equippedGun = Guns.ravager;
+                //    SwitchGun(2, 30);
+                //}
                 break;
 
                 //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
@@ -110,19 +135,19 @@ public class Shooting : MonoBehaviour
                 {
                     RuntimeManager.PlayOneShot(fire1SFX);
 
-                    Shoot(2.6f, 0.2f, 5, 0.5f);
-                    Debug.Log("Ravaging Shot");
+                    Shoot(2.6f, 0.5f, 5, 0.5f);
+                    //Debug.Log("Ravaging Shot");
                 }
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    equippedGun = Guns.deathsWhisper;
-                    SwitchGun(3, 60);
-                }
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    equippedGun = Guns.remorse;
-                    SwitchGun(1, 6);
-                }
+                //if (Input.GetKeyDown(KeyCode.E))
+                //{
+                //    equippedGun = Guns.deathsWhisper;
+                //    SwitchGun(3, 60);
+                //}
+                //if (Input.GetKeyDown(KeyCode.Q))
+                //{
+                //    equippedGun = Guns.remorse;
+                //    SwitchGun(1, 6);
+                //}
                 break;
 
             case Guns.deathsWhisper:
@@ -130,19 +155,19 @@ public class Shooting : MonoBehaviour
                 {
                     RuntimeManager.PlayOneShot(fire1SFX);
 
-                    Shoot(2.0f, 0.3f, 1, 8.0f);
+                    Shoot(2.0f, 0.4f, 1, 8.0f);
                     Debug.Log("Death Whisper Shot");
                 }
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    equippedGun = Guns.plasmaRifle;
-                    SwitchGun(0, 20);
-                }
-                if (Input.GetKeyDown(KeyCode.Q))
-                {
-                    equippedGun = Guns.ravager;
-                    SwitchGun(2, 30);
-                }
+                //if (Input.GetKeyDown(KeyCode.E))
+                //{
+                //    equippedGun = Guns.plasmaRifle;
+                //    SwitchGun(0, 20);
+                //}
+                //if (Input.GetKeyDown(KeyCode.Q))
+                //{
+                //    equippedGun = Guns.ravager;
+                //    SwitchGun(2, 30);
+                //}
                 break;
 
                 //Gun names: 
@@ -153,13 +178,70 @@ public class Shooting : MonoBehaviour
                 //Swan song
                 //Cataclysm,
                 //BFG
-                //Sorrow's Whisper
         }
 
         if (animator.GetBool("hasShot") == false)
         {
             muzzleFlash.SetActive(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(remorsePickUp == true && equippedGun != Guns.remorse)
+            {
+                equippedGun = Guns.remorse;
+                SwitchGun(1, 6, "Remorse");
+                Destroy(gunDrop);
+            }
+            if(ravagerPickUp == true && equippedGun != Guns.ravager)
+            {
+                equippedGun = Guns.ravager;
+                SwitchGun(2, 30, "The Ravager");
+                Destroy(gunDrop);
+            }
+             if(deathsWhisperPickUp == true && equippedGun != Guns.deathsWhisper)
+            {
+                equippedGun = Guns.deathsWhisper;
+                SwitchGun(3, 60, "Deaths Whisper");
+                Destroy(gunDrop);
+            }
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {      
+        if(other.gameObject.tag == "RemorseDrop")
+        {
+            gunDrop = other.gameObject;
+            remorsePickUp = true;
+        }
+        if(other.gameObject.tag == "RavagerDrop")
+        {
+            gunDrop = other.gameObject;
+            ravagerPickUp = true;
+        }
+        if(other.gameObject.tag == "WhisperDrop")
+        {
+            deathsWhisperPickUp = true;
+            gunDrop = other.gameObject;
+        }
+        
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {        
+        if(other.gameObject.tag == "RemorseDrop")
+        {
+            remorsePickUp = false;
+        }
+        if(other.gameObject.tag == "RavagerDrop")
+        {
+            ravagerPickUp = false;
+        }
+        if(other.gameObject.tag == "WhisperDrop")
+        {
+            deathsWhisperPickUp = false;
+        }
+        
     }
 
     void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
@@ -198,15 +280,23 @@ public class Shooting : MonoBehaviour
     }
 
     //WIP, changes gunsprite and any other attributes when gun state changed
-    void SwitchGun(int spriteVersion, int damageAmount)
+    void SwitchGun(int spriteVersion, int damageAmount, string weaponName)
     {
         spriteR.sprite = sprites[spriteVersion];
-        //gunRender.material.SetTexture("_Emissive", weaponEmissions[spriteVersion]);
 
-        //spriteR.SecondarySpriteTexture = weaponEmissions[spriteVersion];// =  ("_EmissionMap", weaponEmissions[spriteVersion]);
         weaponUI.sprite = UIWeapons[spriteVersion];
-        //spriteR.gameObject.material.SetTexture();
-        //spriteR.SetEmissive(SetEmissive(renderer))
+
+        gunImageShowing = true;
+        pickUpImage.gameObject.SetActive(true);
+
+        GameObject textObj = pickUpImage.transform.GetChild(0).gameObject;
+        textObj.GetComponent<TextMeshProUGUI>().text = "\"" + weaponName + "\" Picked Up";
+
+        GameObject gunImage = pickUpImage.transform.GetChild(1).gameObject;
+        gunImage.GetComponent<Image>().sprite = UIWeapons[spriteVersion];
+
+        
+
 
         damage = damageAmount;
     }
