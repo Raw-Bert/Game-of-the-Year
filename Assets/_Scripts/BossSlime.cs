@@ -187,7 +187,7 @@ public class BossSlime : MonoBehaviour
             {
                 health = 0;
             }
-            healthBar.SetHealth(health);
+            
             Destroy(other.gameObject);
         }
     }
@@ -200,9 +200,10 @@ public class BossSlime : MonoBehaviour
         }
     }   
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.SetHealth(health);
 
         if(health <= 0)
         {

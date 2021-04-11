@@ -64,7 +64,7 @@ public class Shooting : MonoBehaviour
 
     /// - Laser Specifc Variables - ///
     public LineRenderer lineRenderer;
-    float laserDamageTimer = 0; public float laserDamageThreshold = 0.2f;
+    float laserDamageTimer = 0; public float laserDamageThreshold = 0.15f;
 
 
     void Start()
@@ -89,6 +89,10 @@ public class Shooting : MonoBehaviour
                 pickUpImage.gameObject.SetActive(false);
                 gunImageTimer = 0;
             }
+        }
+        if(equippedGun != Guns.soulburn)
+        {
+            StopLaser();
         }
         timeSinceLastShot += Time.deltaTime;
 
@@ -307,9 +311,14 @@ public class Shooting : MonoBehaviour
         if(hit)
         {
             lineRenderer.SetPosition (1, hit.point);
-            if((hit.transform.gameObject.tag == "Enemy"  || hit.transform.gameObject.tag == "Boss") && laserDamageTimer >= laserDamageThreshold)
+            if(hit.transform.gameObject.tag == "Enemy" && laserDamageTimer >= laserDamageThreshold)
             {
                 hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                laserDamageTimer = 0;
+            }
+            else if( hit.transform.gameObject.tag == "Boss" && laserDamageTimer >= laserDamageThreshold)
+            {
+                hit.transform.gameObject.GetComponent<BossSlime>().TakeDamage(damage);
                 laserDamageTimer = 0;
             }
         }
