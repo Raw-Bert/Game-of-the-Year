@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public class Shooting : MonoBehaviour
 {
-
+    public Camera camera;
     public Transform firePoint;
     private Animator animator;
     private Animator gunAnimator;
@@ -35,13 +35,12 @@ public class Shooting : MonoBehaviour
         plasmaRifle, //Default semi-auto gun
         remorse, //Machine gun named remorse? idk
         ravager, //Shot gun called the ravager
-        deathsWhisper
+        deathsWhisper, //Sniper rifle
+        soulburn //Laser gun
 
     }
 
     public Guns equippedGun;
-
-    Vector2 mousePos;
 
     public float bulletSpeed = 20f;
 
@@ -57,10 +56,16 @@ public class Shooting : MonoBehaviour
     bool p1_smaPickUp = false;
     bool ravagerPickUp = false;
     bool deathsWhisperPickUp = false;
-    //bool remorsePickUp = false;
+    bool soulBurnPickUp = false;
     GameObject gunDrop;
 
     public Image pickUpImage;
+
+
+    /// - Laser Specifc Variables - ///
+    public LineRenderer lineRenderer;
+    float laserDamageTimer = 0; public float laserDamageThreshold = 0.2f;
+
 
     void Start()
     {
@@ -69,6 +74,7 @@ public class Shooting : MonoBehaviour
         gunRender = gun.GetComponent<Renderer>();
 
         pickUpImage.gameObject.SetActive(false);
+        StopLaser();
     }
 
     // Update is called once per frame
@@ -169,6 +175,24 @@ public class Shooting : MonoBehaviour
                 //    SwitchGun(2, 30);
                 //}
                 break;
+            
+            case Guns.soulburn:
+                if(Input.GetButtonDown("Fire1"))
+                {
+                    ShootLaser();
+                }
+
+                if(Input.GetButton("Fire1"))
+                {
+                    UpdateLaser();
+                }
+
+                if(Input.GetButtonUp("Fire1"))
+                {
+                    StopLaser();
+                }
+                
+                break;
 
                 //Gun names: 
                 //Peacekeeper
@@ -199,10 +223,16 @@ public class Shooting : MonoBehaviour
                 SwitchGun(2, 30, "The Ravager");
                 Destroy(gunDrop);
             }
-             if(deathsWhisperPickUp == true && equippedGun != Guns.deathsWhisper)
+            if(deathsWhisperPickUp == true && equippedGun != Guns.deathsWhisper)
             {
                 equippedGun = Guns.deathsWhisper;
                 SwitchGun(3, 60, "Deaths Whisper");
+                Destroy(gunDrop);
+            }
+            if(soulBurnPickUp == true && equippedGun != Guns.soulburn)
+            {
+                equippedGun = Guns.soulburn;
+                SwitchGun(4, 7, "Soul Burn");
                 Destroy(gunDrop);
             }
         }
@@ -225,6 +255,11 @@ public class Shooting : MonoBehaviour
             deathsWhisperPickUp = true;
             gunDrop = other.gameObject;
         }
+        if(other.gameObject.tag == "SoulburnDrop")
+        {
+            soulBurnPickUp = true;
+            gunDrop = other.gameObject;
+        }
         
     }
     void OnTriggerExit2D(Collider2D other)
@@ -241,9 +276,49 @@ public class Shooting : MonoBehaviour
         {
             deathsWhisperPickUp = false;
         }
+        if(other.gameObject.tag == "SoulburnDrop")
+        {
+            soulBurnPickUp = false;
+        }
         
     }
 
+    void ShootLaser()
+    {
+        lineRenderer.enabled = true;
+    }
+
+    void UpdateLaser()
+    {
+        laserDamageTimer += Time.deltaTime;
+        var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 endPos;
+        Vector2 tempPos = new Vector2(firePoint.position.x, firePoint.position.y);
+        Vector2 dir = mousePos - tempPos;
+        lineRenderer.SetPosition(0, tempPos);
+        float dist = Mathf.Clamp(Vector2.Distance(tempPos, mousePos), 0.1f, 8);
+        endPos = tempPos + (dir.normalized * dist);
+        lineRenderer.SetPosition(1, endPos);
+
+        
+        
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.transform.position, dir.normalized, dir.magnitude);
+        if(hit)
+        {
+            lineRenderer.SetPosition (1, hit.point);
+            if((hit.transform.gameObject.tag == "Enemy"  || hit.transform.gameObject.tag == "Boss") && laserDamageTimer >= laserDamageThreshold)
+            {
+                hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+                laserDamageTimer = 0;
+            }
+        }
+    }
+
+    void StopLaser()
+    {
+        lineRenderer.enabled = false;
+    }
     void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
     {
         GameObject bullet = Instantiate(basicBullet, firePoint.position, firePoint.rotation);
