@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4842689639277361808}
   - component: {fileID: 4842689639277361814}
   - component: {fileID: 4842689639277361815}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 4842689639761138789}
   - component: {fileID: 4842689639761138790}
   - component: {fileID: 6467306353096415264}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ravager Drop
   m_TagString: RavagerDrop
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2685285341953147356}
   - component: {fileID: 2685285341953147354}
   - component: {fileID: 2685285341953147355}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 2685285343339769641}
   - component: {fileID: 2685285343339769642}
   - component: {fileID: 4589379709846512492}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DeathWhisperDrop
   m_TagString: WhisperDrop
   m_Icon: {fileID: 0}

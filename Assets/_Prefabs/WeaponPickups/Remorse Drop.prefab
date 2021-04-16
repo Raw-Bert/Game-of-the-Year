@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4625692574632466010}
   - component: {fileID: 5995395988156078554}
   - component: {fileID: 3400422057552816610}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 8410878102203939262}
   - component: {fileID: 3911336173555280505}
   - component: {fileID: 7668258209005032204}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Remorse Drop
   m_TagString: RemorseDrop
   m_Icon: {fileID: 0}

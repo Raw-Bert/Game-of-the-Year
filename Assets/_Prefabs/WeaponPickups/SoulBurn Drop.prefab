@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 954667216744478804}
   - component: {fileID: 954667216744478807}
   - component: {fileID: 1714574634501731345}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SoulBurn Drop
   m_TagString: SoulburnDrop
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 954667218161489569}
   - component: {fileID: 954667218161489575}
   - component: {fileID: 954667218161489574}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
