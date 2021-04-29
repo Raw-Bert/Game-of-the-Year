@@ -40,7 +40,7 @@ public class AudioSwapper : MonoBehaviour
     }
     void Start()
     {
-       
+
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[0]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[1]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[2]));
@@ -76,6 +76,7 @@ public class AudioSwapper : MonoBehaviour
 
         if (GetComponent<ChangeForm>().shadowForm)
         {
+            //Change volumes based on amount of enemies
             for (int a = 0; a < 2; ++a)
             {
                 if (!switchDark[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
@@ -113,11 +114,12 @@ public class AudioSwapper : MonoBehaviour
                 switchBright[lastIndex] = false;
             }
 
-            fadeIn(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
+            fadeIn(busDark[lastIndex], fadeInit[lastIndex ], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
             fadeOut(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
         }
         else
         {
+            //Change volumes based on amount of enemies
             for (int a = 0; a < 2; ++a)
             {
                 if (!switchBright[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
@@ -141,6 +143,7 @@ public class AudioSwapper : MonoBehaviour
             }
 
             int lastIndex = switchBright.Count - 1;
+            // Get inital volumes when Player is swaping from 
             if (!switchBright[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
@@ -155,8 +158,8 @@ public class AudioSwapper : MonoBehaviour
                 switchDark[lastIndex] = false;
             }
 
-            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
-            fadeOut(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
+            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2], 0.5f);
+            fadeOut(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1]);
         }
     }
 
