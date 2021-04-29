@@ -100,6 +100,7 @@ public class AudioSwapper : MonoBehaviour
             }
 
             int lastIndex = switchDark.Count - 1;
+            // Get initial volumes when Player is swaping forms 
             if (!switchDark[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
@@ -114,7 +115,7 @@ public class AudioSwapper : MonoBehaviour
                 switchBright[lastIndex] = false;
             }
 
-            fadeIn(busDark[lastIndex], fadeInit[lastIndex ], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
+            fadeIn(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
             fadeOut(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
         }
         else
@@ -143,7 +144,7 @@ public class AudioSwapper : MonoBehaviour
             }
 
             int lastIndex = switchBright.Count - 1;
-            // Get inital volumes when Player is swaping from 
+            // Get initial volumes when Player is swaping forms 
             if (!switchBright[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
