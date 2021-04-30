@@ -77,7 +77,7 @@ public class AudioSwapper : MonoBehaviour
         if (GetComponent<ChangeForm>().shadowForm)
         {
             //Change volumes based on amount of enemies
-            for (int a = 0; a < 2; ++a)
+            for (int a = 0; a < switchDark.Count - 1; ++a)
             {
                 if (!switchDark[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
                 {
@@ -106,7 +106,7 @@ public class AudioSwapper : MonoBehaviour
                 fadeInit[lastIndex] = DateTime.Now;
 
                 float tmp;
-                busDark[lastIndex - 1].getVolume(out tmp);
+                busDark[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2 - 1] = tmp;
                 busBright[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2] = tmp;
@@ -121,7 +121,7 @@ public class AudioSwapper : MonoBehaviour
         else
         {
             //Change volumes based on amount of enemies
-            for (int a = 0; a < 2; ++a)
+            for (int a = 0; a < switchBright.Count - 1; ++a)
             {
                 if (!switchBright[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
                 {
@@ -129,18 +129,18 @@ public class AudioSwapper : MonoBehaviour
 
                     float tmp;
                     busBright[a].getVolume(out tmp);
-                    startVol[a * 2] = tmp;
-                    busDark[a].getVolume(out tmp);
                     startVol[a * 2 + 1] = tmp;
+                    busDark[a].getVolume(out tmp);
+                    startVol[a * 2] = tmp;
 
                     lastAmountOfEnemyType[a] = amountOfEnemyType[a];
                     switchBright[a] = true;
                     switchDark[a] = false;
                 }
 
-                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2],
+                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2+1],
                     0.5f * (0.1f * amountOfEnemyType[a] + (amountOfEnemyType[a] > 0 ? 1 : 0)));
-                fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2 + 1]);
+                fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2]);
             }
 
             int lastIndex = switchBright.Count - 1;
@@ -150,10 +150,10 @@ public class AudioSwapper : MonoBehaviour
                 fadeInit[lastIndex] = DateTime.Now;
 
                 float tmp;
-                busBright[lastIndex - 1].getVolume(out tmp);
-                startVol[lastIndex * 2 - 1] = tmp;
-                busDark[lastIndex].getVolume(out tmp);
+                busBright[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2] = tmp;
+                busDark[lastIndex].getVolume(out tmp);
+                startVol[lastIndex * 2 - 1] = tmp;
 
                 switchBright[lastIndex] = true;
                 switchDark[lastIndex] = false;
