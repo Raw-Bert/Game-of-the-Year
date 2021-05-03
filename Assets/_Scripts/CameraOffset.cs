@@ -26,18 +26,71 @@ public class CameraOffset : MonoBehaviour
     Coroutine currentRecoil;
     Vector2 tempNewPos;
 
+    public enum CameraType{
+        CombatCam,
+        FollowPlayer,
+        CameraShake
+    }
+    public CameraType cameraState;
+    float magnitude = 0.04f;
+    public bool laserShooting = false;
+
     void Start()
     {
+        cameraState = CameraType.CombatCam;
         target = player.position;
         zStart = transform.position.z;
     }
 
     void Update() 
     {
-        mousePos = CaptureMousePos();
-        target = UpdateTargetPos();
-        UpdateCameraPos();
+        switch(cameraState)
+        {
+            case CameraType.CombatCam:
+                mousePos = CaptureMousePos();
+                target = UpdateTargetPos();
+                UpdateCameraPos();
+
+                if(laserShooting == true)
+                {
+                    cameraState = CameraType.CameraShake;
+                }
+
+                break;
+
+            case CameraType.FollowPlayer:
+                this.transform.position = new Vector3 (player.transform.position.x,player.transform.position.y, this.transform.position.z);
+                
+                break;
+
+            case CameraType.CameraShake:
+                mousePos = CaptureMousePos();
+                target = UpdateTargetPos();
+                UpdateCameraPos();
+
+
+                float x = Random.Range(-1f, 1f) * magnitude;
+                float y = Random.Range(-1f, 1f) * magnitude;
+
+                transform.localPosition = new Vector3(this.transform.position.x + x, this.transform.position.y + y, this.transform.position.z);
+
+                if(laserShooting == false)
+                {
+                    cameraState = CameraType.CombatCam;
+                }
+
+                break;
+        }
+
+        if (player.GetComponent<Player>().death == true)
+        {
+            cameraState = CameraType.FollowPlayer;
+        }
+
+        
     }
+
+    //IEnumerator
 
     public Vector2 CaptureMousePos()
     {

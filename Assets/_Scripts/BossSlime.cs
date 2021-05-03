@@ -177,7 +177,6 @@ public class BossSlime : MonoBehaviour
         {
             isCollidingWithPlayer = true;
             player.GetComponent<Player>().TakeDamage(30);
-            //TODO: Deal damage to player here
         }
         if(other.gameObject.tag == "Player Bullet")
         {

@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     float timer;
     float invincibilityTime = 0.5f;
 
+    public bool death;
+
     public int healingAmount = 25;
     public TextMeshProUGUI healthText;
 
@@ -35,6 +37,7 @@ public class Player : MonoBehaviour
     public HealthBar shadowBar;
     float shadowBarThreshold = 0.2f;
     float shadowTimer = 0;
+    //public GameObject mainCamera;
 
     public ParticleSystem shiftBarParticles;
 
@@ -51,12 +54,18 @@ public class Player : MonoBehaviour
         shadowBar.SetHealth(0);
 
         shiftBarParticles.Pause();
+        death = false;
     }
 
     void Update()
     {
         timer += Time.deltaTime;
         shadowTimer += Time.deltaTime;
+
+        if(currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
 
         if (timer < invincibilityTime)
         {
@@ -190,6 +199,8 @@ public class Player : MonoBehaviour
     {
         //Play player death animation here
         manager.GetComponent<GameOver>().End(2f);
+        death = true;
+        
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }

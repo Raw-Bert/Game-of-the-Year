@@ -65,6 +65,7 @@ public class Shooting : MonoBehaviour
     /// - Laser Specifc Variables - ///
     public LineRenderer lineRenderer;
     float laserDamageTimer = 0; public float laserDamageThreshold = 0.15f;
+    public ParticleSystem laserParticles;
 
 
     void Start()
@@ -74,6 +75,7 @@ public class Shooting : MonoBehaviour
         gunRender = gun.GetComponent<Renderer>();
 
         pickUpImage.gameObject.SetActive(false);
+        laserParticles.Pause();
         StopLaser();
     }
 
@@ -290,6 +292,8 @@ public class Shooting : MonoBehaviour
     void ShootLaser()
     {
         lineRenderer.enabled = true;
+        camera.GetComponent<CameraOffset>().laserShooting = true;
+        laserParticles.Play();
     }
 
     void UpdateLaser()
@@ -327,6 +331,8 @@ public class Shooting : MonoBehaviour
     void StopLaser()
     {
         lineRenderer.enabled = false;
+        camera.GetComponent<CameraOffset>().laserShooting = false;
+        laserParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
     {
