@@ -41,6 +41,8 @@ public class Player : MonoBehaviour
 
     public ParticleSystem shiftBarParticles;
 
+    Animator playerAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +57,8 @@ public class Player : MonoBehaviour
 
         shiftBarParticles.Pause();
         death = false;
+
+        playerAnimator = this.GetComponent<Animator>();
     }
 
     void Update()
@@ -197,11 +201,11 @@ public class Player : MonoBehaviour
 
     void PlayerDeath()
     {
-        //Play player death animation here
+        playerAnimator.SetBool("isDead", true);
         manager.GetComponent<GameOver>().End(2f);
         death = true;
         
-        this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        //this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 

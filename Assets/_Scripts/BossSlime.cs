@@ -30,7 +30,7 @@ public class BossSlime : MonoBehaviour
     public int maxHealth = 300;
 
     bool enrage = false;
-    bool isCollidingWithPlayer = false;
+    bool isCollidingWithThing = false;
 
     Vector3 chargeLoc;
     public float chargeSpeed = 5;
@@ -42,6 +42,11 @@ public class BossSlime : MonoBehaviour
     public bool aggro = false;
 
     public GameObject collideEffect;
+
+    Animator slimeBoseAnimation;
+    Renderer renderer;
+    Shader origin;
+    Shader rgb;
 
     public enum BossStates
     {
@@ -56,6 +61,15 @@ public class BossSlime : MonoBehaviour
     {
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+    }
+
+    private void Start()
+    {
+        slimeBoseAnimation = this.GetComponent<Animator>();
+        renderer = this.GetComponent<SpriteRenderer>();
+        origin = Shader.Find("Sprites/Default");
+        rgb = Shader.Find("Shader Graphs/RgbShift");
+        renderer.material.shader = origin;
     }
     // Update is called once per frame
     void Update()
@@ -72,46 +86,61 @@ public class BossSlime : MonoBehaviour
         switch (states)
         {
             case BossStates.idle:
-                //TODO: Make slime do idle animation
                 if(aggro){
                     timeSinceLastMove += Time.deltaTime;
 
-                    if(timeSinceLastMove >= timeBetweenMoves)
+                    if (timeSinceLastMove >= 2)
+                    {
+                        if(slimeBoseAnimation.GetBool("isSpawn") == true)
+                        {
+                            slimeBoseAnimation.SetBool("isSpawn", false);
+                            renderer.material.shader = origin;
+                        }
+                    }
+
+                    if (timeSinceLastMove >= timeBetweenMoves)
                     {
                         int selectMove = Random.Range(1,4);
                         Debug.Log("SELECTED MOVE: " + selectMove);
                         if(selectMove == 1 || selectMove == 2)
                         {
                             states = BossStates.chargeUp;
+                            slimeBoseAnimation.SetBool("isChargeUp", true);
+                            renderer.material.shader = rgb;
                         }
                         else
                         {
                             states = BossStates.spawning;
                             spawnSlimes = true;
+                            slimeBoseAnimation.SetBool("isSpawn", true);
+                            renderer.material.shader = rgb;
                         }
                     }
                 }
                 break;
 
             case BossStates.chargeUp:
-                //TODO: Make slime do charge up animation
-
                 chargeTimer += Time.deltaTime;
                 if(chargeTimer >= chargeThreshold)
                 {
                     chargeTimer = 0.0f;
                     chargeLoc = player.transform.position;
                     states = BossStates.dashing;
+                    slimeBoseAnimation.SetBool("isChargeUp", false);
+                    slimeBoseAnimation.SetBool("isDash", true);
+                    dashAttackTime = 0;
                 }
                 break;
 
             case BossStates.dashing:
-                //TODO: Make slime do dash animation
-
-                if (dashAttackTime >= 2 || isCollidingWithPlayer || transform.position == chargeLoc)
+                dashAttackTime += Time.deltaTime;
+                if (dashAttackTime >= 0.5 && (isCollidingWithThing || Vector3.Distance( transform.position,chargeLoc) < 0.1))
                 {
+                    print("heeeeeeee");
                     timeSinceLastMove = 0;
                     states = BossStates.idle;
+                    slimeBoseAnimation.SetBool("isDash", false);
+                    renderer.material.shader = origin;
                 }
                 else
                 {
@@ -128,11 +157,7 @@ public class BossSlime : MonoBehaviour
                     spawnSlimes = false;
 
                 }
-                //Maybe play an animation in here somewhere, and play a spawning animation for the slimes?
-                
-                
                 timeSinceLastMove = 0;
-                //spawnSlimes = false;
                 states = BossStates.idle;
 
                 break;
@@ -152,7 +177,6 @@ public class BossSlime : MonoBehaviour
                 if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > 3 && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > 3)
                 {
                     GameObject newEnemy = Instantiate(slimes, spawnPoint.transform.position, Quaternion.identity);
-                    Debug.Log("Spawn a slime");
                     break;
                 }
                 else
@@ -172,11 +196,15 @@ public class BossSlime : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("SLIIIIME");
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag != "Enemy")
         {
-            isCollidingWithPlayer = true;
-            player.GetComponent<Player>().TakeDamage(30);
+            print("clide????");
+            isCollidingWithThing = true;
+
+            if (other.gameObject.tag == "Player")
+            {
+                player.GetComponent<Player>().TakeDamage(30);
+            }
         }
         if(other.gameObject.tag == "Player Bullet")
         {
@@ -193,9 +221,9 @@ public class BossSlime : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
+        if (other.gameObject.tag != "Enemy")
         {
-            isCollidingWithPlayer = false;
+            isCollidingWithThing = false;
         }
     }   
 

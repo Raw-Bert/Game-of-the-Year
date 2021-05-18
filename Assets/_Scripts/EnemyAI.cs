@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5, detectDistance = 8;
     bool hasCharged = true;
     bool isCollidingWithPlayer = false;
+    bool isCollidingWithTile = false;
     public List<Vector3> patrollingPoints;
     Vector3 patrollingPoint;
     bool patrolPointSet = false;
@@ -106,6 +107,8 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.tag == "Tile")
+            isCollidingWithTile = true;
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = true;
     }
@@ -129,14 +132,6 @@ public class EnemyAI : MonoBehaviour
             cooldownTimer += Time.deltaTime;
             if (cooldownTimer >= 5 && (Vector3.Distance(transform.position, playerPos) < chargeDistance))
             {
-                enemyAnimator.SetBool("isMoving", false);
-                enemyAnimator.SetBool("isJump", true);
-                enemyAnimator.SetBool("isAngry", false);
-
-                patrolPointSet = false;
-                agent.isStopped = true;
-                agent.ResetPath();
-
                 Vector2 direct = new Vector2(playerPos.x, playerPos.y) - new Vector2(transform.position.x, transform.position.y);
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direct.normalized);
 
@@ -144,6 +139,14 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (hit.collider.gameObject.tag == "Player")
                     {
+                        enemyAnimator.SetBool("isMoving", false);
+                        enemyAnimator.SetBool("isJump", true);
+                        enemyAnimator.SetBool("isAngry", false);
+
+                        patrolPointSet = false;
+                        agent.isStopped = true;
+                        agent.ResetPath();
+
                         hasCharged = false;
                         cooldownTimer = 0;
                         chargeTimer = 0;
@@ -187,12 +190,13 @@ public class EnemyAI : MonoBehaviour
 
         if (!hasCharged)
         {
-            enemyAnimator.SetBool("isMoving", false);
-            enemyAnimator.SetBool("isJump", false);
-            enemyAnimator.SetBool("isAngry", true);
-
-            if (chargeTimer >= 2 || isCollidingWithPlayer)
+            if (chargeTimer >= 2 || isCollidingWithPlayer || Vector3.Distance(transform.position, chargeLoc) < 0.1)
+            {
+                enemyAnimator.SetBool("isMoving", false);
+                enemyAnimator.SetBool("isJump", false);
+                enemyAnimator.SetBool("isAngry", true);
                 hasCharged = true;
+            }
             else
                 transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * speed;
             chargeTimer += Time.deltaTime;

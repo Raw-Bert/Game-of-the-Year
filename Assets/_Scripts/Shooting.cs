@@ -82,164 +82,167 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gunImageShowing == true)
+        if (!this.GetComponent<Player>().death)
         {
-            gunImageTimer += Time.deltaTime;
-            if(gunImageTimer >= 3.0f)
+            if (gunImageShowing == true)
             {
-                gunImageShowing = false;
-                pickUpImage.gameObject.SetActive(false);
-                gunImageTimer = 0;
-            }
-        }
-        if(equippedGun != Guns.soulburn)
-        {
-            StopLaser();
-        }
-        timeSinceLastShot += Time.deltaTime;
-
-        //States for each gun, changes the behaviour of the gun
-        switch (equippedGun)
-        {
-            //Semi-Auto plasma rifle. Default gun. Good all around weapon. Medium bullet size. Medium fire rate
-            case Guns.plasmaRifle:
-                if (Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
+                gunImageTimer += Time.deltaTime;
+                if (gunImageTimer >= 3.0f)
                 {
-                    RuntimeManager.PlayOneShot(fire1SFX);
-                    Shoot(1.5f, 0.1f, 1, 5.0f);
+                    gunImageShowing = false;
+                    pickUpImage.gameObject.SetActive(false);
+                    gunImageTimer = 0;
                 }
-                //if (Input.GetKeyDown(KeyCode.E))
-                //{
-                //    equippedGun = Guns.remorse;
-                //    SwitchGun(1, 6);
-                //}
-                //if (Input.GetKeyDown(KeyCode.Q))
-                //{
-                //    equippedGun = Guns.deathsWhisper;
-                //    SwitchGun(3, 60);
-                //}
-                break;
+            }
+            if (equippedGun != Guns.soulburn)
+            {
+                StopLaser();
+            }
+            timeSinceLastShot += Time.deltaTime;
+
+            //States for each gun, changes the behaviour of the gun
+            switch (equippedGun)
+            {
+                //Semi-Auto plasma rifle. Default gun. Good all around weapon. Medium bullet size. Medium fire rate
+                case Guns.plasmaRifle:
+                    if (Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
+                    {
+                        RuntimeManager.PlayOneShot(fire1SFX);
+                        Shoot(1.5f, 0.1f, 1, 5.0f);
+                    }
+                    //if (Input.GetKeyDown(KeyCode.E))
+                    //{
+                    //    equippedGun = Guns.remorse;
+                    //    SwitchGun(1, 6);
+                    //}
+                    //if (Input.GetKeyDown(KeyCode.Q))
+                    //{
+                    //    equippedGun = Guns.deathsWhisper;
+                    //    SwitchGun(3, 60);
+                    //}
+                    break;
 
                 //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
-            case Guns.remorse:
-                if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
-                {
-                    RuntimeManager.PlayOneShot(fire1SFX);
+                case Guns.remorse:
+                    if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
+                    {
+                        RuntimeManager.PlayOneShot(fire1SFX);
 
-                    Shoot(0.9f, 0.08f, 1, 3.0f);
-                    //Debug.Log("Remorsful Shot");
-                }
-                //if (Input.GetKeyDown(KeyCode.Q))
-                //{
-                //    equippedGun = Guns.plasmaRifle;
-                //    SwitchGun(0, 20);
-                //}
-                //if (Input.GetKeyDown(KeyCode.E))
-                //{
-                //    equippedGun = Guns.ravager;
-                //    SwitchGun(2, 30);
-                //}
-                break;
+                        Shoot(0.9f, 0.08f, 1, 3.0f);
+                        //Debug.Log("Remorsful Shot");
+                    }
+                    //if (Input.GetKeyDown(KeyCode.Q))
+                    //{
+                    //    equippedGun = Guns.plasmaRifle;
+                    //    SwitchGun(0, 20);
+                    //}
+                    //if (Input.GetKeyDown(KeyCode.E))
+                    //{
+                    //    equippedGun = Guns.ravager;
+                    //    SwitchGun(2, 30);
+                    //}
+                    break;
 
                 //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
-            case Guns.ravager:
-                if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
-                {
-                    RuntimeManager.PlayOneShot(fire1SFX);
+                case Guns.ravager:
+                    if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
+                    {
+                        RuntimeManager.PlayOneShot(fire1SFX);
 
-                    Shoot(2.6f, 0.5f, 5, 0.5f);
-                    //Debug.Log("Ravaging Shot");
-                }
-                //if (Input.GetKeyDown(KeyCode.E))
-                //{
-                //    equippedGun = Guns.deathsWhisper;
-                //    SwitchGun(3, 60);
-                //}
-                //if (Input.GetKeyDown(KeyCode.Q))
-                //{
-                //    equippedGun = Guns.remorse;
-                //    SwitchGun(1, 6);
-                //}
-                break;
+                        Shoot(2.6f, 0.5f, 5, 0.5f);
+                        //Debug.Log("Ravaging Shot");
+                    }
+                    //if (Input.GetKeyDown(KeyCode.E))
+                    //{
+                    //    equippedGun = Guns.deathsWhisper;
+                    //    SwitchGun(3, 60);
+                    //}
+                    //if (Input.GetKeyDown(KeyCode.Q))
+                    //{
+                    //    equippedGun = Guns.remorse;
+                    //    SwitchGun(1, 6);
+                    //}
+                    break;
 
-            case Guns.deathsWhisper:
-                if (Input.GetMouseButton(0) && timeSinceLastShot > sniperTime)
-                {
-                    RuntimeManager.PlayOneShot(fire1SFX);
+                case Guns.deathsWhisper:
+                    if (Input.GetMouseButton(0) && timeSinceLastShot > sniperTime)
+                    {
+                        RuntimeManager.PlayOneShot(fire1SFX);
 
-                    Shoot(2.0f, 0.4f, 1, 8.0f);
-                    Debug.Log("Death Whisper Shot");
-                }
-                //if (Input.GetKeyDown(KeyCode.E))
-                //{
-                //    equippedGun = Guns.plasmaRifle;
-                //    SwitchGun(0, 20);
-                //}
-                //if (Input.GetKeyDown(KeyCode.Q))
-                //{
-                //    equippedGun = Guns.ravager;
-                //    SwitchGun(2, 30);
-                //}
-                break;
-            
-            case Guns.soulburn:
-                if(Input.GetButtonDown("Fire1"))
-                {
-                    ShootLaser();
-                }
+                        Shoot(2.0f, 0.4f, 1, 8.0f);
+                        Debug.Log("Death Whisper Shot");
+                    }
+                    //if (Input.GetKeyDown(KeyCode.E))
+                    //{
+                    //    equippedGun = Guns.plasmaRifle;
+                    //    SwitchGun(0, 20);
+                    //}
+                    //if (Input.GetKeyDown(KeyCode.Q))
+                    //{
+                    //    equippedGun = Guns.ravager;
+                    //    SwitchGun(2, 30);
+                    //}
+                    break;
 
-                if(Input.GetButton("Fire1"))
-                {
-                    UpdateLaser();
-                }
+                case Guns.soulburn:
+                    if (Input.GetButtonDown("Fire1"))
+                    {
+                        ShootLaser();
+                    }
 
-                if(Input.GetButtonUp("Fire1"))
-                {
-                    StopLaser();
-                }
-                
-                break;
+                    if (Input.GetButton("Fire1"))
+                    {
+                        UpdateLaser();
+                    }
 
-                //Gun names: 
-                //Peacekeeper
-                //Vanquisher
-                //Early retirement
-                //Amnesiac
-                //Swan song
-                //Cataclysm,
-                //BFG
-        }
+                    if (Input.GetButtonUp("Fire1"))
+                    {
+                        StopLaser();
+                    }
 
-        if (animator.GetBool("hasShot") == false)
-        {
-            muzzleFlash.SetActive(false);
-        }
+                    break;
 
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            if(remorsePickUp == true && equippedGun != Guns.remorse)
-            {
-                equippedGun = Guns.remorse;
-                SwitchGun(1, 6, "Remorse");
-                Destroy(gunDrop);
+                    //Gun names: 
+                    //Peacekeeper
+                    //Vanquisher
+                    //Early retirement
+                    //Amnesiac
+                    //Swan song
+                    //Cataclysm,
+                    //BFG
             }
-            if(ravagerPickUp == true && equippedGun != Guns.ravager)
+
+            if (animator.GetBool("hasShot") == false)
             {
-                equippedGun = Guns.ravager;
-                SwitchGun(2, 30, "The Ravager");
-                Destroy(gunDrop);
+                muzzleFlash.SetActive(false);
             }
-            if(deathsWhisperPickUp == true && equippedGun != Guns.deathsWhisper)
+
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                equippedGun = Guns.deathsWhisper;
-                SwitchGun(3, 60, "Deaths Whisper");
-                Destroy(gunDrop);
-            }
-            if(soulBurnPickUp == true && equippedGun != Guns.soulburn)
-            {
-                equippedGun = Guns.soulburn;
-                SwitchGun(4, 7, "Soul Burn");
-                Destroy(gunDrop);
+                if (remorsePickUp == true && equippedGun != Guns.remorse)
+                {
+                    equippedGun = Guns.remorse;
+                    SwitchGun(1, 6, "Remorse");
+                    Destroy(gunDrop);
+                }
+                if (ravagerPickUp == true && equippedGun != Guns.ravager)
+                {
+                    equippedGun = Guns.ravager;
+                    SwitchGun(2, 30, "The Ravager");
+                    Destroy(gunDrop);
+                }
+                if (deathsWhisperPickUp == true && equippedGun != Guns.deathsWhisper)
+                {
+                    equippedGun = Guns.deathsWhisper;
+                    SwitchGun(3, 60, "Deaths Whisper");
+                    Destroy(gunDrop);
+                }
+                if (soulBurnPickUp == true && equippedGun != Guns.soulburn)
+                {
+                    equippedGun = Guns.soulburn;
+                    SwitchGun(4, 7, "Soul Burn");
+                    Destroy(gunDrop);
+                }
             }
         }
     }
