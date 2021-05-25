@@ -383,7 +383,7 @@ public class Shooting : MonoBehaviour
         pickUpImage.gameObject.SetActive(true);
 
         GameObject textObj = pickUpImage.transform.GetChild(0).gameObject;
-        textObj.GetComponent<TextMeshProUGUI>().text = "\"" + weaponName + "\" Picked Up";
+        textObj.GetComponent<TextMeshProUGUI>().text = "\"" + weaponName + "\" Equipped";
 
         GameObject gunImage = pickUpImage.transform.GetChild(1).gameObject;
         gunImage.GetComponent<Image>().sprite = UIWeapons[spriteVersion];
