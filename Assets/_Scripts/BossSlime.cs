@@ -42,11 +42,13 @@ public class BossSlime : MonoBehaviour
     public bool aggro = false;
 
     public GameObject collideEffect;
+    [SerializeField] private bool isCollidingWithPlayer = false;
 
     Animator slimeBoseAnimation;
     Renderer renderer;
     Shader origin;
     Shader rgb;
+    private List<GameObject> testList = new List<GameObject>();
 
     public enum BossStates
     {
@@ -134,11 +136,12 @@ public class BossSlime : MonoBehaviour
 
             case BossStates.dashing:
                 dashAttackTime += Time.deltaTime;
-                if (dashAttackTime >= 0.5 && (isCollidingWithThing || Vector3.Distance( transform.position,chargeLoc) < 0.1))
+                if (dashAttackTime >= 0.5f && (isCollidingWithThing || Vector3.Distance( transform.position,chargeLoc) < 0.1f))
                 {
+                    states = BossStates.idle;
                     print("heeeeeeee");
                     timeSinceLastMove = 0;
-                    states = BossStates.idle;
+                    
                     slimeBoseAnimation.SetBool("isDash", false);
                     renderer.material.shader = origin;
                 }
@@ -199,13 +202,21 @@ public class BossSlime : MonoBehaviour
         if (other.gameObject.tag != "Enemy")
         {
             print("clide????");
-            isCollidingWithThing = true;
+            isCollidingWithThing = true;           
+        }
 
-            if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
+        {
+                
+            isCollidingWithPlayer = true;
+            if(isCollidingWithPlayer == true && !testList.Contains(other.gameObject))
             {
                 player.GetComponent<Player>().TakeDamage(30);
+                Debug.Log("Give The Damage");
+                testList.Add(other.gameObject);
             }
         }
+
         if(other.gameObject.tag == "Player Bullet")
         {
             Instantiate(collideEffect, other.transform.position, other.transform.rotation);
@@ -221,9 +232,14 @@ public class BossSlime : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (other.gameObject.tag != "Enemy" && other.gameObject.tag != "Player")
         {
             isCollidingWithThing = false;
+        }
+        if(other.gameObject.tag == "Player")
+        {
+            isCollidingWithPlayer = false;
+            testList.Remove(other.gameObject);
         }
     }   
 
@@ -244,82 +260,3 @@ public class BossSlime : MonoBehaviour
         Destroy(this.gameObject);
     }
 }
-
-
-//   void ChargeMove(Vector3 playerPos)
-//   {
-//       if (hasCharged)
-//       {
-//           cooldownTimer += Time.deltaTime;
-//           if (cooldownTimer >= 5 && (Vector3.Distance(transform.position, playerPos) < chargeDistance))
-//           {
-//               enemyAnimator.SetBool("isMoving", false);
-//               enemyAnimator.SetBool("isJump", true);
-//               enemyAnimator.SetBool("isAngry", false);
-//
-//               patrolPointSet = false;
-//               agent.isStopped = true;
-//               agent.ResetPath();
-//
-//               Vector2 direct = new Vector2(playerPos.x, playerPos.y) - new Vector2(transform.position.x, transform.position.y);
-//               RaycastHit2D hit = Physics2D.Raycast(transform.position, direct.normalized);
-//
-//               if (hit.collider != null)
-//               {
-//                   if (hit.collider.gameObject.tag == "Player")
-//                   {
-//                       hasCharged = false;
-//                       cooldownTimer = 0;
-//                       chargeTimer = 0;
-//                       chargeLoc = playerPos;
-//                   }
-//               }
-//           }
-//           else if (Vector3.Distance(transform.position, playerPos) > detectDistance)
-//           {
-//               enemyAnimator.SetBool("isMoving", true);
-//               enemyAnimator.SetBool("isJump", false);
-//               enemyAnimator.SetBool("isAngry", false);
-//
-//               if (!patrolPointSet)
-//               {
-//                   int random = Random.Range(0, patrollingPoints.Count);
-//                   patrollingPoint = patrollingPoints[random];
-//                   patrolPointSet = true;
-//                   agent.isStopped = false;
-//               }
-//               else
-//               {
-//                   agent.SetDestination(patrollingPoint);
-//               }
-//
-//               Vector3 distance = this.transform.position - patrollingPoint;
-//
-//               if (distance.magnitude < 1f)
-//                   patrolPointSet = false;
-//           }
-//           else
-//           {
-//               patrolPointSet = false;
-//               agent.isStopped = true;
-//               agent.ResetPath();
-//               enemyAnimator.SetBool("isMoving", false);
-//               enemyAnimator.SetBool("isJump", false);
-//               enemyAnimator.SetBool("isAngry", true);
-//           }
-//       }
-//
-//       if (!hasCharged)
-//       {
-//           enemyAnimator.SetBool("isMoving", false);
-//           enemyAnimator.SetBool("isJump", false);
-//           enemyAnimator.SetBool("isAngry", true);
-//
-//           if (chargeTimer >= 2 || isCollidingWithPlayer)
-//               hasCharged = true;
-//           else
-//               transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * speed;
-//           chargeTimer += Time.deltaTime;
-//       }
-//   }
-//

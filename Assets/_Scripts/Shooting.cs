@@ -240,7 +240,7 @@ public class Shooting : MonoBehaviour
                 if (soulBurnPickUp == true && equippedGun != Guns.soulburn)
                 {
                     equippedGun = Guns.soulburn;
-                    SwitchGun(4, 7, "Soul Burn");
+                    SwitchGun(4, 10, "Soul Burn");
                     Destroy(gunDrop);
                 }
             }
@@ -383,7 +383,7 @@ public class Shooting : MonoBehaviour
         pickUpImage.gameObject.SetActive(true);
 
         GameObject textObj = pickUpImage.transform.GetChild(0).gameObject;
-        textObj.GetComponent<TextMeshProUGUI>().text = "\"" + weaponName + "\" Equipped";
+        textObj.GetComponent<TextMeshProUGUI>().text = "\\" + weaponName + "\\ Equipped";
 
         GameObject gunImage = pickUpImage.transform.GetChild(1).gameObject;
         gunImage.GetComponent<Image>().sprite = UIWeapons[spriteVersion];
