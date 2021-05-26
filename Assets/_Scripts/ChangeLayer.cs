@@ -8,7 +8,7 @@ public class ChangeLayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.transform.position.y > this.transform.position.y)
+        if (player.transform.position.y < this.transform.position.y)
         {
             this.GetComponent<Renderer>().sortingOrder = player.GetComponent<Renderer>().sortingOrder + 2;
         }
