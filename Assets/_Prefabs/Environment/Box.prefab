@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8043554719634730616}
   - component: {fileID: 154115678162835897}
   - component: {fileID: 1514541023040813021}
+  - component: {fileID: -3956441786996411196}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -122,9 +123,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be063f8e43d84cd4a85e240c9d712e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropItem: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
+  healthItem: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
+  weaponDrops:
+  - {fileID: 4842689639761138791, guid: c43d170d45269834fb29e0a96609a13c, type: 3}
+  - {fileID: 779347256975523393, guid: 2ffab239aad22dd489a2edc3f51c5d84, type: 3}
+  - {fileID: 954667216744478806, guid: ca49fd6366daad34aa7ad71262db1d59, type: 3}
+  - {fileID: 2685285343339769643, guid: 460cc695b34be87458adf923bd710283, type: 3}
   tutorialBoxDestroyed: 0
   tutorial: 0
   tutorialItemDrop: 0
   maxHealth: 10
   currentHealth: 0
+--- !u!208 &-3956441786996411196
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745211780811311977}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.1}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
