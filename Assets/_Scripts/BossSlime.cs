@@ -196,7 +196,13 @@ public class BossSlime : MonoBehaviour
         return spawnPoint;
     }
 
-
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Tile")
+        {
+            isCollidingWithThing = true;
+        }
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag != "Enemy")
