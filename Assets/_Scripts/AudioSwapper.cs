@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.Tracing;
 using System.Runtime.CompilerServices;
 //using System.Reflection.Metadata;
@@ -27,18 +27,25 @@ public class AudioSwapper : MonoBehaviour
     List<EventInstance> busBright = new List<EventInstance>(), busDark = new List<EventInstance>();
     private void OnDestroy()
     {
+        
         foreach (var a in busBright)
         {
             a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             a.release();
+            a.clearHandle();
         }
+
         foreach (var a in busDark)
         {
             a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             a.release();
+            a.clearHandle();
         }
+
+        busBright.Clear();
+        busDark.Clear();
     }
-    void Start()
+    void Awake()
     {
 
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[0]));
@@ -138,7 +145,7 @@ public class AudioSwapper : MonoBehaviour
                     switchDark[a] = false;
                 }
 
-                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2+1],
+                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2 + 1],
                     0.5f * (0.1f * amountOfEnemyType[a] + (amountOfEnemyType[a] > 0 ? 1 : 0)));
                 fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2]);
             }

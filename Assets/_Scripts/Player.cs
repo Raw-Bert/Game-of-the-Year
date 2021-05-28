@@ -34,12 +34,13 @@ public class Player : MonoBehaviour
     //Shadow Bar variables
     public float shadowBarCurrent = 0;
     public int maxShadowBar = 100;
+
     public HealthBar shadowBar;
+    private ParticleSystem shiftBarParticles;
+
     float shadowBarThreshold = 0.2f;
     float shadowTimer = 0;
     //public GameObject mainCamera;
-
-    public ParticleSystem shiftBarParticles;
 
     Animator playerAnimator;
 
@@ -50,6 +51,7 @@ public class Player : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
 
         healthText.text = maxHealth + "/" + maxHealth;
+        shiftBarParticles = shadowBar.GetComponentInChildren<ParticleSystem>();
 
         if (!shadowBar)return;
         shadowBar.SetMaxHealth(maxShadowBar);
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
         timer += Time.deltaTime;
         shadowTimer += Time.deltaTime;
 
-        if(currentHealth < 0)
+        if (currentHealth < 0)
         {
             currentHealth = 0;
         }
@@ -82,7 +84,7 @@ public class Player : MonoBehaviour
         if (shadowBarCurrent >= maxShadowBar * 0.4f)
         {
             this.GetComponent<ChangeForm>().canSwitch = true;
-            
+
         }
         else
         {
@@ -97,7 +99,7 @@ public class Player : MonoBehaviour
             shadowBarCurrent = Mathf.Min(shadowBarCurrent, maxShadowBar);
             if (shadowBar)
                 shadowBar.SetHealth((int)shadowBarCurrent);
-            if(shadowBarCurrent > maxShadowBar)
+            if (shadowBarCurrent > maxShadowBar)
             {
                 shadowBarCurrent = maxShadowBar;
             }
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
             shadowBarCurrent -= 1;
             shadowTimer = 0;
             shadowBarCurrent = Mathf.Max(shadowBarCurrent, 0);
-            
+
             if (shadowBar)
                 shadowBar.SetHealth((int)shadowBarCurrent);
 
@@ -120,7 +122,6 @@ public class Player : MonoBehaviour
         {
             this.GetComponent<ChangeForm>().SwitchToNormal();
         }
-        
 
     }
 
@@ -204,7 +205,7 @@ public class Player : MonoBehaviour
         playerAnimator.SetBool("isDead", true);
         manager.GetComponent<GameOver>().End(2f);
         death = true;
-        
+
         //this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }

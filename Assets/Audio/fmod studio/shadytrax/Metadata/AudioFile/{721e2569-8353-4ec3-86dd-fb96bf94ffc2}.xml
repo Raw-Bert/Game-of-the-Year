@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{721e2569-8353-4ec3-86dd-fb96bf94ffc2}">
+		<property name="assetPath">
+			<value>lazer.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>8.4452834467120184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{38838bb1-aef9-41b9-b967-d3602f008489}</destination>
+		</relationship>
+	</object>
+</objects>

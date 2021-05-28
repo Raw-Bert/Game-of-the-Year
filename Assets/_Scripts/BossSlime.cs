@@ -18,7 +18,6 @@ public class BossSlime : MonoBehaviour
     float timeSinceLastMove = 0.0f;
     public float timeBetweenMoves = 9.0f;
 
-
     float chargeTimer = 0.0f;
     //float spawnTimer = 15.0f;
 
@@ -52,7 +51,7 @@ public class BossSlime : MonoBehaviour
 
     public enum BossStates
     {
-        idle,   //idle
+        idle, //idle
         chargeUp, //Charging up to dash
         dashing, //after charging up, moves at player quickly
         spawning //spawning enemies
@@ -75,25 +74,24 @@ public class BossSlime : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {   
-        if(health < maxHealth / 2 && enrage == false)
+    {
+        if (health < maxHealth / 2 && enrage == false)
         {
             enrage = true;
             timeBetweenMoves = 5.0f;
             numberOfSpawns += 2;
         }
 
-        
-
         switch (states)
         {
             case BossStates.idle:
-                if(aggro){
+                if (aggro)
+                {
                     timeSinceLastMove += Time.deltaTime;
 
                     if (timeSinceLastMove >= 2)
                     {
-                        if(slimeBoseAnimation.GetBool("isSpawn") == true)
+                        if (slimeBoseAnimation.GetBool("isSpawn") == true)
                         {
                             slimeBoseAnimation.SetBool("isSpawn", false);
                             renderer.material.shader = origin;
@@ -102,9 +100,9 @@ public class BossSlime : MonoBehaviour
 
                     if (timeSinceLastMove >= timeBetweenMoves)
                     {
-                        int selectMove = Random.Range(1,4);
+                        int selectMove = Random.Range(1, 4);
                         Debug.Log("SELECTED MOVE: " + selectMove);
-                        if(selectMove == 1 || selectMove == 2)
+                        if (selectMove == 1 || selectMove == 2)
                         {
                             states = BossStates.chargeUp;
                             slimeBoseAnimation.SetBool("isChargeUp", true);
@@ -123,7 +121,7 @@ public class BossSlime : MonoBehaviour
 
             case BossStates.chargeUp:
                 chargeTimer += Time.deltaTime;
-                if(chargeTimer >= chargeThreshold)
+                if (chargeTimer >= chargeThreshold)
                 {
                     chargeTimer = 0.0f;
                     chargeLoc = player.transform.position;
@@ -154,11 +152,10 @@ public class BossSlime : MonoBehaviour
                 break;
 
             case BossStates.spawning:
-                if(spawnSlimes == true)
+                if (spawnSlimes == true)
                 {
                     SpawnEnemy();
                     spawnSlimes = false;
-
                 }
                 timeSinceLastMove = 0;
                 states = BossStates.idle;
@@ -169,15 +166,16 @@ public class BossSlime : MonoBehaviour
 
     void SpawnEnemy()
     {
-        
+
         Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
-        for(int i = 0; i < numberOfSpawns; i++){
+        for (int i = 0; i < numberOfSpawns; i++)
+        {
             int breakLoop = 4;
-            while(breakLoop > 0)
+            while (breakLoop > 0)
             {
                 GameObject spawnPoint = SpawnPoint();
 
-                if(Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > 3 && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > 3)
+                if (Mathf.Abs(spawnPoint.transform.position.x - playerPos.x) > 3 && Mathf.Abs(spawnPoint.transform.position.y - playerPos.y) > 3)
                 {
                     GameObject newEnemy = Instantiate(slimes, spawnPoint.transform.position, Quaternion.identity);
                     break;
@@ -186,7 +184,7 @@ public class BossSlime : MonoBehaviour
                 {
                     breakLoop--;
                 }
-            }  
+            }
         }
     }
 
@@ -205,7 +203,7 @@ public class BossSlime : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Enemy")
+        if (!other.gameObject.tag.ToLower().Contains("enemy"))
         {
             print("clide????");
             isCollidingWithThing = true;           
@@ -221,17 +219,18 @@ public class BossSlime : MonoBehaviour
                 Debug.Log("Give The Damage");
                 testList.Add(other.gameObject);
             }
+            isCollidingWithThing = true;
         }
 
         if(other.gameObject.tag == "Player Bullet")
         {
             Instantiate(collideEffect, other.transform.position, other.transform.rotation);
             TakeDamage(other.gameObject.GetComponent<Bullet>().damageAmount);
-            if(health < 0)
+            if (health < 0)
             {
                 health = 0;
             }
-            
+
             Destroy(other.gameObject);
         }
     }
@@ -254,7 +253,7 @@ public class BossSlime : MonoBehaviour
         health -= damage;
         healthBar.SetHealth(health);
 
-        if(health <= 0)
+        if (health <= 0)
         {
             BossDeath();
         }

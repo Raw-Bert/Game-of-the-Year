@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,8 @@ public class Shooting : MonoBehaviour
     public GameObject gun;
     Renderer gunRender;
 
-    [EventRef] public string fire1SFX;
+    [EventRef] public List<string> fireSFX = new List<string>();
+    EventInstance lazerSFX;
 
     public GameObject manager;
 
@@ -64,12 +66,15 @@ public class Shooting : MonoBehaviour
 
     /// - Laser Specifc Variables - ///
     public LineRenderer lineRenderer;
-    float laserDamageTimer = 0; public float laserDamageThreshold = 0.15f;
+    float laserDamageTimer = 0;
+    public float laserDamageThreshold = 0.15f;
     public ParticleSystem laserParticles;
 
 
     void Start()
     {
+        lazerSFX = FMODUnity.RuntimeManager.CreateInstance(fireSFX[2]);
+
         animator = muzzleFlash.GetComponent<Animator>();
         gunAnimator = gun.GetComponent<Animator>();
         gunRender = gun.GetComponent<Renderer>();
@@ -122,7 +127,7 @@ public class Shooting : MonoBehaviour
                     //}
                     break;
 
-                //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
+                    //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
                 case Guns.remorse:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
                     {
@@ -143,7 +148,7 @@ public class Shooting : MonoBehaviour
                     //}
                     break;
 
-                //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
+                    //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
                 case Guns.ravager:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
                     {
@@ -294,8 +299,13 @@ public class Shooting : MonoBehaviour
 
     void ShootLaser()
     {
+        PLAYBACK_STATE sTATE;
+        lazerSFX.getPlaybackState(out sTATE);
+        if (sTATE == PLAYBACK_STATE.STOPPED)
+            lazerSFX.start();
+
         lineRenderer.enabled = true;
-        camera.GetComponent<CameraOffset>().laserShooting = true;
+        Camera.main.GetComponent<CameraOffset>().laserShooting = true;
         laserParticles.Play();
     }
 
@@ -334,6 +344,11 @@ public class Shooting : MonoBehaviour
 
     void StopLaser()
     {
+        PLAYBACK_STATE sTATE;
+        lazerSFX.getPlaybackState(out sTATE);
+        if (sTATE == PLAYBACK_STATE.PLAYING)
+            lazerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         lineRenderer.enabled = false;
         camera.GetComponent<CameraOffset>().laserShooting = false;
         laserParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
@@ -393,5 +408,13 @@ public class Shooting : MonoBehaviour
 
 
         damage = damageAmount;
+    }
+
+    private void OnDestroy()
+    {
+        lazerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        lazerSFX.release();
+        lazerSFX.clearHandle();
+
     }
 }
