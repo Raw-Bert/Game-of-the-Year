@@ -56,6 +56,7 @@ public class ChangeForm : MonoBehaviour
         normalGround.SetActive(true);
         normalEmblem.SetActive(true);
     }
+    
     // Update is called once per frame
     //If designated key pressed, switch form, switch dimension, and make the screen flash
     void Update()

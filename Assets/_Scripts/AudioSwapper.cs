@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.Tracing;
 using System.Runtime.CompilerServices;
 //using System.Reflection.Metadata;
@@ -27,20 +27,27 @@ public class AudioSwapper : MonoBehaviour
     List<EventInstance> busBright = new List<EventInstance>(), busDark = new List<EventInstance>();
     private void OnDestroy()
     {
+        
         foreach (var a in busBright)
         {
             a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             a.release();
+            a.clearHandle();
         }
+
         foreach (var a in busDark)
         {
             a.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             a.release();
+            a.clearHandle();
         }
+
+        busBright.Clear();
+        busDark.Clear();
     }
-    void Start()
+    void Awake()
     {
-       
+
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[0]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[1]));
         busBright.Add(FMODUnity.RuntimeManager.CreateInstance(sounds[2]));
@@ -76,7 +83,8 @@ public class AudioSwapper : MonoBehaviour
 
         if (GetComponent<ChangeForm>().shadowForm)
         {
-            for (int a = 0; a < 2; ++a)
+            //Change volumes based on amount of enemies
+            for (int a = 0; a < switchDark.Count - 1; ++a)
             {
                 if (!switchDark[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
                 {
@@ -99,12 +107,13 @@ public class AudioSwapper : MonoBehaviour
             }
 
             int lastIndex = switchDark.Count - 1;
+            // Get initial volumes when Player is swaping forms 
             if (!switchDark[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
 
                 float tmp;
-                busDark[lastIndex - 1].getVolume(out tmp);
+                busDark[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2 - 1] = tmp;
                 busBright[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2] = tmp;
@@ -118,7 +127,8 @@ public class AudioSwapper : MonoBehaviour
         }
         else
         {
-            for (int a = 0; a < 2; ++a)
+            //Change volumes based on amount of enemies
+            for (int a = 0; a < switchBright.Count - 1; ++a)
             {
                 if (!switchBright[a] || lastAmountOfEnemyType[a] != amountOfEnemyType[a])
                 {
@@ -126,37 +136,38 @@ public class AudioSwapper : MonoBehaviour
 
                     float tmp;
                     busBright[a].getVolume(out tmp);
-                    startVol[a * 2] = tmp;
-                    busDark[a].getVolume(out tmp);
                     startVol[a * 2 + 1] = tmp;
+                    busDark[a].getVolume(out tmp);
+                    startVol[a * 2] = tmp;
 
                     lastAmountOfEnemyType[a] = amountOfEnemyType[a];
                     switchBright[a] = true;
                     switchDark[a] = false;
                 }
 
-                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2],
+                fadeIn(busBright[a], fadeInit[a], fadeTime, startVol[a * 2 + 1],
                     0.5f * (0.1f * amountOfEnemyType[a] + (amountOfEnemyType[a] > 0 ? 1 : 0)));
-                fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2 + 1]);
+                fadeOut(busDark[a], fadeInit[a], fadeTime, startVol[a * 2]);
             }
 
             int lastIndex = switchBright.Count - 1;
+            // Get initial volumes when Player is swaping forms 
             if (!switchBright[lastIndex])
             {
                 fadeInit[lastIndex] = DateTime.Now;
 
                 float tmp;
-                busBright[lastIndex - 1].getVolume(out tmp);
-                startVol[lastIndex * 2 - 1] = tmp;
-                busDark[lastIndex].getVolume(out tmp);
+                busBright[lastIndex].getVolume(out tmp);
                 startVol[lastIndex * 2] = tmp;
+                busDark[lastIndex].getVolume(out tmp);
+                startVol[lastIndex * 2 - 1] = tmp;
 
                 switchBright[lastIndex] = true;
                 switchDark[lastIndex] = false;
             }
 
-            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1], 0.5f);
-            fadeOut(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2]);
+            fadeIn(busBright[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2], 0.5f);
+            fadeOut(busDark[lastIndex], fadeInit[lastIndex], fadeTime, startVol[lastIndex * 2 - 1]);
         }
     }
 

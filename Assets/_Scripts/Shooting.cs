@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 public class Shooting : MonoBehaviour
 {
-    public Camera camera;
     public Transform firePoint;
     private Animator animator;
     private Animator gunAnimator;
@@ -16,7 +16,8 @@ public class Shooting : MonoBehaviour
     public GameObject gun;
     Renderer gunRender;
 
-    [EventRef] public string fire1SFX;
+    [EventRef] public List<string> fireSFX = new List<string>();
+    EventInstance lazerSFX;
 
     public GameObject manager;
 
@@ -53,7 +54,6 @@ public class Shooting : MonoBehaviour
     int damage = 20;
 
     bool remorsePickUp = false;
-    bool p1_smaPickUp = false;
     bool ravagerPickUp = false;
     bool deathsWhisperPickUp = false;
     bool soulBurnPickUp = false;
@@ -64,12 +64,15 @@ public class Shooting : MonoBehaviour
 
     /// - Laser Specifc Variables - ///
     public LineRenderer lineRenderer;
-    float laserDamageTimer = 0; public float laserDamageThreshold = 0.15f;
+    float laserDamageTimer = 0;
+    public float laserDamageThreshold = 0.15f;
     public ParticleSystem laserParticles;
 
 
     void Start()
     {
+        lazerSFX = FMODUnity.RuntimeManager.CreateInstance(fireSFX[2]);
+
         animator = muzzleFlash.GetComponent<Animator>();
         gunAnimator = gun.GetComponent<Animator>();
         gunRender = gun.GetComponent<Renderer>();
@@ -107,7 +110,7 @@ public class Shooting : MonoBehaviour
                 case Guns.plasmaRifle:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
                         Shoot(1.5f, 0.1f, 1, 5.0f);
                     }
                     //if (Input.GetKeyDown(KeyCode.E))
@@ -122,11 +125,11 @@ public class Shooting : MonoBehaviour
                     //}
                     break;
 
-                //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
+                    //Remorse: Fast firing, low damage-per-shot machine gun. Small bullet size
                 case Guns.remorse:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[1]);
 
                         Shoot(0.9f, 0.08f, 1, 3.0f);
                         //Debug.Log("Remorsful Shot");
@@ -143,11 +146,11 @@ public class Shooting : MonoBehaviour
                     //}
                     break;
 
-                //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
+                    //Ravager: slow shooting shotgun, shoots 5 medium bullets per shot, high damage, low bullet lifetime    
                 case Guns.ravager:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
 
                         Shoot(2.6f, 0.5f, 5, 0.5f);
                         //Debug.Log("Ravaging Shot");
@@ -167,7 +170,7 @@ public class Shooting : MonoBehaviour
                 case Guns.deathsWhisper:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > sniperTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
 
                         Shoot(2.0f, 0.4f, 1, 8.0f);
                         Debug.Log("Death Whisper Shot");
@@ -294,15 +297,20 @@ public class Shooting : MonoBehaviour
 
     void ShootLaser()
     {
+        PLAYBACK_STATE sTATE;
+        lazerSFX.getPlaybackState(out sTATE);
+        if (sTATE == PLAYBACK_STATE.STOPPED)
+            lazerSFX.start();
+
         lineRenderer.enabled = true;
-        camera.GetComponent<CameraOffset>().laserShooting = true;
+        Camera.main.GetComponent<CameraOffset>().laserShooting = true;
         laserParticles.Play();
     }
 
     void UpdateLaser()
     {
         laserDamageTimer += Time.deltaTime;
-        var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 endPos;
         Vector2 tempPos = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -334,8 +342,13 @@ public class Shooting : MonoBehaviour
 
     void StopLaser()
     {
+        PLAYBACK_STATE sTATE;
+        lazerSFX.getPlaybackState(out sTATE);
+        if (sTATE == PLAYBACK_STATE.PLAYING)
+            lazerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
         lineRenderer.enabled = false;
-        camera.GetComponent<CameraOffset>().laserShooting = false;
+        Camera.main.GetComponent<CameraOffset>().laserShooting = false;
         laserParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
@@ -393,5 +406,13 @@ public class Shooting : MonoBehaviour
 
 
         damage = damageAmount;
+    }
+
+    private void OnDestroy()
+    {
+        lazerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        lazerSFX.release();
+        lazerSFX.clearHandle();
+
     }
 }

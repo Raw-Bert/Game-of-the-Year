@@ -58,13 +58,10 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-
+#User Defined
 *.log
-
 .vscode/
-
 *.orig
-
+*.orig.meta
 Assets/Plugins/FMOD/Cache/
-
 Assets/Audio/fmod studio/shadytrax/.cache/

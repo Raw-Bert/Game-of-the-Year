@@ -22,27 +22,29 @@ public class SlimeBossLevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(arenaWallFront != null)
+        if (arenaWallFront != null)
         {
             if (player.transform.position.x > frontWallTrigger.transform.position.x + 0.5f && arenaWallFront.transform.position != frontWallTrigger.transform.position && wallsDrop == false)
             {
-                
+
                 boss.GetComponent<BossSlime>().aggro = true;
                 arenaWallFront.transform.position = Vector3.SmoothDamp(arenaWallFront.transform.position, frontWallTrigger.transform.position, ref velocity, 0.1f);
                 arenaWallBack.transform.position = Vector3.SmoothDamp(arenaWallBack.transform.position, backWallTrigger.transform.position, ref velocity, 0.1f);
-                if(arenaWallFront.transform.position.y <= frontWallTrigger.transform.position.y + 0.01f)
+                if (arenaWallFront.transform.position.y <= frontWallTrigger.transform.position.y + 0.01f)
                 {
                     wallsDrop = true;
                 }
             }
-    
-            if(boss.gameObject == null)
+
+            if (!boss)
             {
-                Destroy(arenaWallFront);
-                Destroy(arenaWallBack);
+                if (arenaWallFront)
+                    Destroy(arenaWallFront);
+                    
+                if (arenaWallBack)
+                    Destroy(arenaWallBack);
             }
         }
-        
-            
+
     }
 }

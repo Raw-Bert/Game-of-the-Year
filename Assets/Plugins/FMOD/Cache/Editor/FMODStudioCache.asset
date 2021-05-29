@@ -107,10 +107,33 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637536046417036688
+  lastModified: 637579039189612816
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-4481649042745128024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Machine Gun
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Machine Gun
+  guid: f2e12d0b75e9184a924f8ca592491a2c
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 445
 --- !u!114 &-3943791049784292788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +157,97 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 12800
+--- !u!114 &-2733691243952390867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Lazer
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Lazer
+  guid: dc1b14c579e4764ebb4c70b7abf6c6b2
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3500
+--- !u!114 &-2637730400430621538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Lazer
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Lazer
+  guid: dc1b14c579e4764ebb4c70b7abf6c6b2
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
+--- !u!114 &-1943147717896088214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Lazer
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Lazer
+  guid: dc1b14c579e4764ebb4c70b7abf6c6b2
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3500
+--- !u!114 &-1821209235915022949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Button Hover
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Button Hover
+  guid: 5fa382d870130d4f99f1e976e468d88b
+  Banks:
+  - {fileID: 2287420172834825757}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 300
 --- !u!114 &-786043044220138848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,12 +304,14 @@ MonoBehaviour:
   - {fileID: -786043044220138848}
   - {fileID: 5853336111823983454}
   - {fileID: -6008538216596977596}
+  - {fileID: -2733691243952390867}
+  - {fileID: -4481649042745128024}
   EditorParameters: []
   MasterBanks:
   - {fileID: -4998036259008802588}
   StringsBanks:
   - {fileID: 8751671713051383776}
-  stringsBankWriteTime: 637576385426333464
+  stringsBankWriteTime: 637579039189792593
   cacheVersion: 6
 --- !u!114 &512131624630317499
 MonoBehaviour:
@@ -235,7 +351,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/BG Music.bank
   Name: BG Music
   StudioPath: bank:/BG Music
-  lastModified: 637536046417181714
+  lastModified: 637579039188721971
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -277,7 +393,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637576385426253434
+  lastModified: 637579039205031729
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -411,7 +527,7 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/DO NOT USE.bank
   Name: DO NOT USE
   StudioPath: bank:/DO NOT USE
-  lastModified: 637528340087068763
+  lastModified: 637579039189200694
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -453,9 +569,9 @@ MonoBehaviour:
   Path: Assets/Audio/fmod studio/shadytrax/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637576385426333464
+  lastModified: 637579039189792593
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1648
+    Value: 1726
   Exists: 1

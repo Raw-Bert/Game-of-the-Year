@@ -20,41 +20,32 @@ public class TutorialManager : MonoBehaviour
     //bool isTriggered = false;
     public List<GameObject> tutorialBoxes = new List<GameObject>();
     bool boxDrop = true;
-    int initalBoxCount;
-
+    int initBoxCount;
 
     void Awake()
     {
-        initalBoxCount = tutorialBoxes.Count;
-        Debug.Log(tutorialBoxes.Count);
+        initBoxCount = tutorialBoxes.Count;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(tutorialBoxes.Count < initalBoxCount && boxDrop == true)
+        //remove boxes that don't exist
+        for (int i = 0; i < tutorialBoxes.Count; i++)
+            if (tutorialBoxes[i] == null)
+                tutorialBoxes.Remove(tutorialBoxes[i--]);
+
+        if (tutorialBoxes.Count < initBoxCount && boxDrop == true)
         {
-           
-            for(int i = 0; i < tutorialBoxes.Count; i++)
-            {
-                
+
+            for (int i = 0; i < tutorialBoxes.Count; i++)
                 tutorialBoxes[i].gameObject.GetComponent<Boxes>().tutorialItemDrop = false;
-            }
+
             boxDrop = false;
         }
-        else
-        {
-            for(int i = 0; i < tutorialBoxes.Count; i++)
-            {
-                if(tutorialBoxes[i] == null)
-                {
-                    tutorialBoxes.Remove(tutorialBoxes[i]);
-                }
-            }
-        }
 
-
-        if(!this.GetComponent<SpawnEnemies>().spawning)
+        if (!this.GetComponent<SpawnEnemies>().spawning)
         {
             if (player.transform.position.x > triggerPos)
             {
@@ -62,24 +53,22 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if(this.GetComponent<SpawnEnemies>().spawning && wall.transform.position != target.transform.position)
+        if (this.GetComponent<SpawnEnemies>().spawning && wall.transform.position != target.transform.position)
         {
             wall.transform.position = Vector3.SmoothDamp(wall.transform.position, target.transform.position, ref velocity, 0.1f);
         }
 
-        if(wallAnimation == false && wall.transform.position != target.transform.position)
+        if (wallAnimation == false && wall.transform.position != target.transform.position)
         {
             //Play animation
             wallAnimation = true;
         }
 
-        if(!enemiesUnleashed && player.transform.position.x > triggerEnemies)
+        if (!enemiesUnleashed && player.transform.position.x > triggerEnemies)
         {
             Destroy(enemyWall);
             enemiesUnleashed = true;
         }
     }
-    
-    
 
 }

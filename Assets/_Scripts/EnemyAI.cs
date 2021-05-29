@@ -18,7 +18,6 @@ public class EnemyAI : MonoBehaviour
     public float speed = 2, chargeTimer = 0, cooldownTimer = 5, chargeDistance = 5, detectDistance = 8;
     bool hasCharged = true;
     bool isCollidingWithPlayer = false;
-    bool isCollidingWithTile = false;
     public List<Vector3> patrollingPoints;
     Vector3 patrollingPoint;
     bool patrolPointSet = false;
@@ -107,8 +106,7 @@ public class EnemyAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag == "Tile")
-            isCollidingWithTile = true;
+       
         if (other.gameObject.tag.ToLower() == "player")
             isCollidingWithPlayer = true;
     }
