@@ -240,7 +240,7 @@ public class Shooting : MonoBehaviour
                 if (soulBurnPickUp == true && equippedGun != Guns.soulburn)
                 {
                     equippedGun = Guns.soulburn;
-                    SwitchGun(4, 7, "Soul Burn");
+                    SwitchGun(4, 10, "Soul Burn");
                     Destroy(gunDrop);
                 }
             }
@@ -308,13 +308,14 @@ public class Shooting : MonoBehaviour
         Vector2 tempPos = new Vector2(firePoint.position.x, firePoint.position.y);
         Vector2 dir = mousePos - tempPos;
         lineRenderer.SetPosition(0, tempPos);
-        float dist = Mathf.Clamp(Vector2.Distance(tempPos, mousePos), 0.1f, 8);
+        //float dist = Mathf.Clamp(Vector2.Distance(tempPos, mousePos), 0.1f, 8);
+        float dist = 8;
         endPos = tempPos + (dir.normalized * dist);
         lineRenderer.SetPosition(1, endPos);
 
         
         
-        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.transform.position, dir.normalized, dir.magnitude);
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)firePoint.transform.position, dir.normalized, 8);
         if(hit)
         {
             lineRenderer.SetPosition (1, hit.point);
@@ -383,7 +384,7 @@ public class Shooting : MonoBehaviour
         pickUpImage.gameObject.SetActive(true);
 
         GameObject textObj = pickUpImage.transform.GetChild(0).gameObject;
-        textObj.GetComponent<TextMeshProUGUI>().text = "\"" + weaponName + "\" Equipped";
+        textObj.GetComponent<TextMeshProUGUI>().text = "\\" + weaponName + "\\ Equipped";
 
         GameObject gunImage = pickUpImage.transform.GetChild(1).gameObject;
         gunImage.GetComponent<Image>().sprite = UIWeapons[spriteVersion];
