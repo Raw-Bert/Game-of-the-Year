@@ -44,7 +44,7 @@ public class BossSlime : MonoBehaviour
     [SerializeField] private bool isCollidingWithPlayer = false;
 
     Animator slimeBoseAnimation;
-    Renderer renderer;
+    Renderer render;
     Shader origin;
     Shader rgb;
     private List<GameObject> testList = new List<GameObject>();
@@ -67,10 +67,10 @@ public class BossSlime : MonoBehaviour
     private void Start()
     {
         slimeBoseAnimation = this.GetComponent<Animator>();
-        renderer = this.GetComponent<SpriteRenderer>();
+        render = this.GetComponent<SpriteRenderer>();
         origin = Shader.Find("Sprites/Default");
         rgb = Shader.Find("Shader Graphs/RgbShift");
-        renderer.material.shader = origin;
+        render.material.shader = origin;
     }
     // Update is called once per frame
     void Update()
@@ -94,7 +94,7 @@ public class BossSlime : MonoBehaviour
                         if (slimeBoseAnimation.GetBool("isSpawn") == true)
                         {
                             slimeBoseAnimation.SetBool("isSpawn", false);
-                            renderer.material.shader = origin;
+                            render.material.shader = origin;
                         }
                     }
 
@@ -106,14 +106,14 @@ public class BossSlime : MonoBehaviour
                         {
                             states = BossStates.chargeUp;
                             slimeBoseAnimation.SetBool("isChargeUp", true);
-                            renderer.material.shader = rgb;
+                            render.material.shader = rgb;
                         }
                         else
                         {
                             states = BossStates.spawning;
                             spawnSlimes = true;
                             slimeBoseAnimation.SetBool("isSpawn", true);
-                            renderer.material.shader = rgb;
+                            render.material.shader = rgb;
                         }
                     }
                 }
@@ -141,7 +141,7 @@ public class BossSlime : MonoBehaviour
                     timeSinceLastMove = 0;
                     
                     slimeBoseAnimation.SetBool("isDash", false);
-                    renderer.material.shader = origin;
+                    render.material.shader = origin;
                 }
                 else
                 {

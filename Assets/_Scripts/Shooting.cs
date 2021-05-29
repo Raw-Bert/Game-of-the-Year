@@ -7,7 +7,6 @@ using UnityEngine.UI;
 using TMPro;
 public class Shooting : MonoBehaviour
 {
-    public Camera camera;
     public Transform firePoint;
     private Animator animator;
     private Animator gunAnimator;
@@ -55,7 +54,6 @@ public class Shooting : MonoBehaviour
     int damage = 20;
 
     bool remorsePickUp = false;
-    bool p1_smaPickUp = false;
     bool ravagerPickUp = false;
     bool deathsWhisperPickUp = false;
     bool soulBurnPickUp = false;
@@ -112,7 +110,7 @@ public class Shooting : MonoBehaviour
                 case Guns.plasmaRifle:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
                         Shoot(1.5f, 0.1f, 1, 5.0f);
                     }
                     //if (Input.GetKeyDown(KeyCode.E))
@@ -131,7 +129,7 @@ public class Shooting : MonoBehaviour
                 case Guns.remorse:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > machineGunTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[1]);
 
                         Shoot(0.9f, 0.08f, 1, 3.0f);
                         //Debug.Log("Remorsful Shot");
@@ -152,7 +150,7 @@ public class Shooting : MonoBehaviour
                 case Guns.ravager:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > shotGunTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
 
                         Shoot(2.6f, 0.5f, 5, 0.5f);
                         //Debug.Log("Ravaging Shot");
@@ -172,7 +170,7 @@ public class Shooting : MonoBehaviour
                 case Guns.deathsWhisper:
                     if (Input.GetMouseButton(0) && timeSinceLastShot > sniperTime)
                     {
-                        RuntimeManager.PlayOneShot(fire1SFX);
+                        RuntimeManager.PlayOneShot(fireSFX[0]);
 
                         Shoot(2.0f, 0.4f, 1, 8.0f);
                         Debug.Log("Death Whisper Shot");
@@ -312,7 +310,7 @@ public class Shooting : MonoBehaviour
     void UpdateLaser()
     {
         laserDamageTimer += Time.deltaTime;
-        var mousePos = (Vector2)camera.ScreenToWorldPoint(Input.mousePosition);
+        var mousePos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Vector2 endPos;
         Vector2 tempPos = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -350,7 +348,7 @@ public class Shooting : MonoBehaviour
             lazerSFX.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
         lineRenderer.enabled = false;
-        camera.GetComponent<CameraOffset>().laserShooting = false;
+        Camera.main.GetComponent<CameraOffset>().laserShooting = false;
         laserParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
     void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)

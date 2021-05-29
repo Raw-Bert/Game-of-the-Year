@@ -9,8 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
 
-    public Camera cam;
-
     public GameObject weapon;
     public Rigidbody2D rbWeapon;
 
@@ -34,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
 
-            mousePosition = cam.ScreenToWorldPoint(Input.mousePosition);
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             rbWeapon.position = this.transform.position;
 

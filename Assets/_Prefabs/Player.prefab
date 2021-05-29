@@ -287,7 +287,6 @@ MonoBehaviour:
   shadowBarCurrent: 0
   maxShadowBar: 100
   shadowBar: {fileID: 0}
-  shiftBarParticles: {fileID: 0}
 --- !u!114 &4918695129866053849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +306,7 @@ MonoBehaviour:
   fireSFX:
   - event:/SFX/Fire 1
   - event:/SFX/Machine Gun
+  - event:/SFX/Lazer
   manager: {fileID: 0}
   machineGunTime: 0.1
   plasmaRifleTime: 0.4

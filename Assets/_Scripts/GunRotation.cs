@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class GunRotation : MonoBehaviour
 {
-    public Camera cam;
-
     public GameObject player;
 
     private SpriteRenderer gunRenderer;
 
-    public Vector3 factor = new Vector3(0.5f,0.5f,0.0f);
+    public Vector3 factor = new Vector3(0.5f, 0.5f, 0.0f);
     public Vector3 weaponOffset = new Vector3(0.0f, -0.04f, 0.0f);
 
     Vector2 mousePosition;
@@ -42,7 +40,8 @@ public class GunRotation : MonoBehaviour
             gunRenderer.flipY = true;
             player.GetComponent<SpriteRenderer>().flipX = true;
         }
-        else if(mousePosition.x >= 0.0f){
+        else if (mousePosition.x >= 0.0f)
+        {
             gunRenderer.flipY = false;
             player.GetComponent<SpriteRenderer>().flipX = false;
         }
@@ -53,10 +52,10 @@ public class GunRotation : MonoBehaviour
             playerAnimator.SetFloat("upDown", -1);
             gunRenderer.sortingOrder = 1;
         }
-        else 
+        else
         {
             playerAnimator.SetFloat("upDown", 1);
-            gunRenderer.sortingOrder = 3; 
+            gunRenderer.sortingOrder = 3;
         }
     }
 
