@@ -332,10 +332,15 @@ public class Shooting : MonoBehaviour
                 hit.transform.gameObject.GetComponent<Enemy>().TakeDamage(damage);
                 laserDamageTimer = 0;
             }
+            
             else if( hit.transform.gameObject.tag == "Boss" && laserDamageTimer >= laserDamageThreshold)
             {
                 hit.transform.gameObject.GetComponent<BossSlime>().TakeDamage(damage);
                 laserDamageTimer = 0;
+            }
+            else if(hit.transform.gameObject.tag == "Box" && laserDamageTimer >= laserDamageThreshold)
+            {
+                hit.transform.gameObject.GetComponent<Boxes>().DamageBox(damage);
             }
         }
     }
