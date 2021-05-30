@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     float shadowTimer = 0;
     //public GameObject mainCamera;
 
+    [SerializeField] private GameObject eButton;
     Animator playerAnimator;
 
     // Start is called before the first frame update
@@ -167,6 +168,20 @@ public class Player : MonoBehaviour
         {
             this.Healing(healingAmount);
             Destroy(other.gameObject);
+        }
+        if(other.gameObject.tag == "WhisperDrop" || other.gameObject.tag == "RemorseDrop" || 
+            other.gameObject.tag == "SoulburnDrop" || other.gameObject.tag == "RavagerDrop")
+        {
+            eButton.SetActive(true);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "WhisperDrop" || other.gameObject.tag == "RemorseDrop" || 
+            other.gameObject.tag == "SoulburnDrop" || other.gameObject.tag == "RavagerDrop")
+        {
+            eButton.SetActive(false);
         }
     }
 
