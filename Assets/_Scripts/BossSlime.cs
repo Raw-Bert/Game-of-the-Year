@@ -39,6 +39,8 @@ public class BossSlime : MonoBehaviour
     public int numberOfSpawns = 3;
 
     public bool aggro = false;
+    private bool isDead = false;
+    private float damageTimer = 0;
 
     public GameObject collideEffect;
     [SerializeField] private bool isCollidingWithPlayer = false;
@@ -75,92 +77,104 @@ public class BossSlime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health < maxHealth / 2 && enrage == false)
+        if (!isDead)
         {
-            enrage = true;
-            timeBetweenMoves = 5.0f;
-            numberOfSpawns += 2;
-        }
+            if (health < maxHealth / 2 && enrage == false)
+            {
+                enrage = true;
+                timeBetweenMoves = 5.0f;
+                numberOfSpawns += 2;
+            }
 
-        switch (states)
-        {
-            case BossStates.idle:
-                if (aggro)
-                {
-                    timeSinceLastMove += Time.deltaTime;
+            if(damageTimer >= 1)
+            {
+                isCollidingWithPlayer = false;
+            }
+            else
+            {
+                damageTimer += Time.deltaTime;
+            }
 
-                    if (timeSinceLastMove >= 2)
+            switch (states)
+            {
+                case BossStates.idle:
+                    if (aggro)
                     {
-                        if (slimeBoseAnimation.GetBool("isSpawn") == true)
+                        timeSinceLastMove += Time.deltaTime;
+
+                        if (timeSinceLastMove >= 2)
                         {
-                            slimeBoseAnimation.SetBool("isSpawn", false);
-                            render.material.shader = origin;
+                            if (slimeBoseAnimation.GetBool("isSpawn") == true)
+                            {
+                                slimeBoseAnimation.SetBool("isSpawn", false);
+                                render.material.shader = origin;
+                            }
+                        }
+
+                        if (timeSinceLastMove >= timeBetweenMoves)
+                        {
+                            int selectMove = Random.Range(1, 4);
+                            Debug.Log("SELECTED MOVE: " + selectMove);
+                            if (selectMove == 1 || selectMove == 2)
+                            {
+                                states = BossStates.chargeUp;
+                                slimeBoseAnimation.SetBool("isChargeUp", true);
+                                render.material.shader = rgb;
+                            }
+                            else
+                            {
+                                states = BossStates.spawning;
+                                spawnSlimes = true;
+                                slimeBoseAnimation.SetBool("isSpawn", true);
+                                render.material.shader = rgb;
+                            }
                         }
                     }
+                    break;
 
-                    if (timeSinceLastMove >= timeBetweenMoves)
-                    {
-                        int selectMove = Random.Range(1, 4);
-                        Debug.Log("SELECTED MOVE: " + selectMove);
-                        if (selectMove == 1 || selectMove == 2)
-                        {
-                            states = BossStates.chargeUp;
-                            slimeBoseAnimation.SetBool("isChargeUp", true);
-                            render.material.shader = rgb;
-                        }
-                        else
-                        {
-                            states = BossStates.spawning;
-                            spawnSlimes = true;
-                            slimeBoseAnimation.SetBool("isSpawn", true);
-                            render.material.shader = rgb;
-                        }
-                    }
-                }
-                break;
-
-            case BossStates.chargeUp:
-                chargeTimer += Time.deltaTime;
-                if (chargeTimer >= chargeThreshold)
-                {
-                    chargeTimer = 0.0f;
-                    chargeLoc = player.transform.position;
-                    states = BossStates.dashing;
-                    slimeBoseAnimation.SetBool("isChargeUp", false);
-                    slimeBoseAnimation.SetBool("isDash", true);
-                    dashAttackTime = 0;
-                }
-                break;
-
-            case BossStates.dashing:
-                dashAttackTime += Time.deltaTime;
-                if (dashAttackTime >= 0.5f && (isCollidingWithThing || Vector3.Distance( transform.position,chargeLoc) < 0.1f))
-                {
-                    states = BossStates.idle;
-                    print("heeeeeeee");
-                    timeSinceLastMove = 0;
-                    
-                    slimeBoseAnimation.SetBool("isDash", false);
-                    render.material.shader = origin;
-                }
-                else
-                {
-                    transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * chargeSpeed;
+                case BossStates.chargeUp:
                     chargeTimer += Time.deltaTime;
-                }
+                    if (chargeTimer >= chargeThreshold)
+                    {
+                        chargeTimer = 0.0f;
+                        chargeLoc = player.transform.position;
+                        states = BossStates.dashing;
+                        slimeBoseAnimation.SetBool("isChargeUp", false);
+                        slimeBoseAnimation.SetBool("isDash", true);
+                        dashAttackTime = 0;
+                    }
+                    break;
 
-                break;
+                case BossStates.dashing:
+                    dashAttackTime += Time.deltaTime;
+                    if (dashAttackTime >= 0.5f && (isCollidingWithThing || Vector3.Distance(transform.position, chargeLoc) < 0.1f))
+                    {
+                        states = BossStates.idle;
+                        print("heeeeeeee");
+                        timeSinceLastMove = 0;
 
-            case BossStates.spawning:
-                if (spawnSlimes == true)
-                {
-                    SpawnEnemy();
-                    spawnSlimes = false;
-                }
-                timeSinceLastMove = 0;
-                states = BossStates.idle;
+                        slimeBoseAnimation.SetBool("isDash", false);
+                        render.material.shader = origin;
+                    }
+                    else
+                    {
+                        transform.position += (chargeLoc - transform.position).normalized * Time.deltaTime * chargeSpeed;
+                        chargeTimer += Time.deltaTime;
+                    }
 
-                break;
+                    break;
+
+                case BossStates.spawning:
+                    if (spawnSlimes == true)
+                    {
+                        SpawnEnemy();
+                        spawnSlimes = false;
+                    }
+                    timeSinceLastMove = 0;
+                    states = BossStates.idle;
+
+                    break;
+            }
         }
     }
 
@@ -211,13 +225,13 @@ public class BossSlime : MonoBehaviour
 
         if (other.gameObject.tag == "Player")
         {
-                
-            isCollidingWithPlayer = true;
-            if(isCollidingWithPlayer == true && !testList.Contains(other.gameObject))
+            if(isCollidingWithPlayer == false && !testList.Contains(other.gameObject))
             {
+                isCollidingWithPlayer = true;
                 player.GetComponent<Player>().TakeDamage(30);
                 Debug.Log("Give The Damage");
                 testList.Add(other.gameObject);
+                damageTimer = 0;
             }
             isCollidingWithThing = true;
         }
@@ -243,7 +257,7 @@ public class BossSlime : MonoBehaviour
         }
         if(other.gameObject.tag == "Player")
         {
-            isCollidingWithPlayer = false;
+            //isCollidingWithPlayer = false;
             testList.Remove(other.gameObject);
         }
     }   
@@ -261,7 +275,10 @@ public class BossSlime : MonoBehaviour
 
     void BossDeath()
     {
-        //Have a cool animation and stuff here!
-        Destroy(this.gameObject);
+        slimeBoseAnimation.SetBool("isDead", true);
+        this.GetComponent<CapsuleCollider2D>().enabled = false;
+        healthBar.DestroyBar();
+        isDead = true;
+        //Destroy(this.gameObject);
     }
 }

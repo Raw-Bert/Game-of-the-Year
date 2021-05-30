@@ -23,4 +23,9 @@ public class HealthBar : MonoBehaviour
 
         //fill.color = gradient.Evaluate(slider.normalizedValue);
     }
+
+    public void DestroyBar()
+    {
+        Destroy(this.gameObject);
+    }
 }

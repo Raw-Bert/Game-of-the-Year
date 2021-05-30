@@ -377,6 +377,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 4918695131421844728}
   basicBullet: {fileID: 7835946755970645943, guid: 079b53eb40ee4194891bcad6578e7b7a, type: 3}
+  shotGunBullet: {fileID: 7835946755970645943, guid: 2cf33f3811d364a4490476f7ce82d587, type: 3}
+  SMGBullet: {fileID: 7835946755970645943, guid: 4c9311e2f762dea44a6525e6897f6c03, type: 3}
+  sniperBullet: {fileID: 7835946755970645943, guid: f373d17300fb0274bae5a81f417db8cf, type: 3}
   muzzleFlash: {fileID: 4918695131661857259}
   gun: {fileID: 4918695131733484751}
   fireSFX:
@@ -408,6 +411,14 @@ MonoBehaviour:
   lineRenderer: {fileID: 4918695130835848090}
   laserDamageThreshold: 0.15
   laserParticles: {fileID: 4918695131568058464}
+  PistolController: {fileID: 9100000, guid: 54ac971766046324994894df0249c9ce, type: 2}
+  ShotGunController: {fileID: 9100000, guid: 7f06660cebb1ebb4db087c2abb51f5a7, type: 2}
+  SMGController: {fileID: 9100000, guid: aa6bba2bcd38e9d43be5357997938d4f, type: 2}
+  SniperController: {fileID: 9100000, guid: 989047ccca088034bb92a387ab3e5953, type: 2}
+  Pistol: {fileID: 5497256644059246517, guid: 00287ab038869ab43b655fdea977409f, type: 3}
+  ShotGun: {fileID: -2408530018317867212, guid: 33f7ba686a5c21a46b936a79a09e34a9, type: 3}
+  SMG: {fileID: 2562568060712908168, guid: a27028565660ee24b8b0e25c1f8c3806, type: 3}
+  Sniper: {fileID: -7040960777665541239, guid: 892d7ff6429b35f468f824a92bd6c2ff, type: 3}
 --- !u!114 &4918695129866053853
 MonoBehaviour:
   m_ObjectHideFlags: 0
