@@ -12,6 +12,9 @@ public class Shooting : MonoBehaviour
     private Animator gunAnimator;
 
     public GameObject basicBullet;
+    public GameObject shotGunBullet;
+    public GameObject SMGBullet;
+    public GameObject sniperBullet;
     public GameObject muzzleFlash;
     public GameObject gun;
     Renderer gunRender;
@@ -68,6 +71,17 @@ public class Shooting : MonoBehaviour
     public float laserDamageThreshold = 0.15f;
     public ParticleSystem laserParticles;
 
+    // different bullet fire animation
+    public RuntimeAnimatorController PistolController;
+    public RuntimeAnimatorController ShotGunController;
+    public RuntimeAnimatorController SMGController;
+    public RuntimeAnimatorController SniperController;
+
+    public Sprite Pistol;
+    public Sprite ShotGun;
+    public Sprite SMG;
+    public Sprite Sniper;
+
 
     void Start()
     {
@@ -111,8 +125,10 @@ public class Shooting : MonoBehaviour
                     if (Input.GetMouseButton(0) && timeSinceLastShot > plasmaRifleTime)
                     {
                         RuntimeManager.PlayOneShot(fireSFX[0]);
-                        Shoot(1.5f, 0.1f, 1, 5.0f);
+                        Shoot(1.5f, 0.1f, 1, 5.0f, basicBullet);
                     }
+                    muzzleFlash.GetComponent<SpriteRenderer>().sprite = Pistol;
+                    muzzleFlash.GetComponent<Animator>().runtimeAnimatorController = PistolController;
                     //if (Input.GetKeyDown(KeyCode.E))
                     //{
                     //    equippedGun = Guns.remorse;
@@ -131,9 +147,11 @@ public class Shooting : MonoBehaviour
                     {
                         RuntimeManager.PlayOneShot(fireSFX[1]);
 
-                        Shoot(0.9f, 0.08f, 1, 3.0f);
+                        Shoot(0.9f, 0.08f, 1, 3.0f, SMGBullet);
                         //Debug.Log("Remorsful Shot");
                     }
+                    muzzleFlash.GetComponent<SpriteRenderer>().sprite = SMG;
+                    muzzleFlash.GetComponent<Animator>().runtimeAnimatorController = SMGController;
                     //if (Input.GetKeyDown(KeyCode.Q))
                     //{
                     //    equippedGun = Guns.plasmaRifle;
@@ -152,9 +170,11 @@ public class Shooting : MonoBehaviour
                     {
                         RuntimeManager.PlayOneShot(fireSFX[0]);
 
-                        Shoot(2.6f, 0.5f, 5, 0.5f);
+                        Shoot(2.6f, 0.5f, 5, 0.5f, shotGunBullet);
                         //Debug.Log("Ravaging Shot");
                     }
+                    muzzleFlash.GetComponent<SpriteRenderer>().sprite = ShotGun;
+                    muzzleFlash.GetComponent<Animator>().runtimeAnimatorController = ShotGunController;
                     //if (Input.GetKeyDown(KeyCode.E))
                     //{
                     //    equippedGun = Guns.deathsWhisper;
@@ -172,9 +192,11 @@ public class Shooting : MonoBehaviour
                     {
                         RuntimeManager.PlayOneShot(fireSFX[0]);
 
-                        Shoot(2.0f, 0.4f, 1, 8.0f);
+                        Shoot(2.0f, 0.4f, 1, 8.0f, sniperBullet);
                         Debug.Log("Death Whisper Shot");
                     }
+                    muzzleFlash.GetComponent<SpriteRenderer>().sprite = Sniper;
+                    muzzleFlash.GetComponent<Animator>().runtimeAnimatorController = SniperController;
                     //if (Input.GetKeyDown(KeyCode.E))
                     //{
                     //    equippedGun = Guns.plasmaRifle;
@@ -356,9 +378,9 @@ public class Shooting : MonoBehaviour
         Camera.main.GetComponent<CameraOffset>().laserShooting = false;
         laserParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
     }
-    void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime)
+    void Shoot(float bulletScale, float recoilModifier, int bulletNumber, float lifeTime, GameObject _bullet)
     {
-        GameObject bullet = Instantiate(basicBullet, firePoint.position, firePoint.rotation);
+        GameObject bullet = Instantiate(_bullet, firePoint.position, firePoint.rotation);
         bullet.transform.localScale = new Vector3(bulletScale, bulletScale, 0.0f);
 
         bullet.GetComponent<Bullet>().damageAmount = damage;
@@ -368,13 +390,13 @@ public class Shooting : MonoBehaviour
         {
             for (int i = 0; i < ((bulletNumber - 1) / 2); i++)
             {
-                GameObject bullet2 = Instantiate(basicBullet, firePoint.position, (firePoint.rotation) * Quaternion.Euler(0, 0, -45 / ((bulletNumber / 2)) / (i + 1)));
+                GameObject bullet2 = Instantiate(_bullet, firePoint.position, (firePoint.rotation) * Quaternion.Euler(0, 0, -45 / ((bulletNumber / 2)) / (i + 1)));
                 bullet2.transform.localScale = new Vector3(bulletScale, bulletScale, 0.0f);
 
                 bullet2.GetComponent<Bullet>().damageAmount = damage;
                 bullet2.GetComponent<Bullet>().lifeTime = lifeTime;
 
-                GameObject bullet3 = Instantiate(basicBullet, firePoint.position, (firePoint.rotation) * Quaternion.Euler(0, 0, 45 / ((bulletNumber / 2)) / (i + 1)));
+                GameObject bullet3 = Instantiate(_bullet, firePoint.position, (firePoint.rotation) * Quaternion.Euler(0, 0, 45 / ((bulletNumber / 2)) / (i + 1)));
                 bullet3.transform.localScale = new Vector3(bulletScale, bulletScale, 0.0f);
 
                 bullet3.GetComponent<Bullet>().damageAmount = damage;
