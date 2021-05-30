@@ -202,6 +202,11 @@ MonoBehaviour:
   flashTime: 0.1
   flashMaxAlpha: 0.5
   flashColor: {r: 1, g: 0, b: 0, a: 1}
+  weaponDrops:
+  - {fileID: 2685285343339769643, guid: 460cc695b34be87458adf923bd710283, type: 3}
+  - {fileID: 4842689639761138791, guid: c43d170d45269834fb29e0a96609a13c, type: 3}
+  - {fileID: 779347256975523393, guid: 2ffab239aad22dd489a2edc3f51c5d84, type: 3}
+  - {fileID: 954667216744478806, guid: ca49fd6366daad34aa7ad71262db1d59, type: 3}
   probabilityOfHPDrop: 8
   HPDrop: {fileID: 490469049427117301, guid: fc4e71e5f49355b48b081ec31ca76545, type: 3}
   dieTime: 5

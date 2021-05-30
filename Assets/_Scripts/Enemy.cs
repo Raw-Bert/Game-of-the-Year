@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public float flashTime;
     public float flashMaxAlpha;
     public Color flashColor = Color.red;
+        public List<GameObject> weaponDrops;
 
     public int probabilityOfHPDrop = 6; //4%
     public GameObject HPDrop;
@@ -38,10 +39,11 @@ public class Enemy : MonoBehaviour
         manager.GetComponent<SpawnEnemies>().numberOfEnemies += 1;
     }
 
-    void Update(){
+    void Update()
+    {
         if (isDied)
         {
-            if(waitTime > 0)
+            if (waitTime > 0)
             {
                 Color tmp = this.GetComponent<SpriteRenderer>().color;
                 tmp.a = waitTime / dieTime;
@@ -53,20 +55,20 @@ public class Enemy : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-    //if (Input.GetKeyDown(KeyCode.Space))
-    //{
-    //    TakeDamage(20);
-    //}
-    //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TakeDamage(20);
+        //}
+        //}
 
-    // void OnCollisionEnter2D(Collision2D col)
-    // {
-    //     if(col.gameObject.tag == "Player Bullet")
-    //     {
-    //         TakeDamage(15);
+        // void OnCollisionEnter2D(Collision2D col)
+        // {
+        //     if(col.gameObject.tag == "Player Bullet")
+        //     {
+        //         TakeDamage(15);
 
-    //         Destroy(col.gameObject);
-    //     }
+        //         Destroy(col.gameObject);
+        //     }
     }
 
     public void TakeDamage(int damage)
@@ -102,6 +104,15 @@ public class Enemy : MonoBehaviour
         {
             Instantiate(HPDrop, this.transform.position, Quaternion.identity);
         }
+
+        //gun drop chance
+        if (HealthDropChance(7))
+        {
+            int gunDrop = Random.Range(0, weaponDrops.Count);
+            Debug.Log("Count: " + weaponDrops.Count);
+            Instantiate(weaponDrops[gunDrop], this.transform.position, Quaternion.identity);
+        }
+
         manager.GetComponent<GameScore>().countScore(10);
         manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
         isDied = true;
