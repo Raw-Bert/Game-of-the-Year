@@ -391,7 +391,7 @@ MonoBehaviour:
   plasmaRifleTime: 0.4
   shotGunTime: 1.2
   sniperTime: 1.2
-  equippedGun: 1
+  equippedGun: 0
   bulletSpeed: 100
   spriteR: {fileID: 4918695131733484753}
   sprites:
