@@ -36,7 +36,7 @@ public class SlimeBossLevelManager : MonoBehaviour
                 }
             }
 
-            if (!boss)
+            if (boss.GetComponent<BossSlime>().isDead)
             {
                 if (arenaWallFront)
                     Destroy(arenaWallFront);

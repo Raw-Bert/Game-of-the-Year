@@ -39,8 +39,10 @@ public class BossSlime : MonoBehaviour
     public int numberOfSpawns = 3;
 
     public bool aggro = false;
-    private bool isDead = false;
     private float damageTimer = 0;
+    public bool isDead = false;
+    public float dieTime = 5f;
+    float waitTime = 0;
 
     public GameObject collideEffect;
     [SerializeField] private bool isCollidingWithPlayer = false;
@@ -176,6 +178,20 @@ public class BossSlime : MonoBehaviour
                     break;
             }
         }
+        else
+        {
+            if (waitTime > 0)
+            {
+                Color tmp = this.GetComponent<SpriteRenderer>().color;
+                tmp.a = waitTime / dieTime;
+                this.GetComponent<SpriteRenderer>().color = tmp;
+                waitTime -= Time.deltaTime;
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
     void SpawnEnemy()
@@ -278,6 +294,7 @@ public class BossSlime : MonoBehaviour
         slimeBoseAnimation.SetBool("isDead", true);
         this.GetComponent<CapsuleCollider2D>().enabled = false;
         healthBar.DestroyBar();
+        waitTime = dieTime;
         isDead = true;
         //Destroy(this.gameObject);
     }

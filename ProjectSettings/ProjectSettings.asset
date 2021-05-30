@@ -558,7 +558,9 @@ PlayerSettings:
   suppressCommonWarnings: 1
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
-  additionalIl2CppArgs: 
+  additionalIl2CppArgs: --additional-cpp="C:/Users/Lilli/OneDrive/Desktop/Venture
+    Creation/Game-of-the-Year/Assets/../Temp/fmod_register_static_plugins.cpp" --additional-cpp="C:/Users/Lilli/OneDrive/Desktop/Venture
+    Creation/Game-of-the-Year/Assets/Plugins/FMOD/src/Runtime/fmod_static_plugin_support.h"
   scriptingRuntimeVersion: 1
   gcIncremental: 1
   gcWBarrierValidation: 0
