@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
     public float flashTime;
     public float flashMaxAlpha;
     public Color flashColor = Color.red;
-        public List<GameObject> weaponDrops;
+    public List<GameObject> weaponDrops;
 
     public int probabilityOfHPDrop = 6; //4%
     public GameObject HPDrop;
@@ -106,12 +107,13 @@ public class Enemy : MonoBehaviour
         }
 
         //gun drop chance
-        if (HealthDropChance(7))
-        {
-            int gunDrop = Random.Range(0, weaponDrops.Count);
-            Debug.Log("Count: " + weaponDrops.Count);
-            Instantiate(weaponDrops[gunDrop], this.transform.position, Quaternion.identity);
-        }
+        if (SceneManager.GetActiveScene().buildIndex == 4)//Only do in _GameScene(Endless Mode)
+            if (HealthDropChance(7))
+            {
+                int gunDrop = Random.Range(0, weaponDrops.Count);
+                Debug.Log("Count: " + weaponDrops.Count);
+                Instantiate(weaponDrops[gunDrop], this.transform.position, Quaternion.identity);
+            }
 
         manager.GetComponent<GameScore>().countScore(10);
         manager.GetComponent<SpawnEnemies>().numberOfEnemies -= 1;
